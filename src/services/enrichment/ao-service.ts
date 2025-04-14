@@ -43,7 +43,7 @@ export class AoEnrichmentService implements IEnrichmentService {
       let totalSeats = 0;
 
       for (const item of list) {
-        const aoFlightNo = item.AirlineNo?.split(" ").pop()?.trim();
+        const aoFlightNo = item.AirlinetList[0]?.AirlineNo?.split(" ").pop()?.trim();
         const availSeats = item.AvailSeat;
 
         for (const price of item.PriceDetails) {
