@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model FareAudit {
+  id                            Int      @id(map: "PK__FareAudi__3213E83FE4946D4A") @default(autoincrement())
+  bookingId                     Int?
+  ticketId                      Int
+  fareLogId                     Int
+  logType                       String   @db.NVarChar(100)
+  source                        String   @db.NVarChar(100)
+  requestDateTime               DateTime
+  pnr                           String?  @db.NVarChar(50)
+  flightSector                  String   @db.NVarChar(50)
+  flightNumber                  String   @db.NVarChar(20)
+  travelDateTime                DateTime
+  fsSameFlightFare              Decimal? @db.Decimal(10, 2)
+  fsLowestFlightFare            Decimal? @db.Decimal(10, 2)
+  fsAvailableStock              Int?
+  fsErrorMessage                String?  @db.NVarChar(255)
+  fsAverageFare                 Decimal? @db.Decimal(10, 2)
+  aoSameFlightFare              Decimal? @db.Decimal(10, 2)
+  aoLowestFare                  Decimal? @db.Decimal(10, 2)
+  aoAverageFare                 Decimal? @db.Decimal(10, 2)
+  aoErrorMessage                String?  @db.NVarChar(255)
+  flightWiseTotalSeatsPurchased Int?
+  flightWiseTotalSeatsSold      Int?
+  flightWiseTotalSeatsLeft      Int?
+  flightWiseAverageCost         Decimal? @db.Decimal(10, 2)
+  routeWiseSeatsPurchased       Int?
+  routeWiseSeatsSold            Int?
+  routeWiseSeatsLeft            Int?
+  routeWiseAverageCost          Decimal? @db.Decimal(10, 2)
+  averageSellFare               Decimal? @db.Decimal(10, 2)
+  status                        String?  @db.NVarChar(50)
+  remark                        String?  @db.NVarChar(255)
+  taskCompletedDateTime         DateTime
+}
+
+model EFMigrationsHistory {
+  MigrationId    String @id(map: "PK___EFMigrationsHistory") @db.NVarChar(150)
+  ProductVersion String @db.NVarChar(32)
+
+  @@map("__EFMigrationsHistory")
+}
+
+model Flights {
+  Id                Int       @id(map: "PK__Flights__3214EC076847DFF0") @default(autoincrement())
+  AirlineCode       String    @db.VarChar(10)
+  FlightNumber      String    @db.VarChar(10)
+  Origin            String    @db.VarChar(10)
+  Destination       String    @db.VarChar(10)
+  DepartureTerminal String?   @db.VarChar(10)
+  ArrivalTerminal   String?   @db.VarChar(10)
+  DepartureDateTime DateTime  @db.DateTime
+  ArrivalDateTime   DateTime  @db.DateTime
+  TravelClass       String?   @db.VarChar(5)
+  PriceId           String    @db.VarChar(20)
+  Stops             Int
+  Via               String    @db.VarChar(50)
+  PlatingCarrier    String    @db.VarChar(10)
+  AvailableSeats    Int
+  BaseAmount        Decimal   @db.Decimal(10, 2)
+  TotalTaxAmount    Decimal   @db.Decimal(10, 2)
+  GrossAmount       Decimal   @db.Decimal(10, 2)
+  FareType          String    @db.Char(1)
+  Source            String    @db.VarChar(100)
+  EntryDate         DateTime? @db.DateTime
+}
+
+model sysdiagrams {
+  name         String @db.NVarChar(128)
+  principal_id Int
+  diagram_id   Int    @id(map: "PK__sysdiagr__C2B05B612D69782F") @default(autoincrement())
+  version      Int?
+  definition   Bytes?
+
+  @@unique([principal_id, name], map: "UK_principal_name")
+}
