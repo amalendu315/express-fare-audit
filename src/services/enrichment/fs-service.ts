@@ -82,7 +82,7 @@ export class FsEnrichmentService implements IEnrichmentService {
         for (const fare of fares) {
           const totalAmount = fare.FareDetails?.[0]?.Total_Amount;
           const seats = fare?.Seats_Available;
-          totalSeats = parseInt(seats) || 0;
+          totalSeats += parseInt(seats) || 0;
 
           const clean = (fn: string) => fn.replace(/\D/g, "");
           if (clean(segmentFlightNumber) === String(flightNumber)) {
