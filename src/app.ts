@@ -15,6 +15,7 @@ app.use(express.json()); // Body parser
 app.use("/api", fareAuditRoutes);
 app.post("/login", async (req, res) => {
   try {
+    console.log("Login Started")
     const data = {
       AgentID: "AQAG051265",
       Username: "9710101010",
@@ -26,7 +27,7 @@ app.post("/login", async (req, res) => {
         Authorization: "Basic QVFBRzA1MTI2NSo5NzEwMTAxMDEwOjM0ODkzMQ==",
       },
     };
-
+    console.log("Response initiated")
     const response = await axios.post(
       "http://airiqapi.tesepr.com/TravelAPI.svc/Login",
       data,
