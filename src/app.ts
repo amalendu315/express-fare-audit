@@ -32,7 +32,7 @@ app.post("/login", async (req, res) => {
       data,
       config
     );
-
+    console.log("Response:", response.data); // Log the response data
     res.json(response.data);
   } catch (error) {
     // Handle any errors
