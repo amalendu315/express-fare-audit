@@ -4,7 +4,8 @@ import { EnrichmentResultModel } from "../../models/enrichment-result-model";
 
 
 const getToken = async () => {
-  console.log("Getting Token...");
+  try{
+    console.log("Getting Token...");
   const data = {
     AgentID: "AQAG051265",
     Username: "9710101010",
@@ -21,12 +22,12 @@ const getToken = async () => {
     data,
     config
   );
-  if(response?.data){
+  console.log(response)
     const token = response.data?.Token;
     console.log("token recieved and returned");
     return token;
-  } else {
-    console.log("Error getting token");
+  } catch (error) {
+    console.error("Error getting token:", error);
     return null;
   }
 };
@@ -54,9 +55,6 @@ export class AoEnrichmentService implements IEnrichmentService {
       };
     }
     var token = await getToken();
-    if (token === null) {
-      token = await getToken();
-    }
     console.log("Token received: ", token);
      const [origin, destination] = flightSector.split("-");
      if (!origin || !destination) {
