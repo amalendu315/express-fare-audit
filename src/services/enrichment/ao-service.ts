@@ -31,6 +31,13 @@ export class AoEnrichmentService implements IEnrichmentService {
     flightSector: string,
     travelDateTime: Date
   ): Promise<EnrichmentResultModel> {
+    const formatDate = (date: Date): string => {
+      const yyyy = date.getFullYear();
+      const mm = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+      const dd = String(date.getDate()).padStart(2, "0");
+
+      return `${yyyy}${mm}${dd}`;
+    };
     if (!flightSector) {
       return {
         sameFlightFare: 0,
@@ -78,7 +85,7 @@ export class AoEnrichmentService implements IEnrichmentService {
         {
           DepartureStation: origin,
           ArrivalStation: destination,
-          FlightDate: travelDateTime,
+          FlightDate: formatDate(travelDateTime),
           FarecabinOption: "E",
           FareType: "N",
           OnlyDirectFlight: false,
