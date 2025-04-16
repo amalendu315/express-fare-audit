@@ -18,7 +18,26 @@ export class AoEnrichmentService implements IEnrichmentService {
         remarks: "Cannot enrich without flight info",
       };
     }
-
+    const getToken = async () => {
+      console.log("Getting Token...");
+      const data = {
+        AgentID: "AQAG051265",
+        Username: "9710101010",
+        Password: "348931",
+      };
+       const config = {
+         headers: {
+           Authorization: "Basic QVFBRzA1MTI2NSo5NzEwMTAxMDEwOjM0ODkzMQ==",
+         },
+       };
+       console.log("Response initiated");
+       const response = await axios.post(
+         "https://airiqapi.tesepr.com/TravelAPI.svc/Login",
+         data,
+         config
+       );
+       
+    }
     const payload = {
       Sectors: flightSector,
       FlightDate:travelDateTime.toLocaleDateString("en-US",{

@@ -29,7 +29,7 @@ app.post("/login", async (req, res) => {
     };
     console.log("Response initiated")
     const response = await axios.post(
-      "http://airiqapi.tesepr.com/TravelAPI.svc/Login",
+      "https://airiqapi.tesepr.com/TravelAPI.svc/Login",
       data,
       config
     );
