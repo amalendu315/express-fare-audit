@@ -22,6 +22,7 @@ const getToken = async () => {
     config
   );
   const token = response.data?.Token;
+  console.log('token recieved and returned')
   return token;
 };
 export class AoEnrichmentService implements IEnrichmentService {
@@ -51,6 +52,7 @@ export class AoEnrichmentService implements IEnrichmentService {
         remarks: "Cannot enrich without token",
         };
     }
+    console.log("Token received: ", token);
      const [origin, destination] = flightSector.split("-");
      if (!origin || !destination) {
        return {
@@ -62,6 +64,7 @@ export class AoEnrichmentService implements IEnrichmentService {
          remarks: "Expected format: ORIGIN-DEST",
        };
      }
+     console.log("Origin: ", origin, "Destination: ", destination);
     const payload = {
       AgentInfo: {
         AgentId: "AQAG051265",
@@ -89,13 +92,15 @@ export class AoEnrichmentService implements IEnrichmentService {
     };
 
     const config = { headers: { TOKEN: token } };
-
+    console.log("Payload: ", payload);
+    console.log("Config: ", config);
     try {
       const res = await axios.post(
         "https://airiqapi.tesepr.com/TravelAPI.svc/Availability",
         payload,
         config
       );
+      console.log("Response: ", res.data);
       const items = res.data?.ItineraryFlightList?.[0]?.Items || [];;
 
       let sameFlightFare: number | undefined;
@@ -127,6 +132,7 @@ export class AoEnrichmentService implements IEnrichmentService {
 
         totalSeats = availSeats;
       }
+      console.log("Total Fare Sum: ", totalFareSum);
       const averageFare = totalFareCount > 0 ? totalFareSum / totalFareCount : 0;
       return {
         sameFlightFare : sameFlightFare || 0,
