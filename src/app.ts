@@ -43,7 +43,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/V0/Availability", async (req, res) => {
-  const { departure, arrival, FlightDate, OnlyDirectFlight } = req.body;
+  const { DepartureStation, ArrivalStation, FlightDate, OnlyDirectFlight } = req.body;
 
   console.log(req.body);
 
@@ -63,8 +63,8 @@ app.post("/V0/Availability", async (req, res) => {
     AirlineID: "",
     AvailInfo: [
       {
-        DepartureStation: departure,
-        ArrivalStation: arrival,
+        DepartureStation: DepartureStation,
+        ArrivalStation: ArrivalStation,
         FlightDate: FlightDate,
         FarecabinOption: "E",
         FareType: "N",
