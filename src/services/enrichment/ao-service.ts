@@ -21,9 +21,14 @@ const getToken = async () => {
     data,
     config
   );
-  const token = response.data?.Token;
-  console.log('token recieved and returned')
-  return token;
+  if(response?.data){
+    const token = response.data?.Token;
+    console.log("token recieved and returned");
+    return token;
+  } else {
+    console.log("Error getting token");
+    return null;
+  }
 };
 export class AoEnrichmentService implements IEnrichmentService {
   async enrich(
@@ -48,16 +53,9 @@ export class AoEnrichmentService implements IEnrichmentService {
         remarks: "Cannot enrich without flight info",
       };
     }
-    const token = await getToken();
-    if (!token) {
-      return {
-        sameFlightFare: 0,
-        lowestFlightFare: 0,
-        averageFare: 0,
-        availableStock: 0,
-        errorMessage: "Missing Token",
-        remarks: "Cannot enrich without token",
-        };
+    var token = await getToken();
+    if (token === null) {
+      token = await getToken();
     }
     console.log("Token received: ", token);
      const [origin, destination] = flightSector.split("-");
