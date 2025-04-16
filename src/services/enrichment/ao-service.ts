@@ -2,35 +2,59 @@ import axios from "axios";
 import { IEnrichmentService } from "./interface";
 import { EnrichmentResultModel } from "../../models/enrichment-result-model";
 
+let cachedToken: string | null = null;
+let tokenFetchedAt: Date | null = null;
+const TOKEN_EXPIRY_MINUTES = 180; // Adjust as needed
 
-const getToken = async () => {
-  try{
-    console.log("Getting Token...");
-  const data = {
-    AgentID: "AQAG051265",
-    Username: "9710101010",
-    Password: "348931",
-  };
-  const config = {
-    headers: {
-      Authorization: "Basic QVFBRzA1MTI2NSo5NzEwMTAxMDEwOjM0ODkzMQ==",
-    },
-  };
-  console.log("Response initiated");
-  const response = await axios.post(
-    "https://airiqapi.tesepr.com/TravelAPI.svc/Login",
-    data,
-    config
-  );
-  console.log(response)
+const getToken = async (): Promise<string | null> => {
+  const now = new Date();
+
+  // Reuse token if valid
+  if (
+    cachedToken &&
+    tokenFetchedAt &&
+    (now.getTime() - tokenFetchedAt.getTime()) / (1000 * 60) <
+      TOKEN_EXPIRY_MINUTES
+  ) {
+    console.log("Using cached token");
+    return cachedToken;
+  }
+
+  try {
+    console.log("Getting new token...");
+    const data = {
+      AgentID: "AQAG051265",
+      Username: "9710101010",
+      Password: "348931",
+    };
+    const config = {
+      headers: {
+        Authorization: "Basic QVFBRzA1MTI2NSo5NzEwMTAxMDEwOjM0ODkzMQ==",
+      },
+    };
+
+    const response = await axios.post(
+      "https://airiqapi.tesepr.com/TravelAPI.svc/Login",
+      data,
+      config
+    );
+
     const token = response.data?.Token;
-    console.log("token recieved and returned");
+
+    if (token) {
+      cachedToken = token;
+      tokenFetchedAt = new Date();
+      console.log("New token cached at", tokenFetchedAt);
+    }
+
     return token;
   } catch (error) {
     console.error("Error getting token:", error);
     return null;
   }
 };
+
+
 export class AoEnrichmentService implements IEnrichmentService {
   async enrich(
     flightNumber: number,
