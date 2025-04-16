@@ -75,9 +75,9 @@ export const logFareManage = async (req: Request, res: Response, next:NextFuncti
     const created = await service.logFareManageAsync(log as FareAudit);
     if (created) {
       await queue.write(created);
-      newLogs.push(ticketId);
+      newLogs.push(fareLogId);
     } else {
-      duplicateLogs.push(ticketId);
+      duplicateLogs.push(fareLogId);
     }
   }
 
