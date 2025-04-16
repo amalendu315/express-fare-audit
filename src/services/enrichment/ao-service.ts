@@ -2,6 +2,28 @@ import axios from "axios";
 import { IEnrichmentService } from "./interface";
 import { EnrichmentResultModel } from "../../models/enrichment-result-model";
 
+
+const getToken = async () => {
+  console.log("Getting Token...");
+  const data = {
+    AgentID: "AQAG051265",
+    Username: "9710101010",
+    Password: "348931",
+  };
+  const config = {
+    headers: {
+      Authorization: "Basic QVFBRzA1MTI2NSo5NzEwMTAxMDEwOjM0ODkzMQ==",
+    },
+  };
+  console.log("Response initiated");
+  const response = await axios.post(
+    "https://airiqapi.tesepr.com/TravelAPI.svc/Login",
+    data,
+    config
+  );
+  const token = response.data?.Token;
+  return token;
+};
 export class AoEnrichmentService implements IEnrichmentService {
   async enrich(
     flightNumber: number,
@@ -18,25 +40,16 @@ export class AoEnrichmentService implements IEnrichmentService {
         remarks: "Cannot enrich without flight info",
       };
     }
-    const getToken = async () => {
-      console.log("Getting Token...");
-      const data = {
-        AgentID: "AQAG051265",
-        Username: "9710101010",
-        Password: "348931",
-      };
-       const config = {
-         headers: {
-           Authorization: "Basic QVFBRzA1MTI2NSo5NzEwMTAxMDEwOjM0ODkzMQ==",
-         },
-       };
-       console.log("Response initiated");
-       const response = await axios.post(
-         "https://airiqapi.tesepr.com/TravelAPI.svc/Login",
-         data,
-         config
-       );
-       
+    const token = await getToken();
+    if (!token) {
+      return {
+        sameFlightFare: 0,
+        lowestFlightFare: 0,
+        averageFare: 0,
+        availableStock: 0,
+        errorMessage: "Missing Token",
+        remarks: "Cannot enrich without token",
+        };
     }
     const payload = {
       Sectors: flightSector,
