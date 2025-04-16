@@ -12,7 +12,6 @@ export class FareAuditService {
   async logFareManageAsync(log: FareAudit): Promise<FareAudit | null> {
     const exists = await prisma.fareAudit.findFirst({
       where: {
-        ticketId: log.ticketId,
         fareLogId: log.fareLogId,
         logType:"fare",
       },
@@ -30,7 +29,6 @@ export class FareAuditService {
     const exists = await prisma.fareAudit.findFirst({
       where: {
         bookingId: log.bookingId,
-        ticketId: log.ticketId,
         logType:"booking",
       },
     });
