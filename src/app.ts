@@ -83,7 +83,7 @@ app.post("/V0/Availability", async (req, res) => {
   try {
     console.log(
       "NEW EndPoint Log:",
-      JSON.stringify(data, null, 2),
+      JSON.stringify(data?.AvailInfo, null, 2),
       JSON.stringify(config, null, 2)
     );
 
