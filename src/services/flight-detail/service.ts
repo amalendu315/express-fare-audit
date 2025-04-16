@@ -14,6 +14,8 @@ export class FlightDetailService {
     const query = `
       SELECT TOP 1
         TicketEntrySummary.DestinationID,
+        ${type === "booking" ? "SV.TicketID AS TicketID," : ""}
+        ${type === "booking" ? "FareLog.FareLogID AS FareLogID," : ""}
         ${
           type === "booking"
             ? `SV.FDestName AS Sector`
@@ -124,7 +126,19 @@ export class FlightDetailService {
           }
             AND CONVERT(DATE, RefTable.TravelDateTime) = CONVERT(DATE, SV.TravelDateTime)
       ) AS DailyRefundAmount
-
+      ${
+        type === "booking"
+          ? `
+OUTER APPLY (
+    SELECT TOP 1 FareLogID
+    FROM [dbo].[FareLogVw] AS FL
+    WHERE FL.PNR = SV.PNR
+    ORDER BY FareLogID DESC
+) AS FareLog
+`
+          : ""
+      }
+    
       OUTER APPLY (
           SELECT
               MAX(FDestID) AS DestinationID
@@ -148,6 +162,8 @@ export class FlightDetailService {
 
     return {
       destinationId: row.DestinationID,
+      ticketId: row.TicketID ?? null,
+      fareLogId: row.FareLogID ?? null,
       sector: row.SectorCode,
       airlineName: row.aName,
       travelDateTime: row.TravelDateTime,

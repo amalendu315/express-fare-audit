@@ -103,8 +103,8 @@ export const logBookingTicket = async (req: Request, res: Response, next:NextFun
 
   const log = {
     bookingId: request.bookingId,
-    ticketId: request.ticketId,
-    fareLogId: request.fareLogId,
+    ticketId: flightDetails?.ticketId,
+    fareLogId: flightDetails?.fareLogId,
     pnr: flightDetails?.pnr || null,
     flightSector: flightDetails?.sector!,
     flightNumber: flightDetails?.flightNumber.toString() || "",

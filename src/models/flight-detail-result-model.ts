@@ -2,6 +2,8 @@ import { Decimal } from "@prisma/client/runtime/library";
 
 export interface FlightDetailResultModel {
   destinationId: number;
+  ticketId?: number;
+  fareLogId?: number;
   sector?: string;
   airlineName?: string;
   travelDateTime: Date;
