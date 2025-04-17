@@ -99,7 +99,7 @@ export const logFareManage = async (
       added: newLogs,
       duplicates: duplicateLogs,
       missingFlightDetails,
-      message: "Bulk fare manage log processed.",
+      message: `Bulk fare manage log processed.${missingFlightDetails.length > 0 ? " Missing flight details for some tickets." : ""}`,
     });
   } catch (error) {
     console.error("Error in logFareManage controller:", error);
