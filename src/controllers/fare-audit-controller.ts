@@ -40,8 +40,8 @@ export const logFareManage = async (
           "fare"
         );
         if (!flightDetails || !flightDetails.flightNumber) {
-          console.warn(`[❌] Missing flight details for TicketID: ${ticketId}`);
-          missingFlightDetails.push(ticketId);
+          console.warn(`[❌] Missing flight details for FareLogID: ${fareLogId}`);
+          missingFlightDetails.push(fareLogId);
           continue;
         }
 
