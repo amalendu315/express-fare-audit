@@ -6,9 +6,13 @@ class EnrichmentQueue {
   private subscribers: Subscriber[] = [];
 
   // Call this to push a new log to the queue
-  async write(log: FareAudit): Promise<void> {
+  write(log: FareAudit): void {
     for (const subscriber of this.subscribers) {
-      await subscriber(log);
+      setTimeout(() => {
+        subscriber(log).catch((err) =>
+          console.error(`[Queue] Error processing log ${log.id}:`, err)
+        );
+      }, 0);
     }
   }
 

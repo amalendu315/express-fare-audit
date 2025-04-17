@@ -6,14 +6,18 @@ export function startEnrichmentWorker() {
   const service = new FareAuditService();
 
   enrichmentQueue.subscribe(async (log: FareAudit) => {
-    console.log(
-      `[QUEUE] Enriching ${log.logType}: ${log.ticketId ?? log.bookingId}`
-    );
+    try {
+      console.log(
+        `[QUEUE] Enriching ${log.logType}: ${log.ticketId ?? log.bookingId}`
+      );
 
-    if (log.logType === "fare") {
-      await service.enrichFareManageAsync(log);
-    } else if (log.logType === "booking") {
-      await service.enrichBookingTicketAsync(log);
+      if (log.logType === "fare") {
+        await service.enrichFareManageAsync(log);
+      } else if (log.logType === "booking") {
+        await service.enrichBookingTicketAsync(log);
+      }
+    } catch (err) {
+      console.error(`[WORKER ERROR] Failed to enrich log ${log.id}:`, err);
     }
   });
 }
