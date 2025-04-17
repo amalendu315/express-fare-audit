@@ -1,58 +1,7 @@
 import axios from "axios";
 import { IEnrichmentService } from "./interface";
 import { EnrichmentResultModel } from "../../models/enrichment-result-model";
-
-let cachedToken: string | null = null;
-let tokenFetchedAt: Date | null = null;
-const TOKEN_EXPIRY_MINUTES = 180; // Adjust as needed
-
-const getToken = async (): Promise<string | null> => {
-  const now = new Date();
-
-  // Reuse token if valid
-  if (
-    cachedToken &&
-    tokenFetchedAt &&
-    (now.getTime() - tokenFetchedAt.getTime()) / (1000 * 60) <
-      TOKEN_EXPIRY_MINUTES
-  ) {
-    console.log("Using cached token");
-    return cachedToken;
-  }
-
-  try {
-    console.log("Getting new token...");
-    const data = {
-      AgentID: "AQAG051265",
-      Username: "9710101010",
-      Password: "348931",
-    };
-    const config = {
-      headers: {
-        Authorization: "Basic QVFBRzA1MTI2NSo5NzEwMTAxMDEwOjM0ODkzMQ==",
-      },
-    };
-
-    const response = await axios.post(
-      "https://airiqapi.tesepr.com/TravelAPI.svc/Login",
-      data,
-      config
-    );
-
-    const token = response.data?.Token;
-
-    if (token) {
-      cachedToken = token;
-      tokenFetchedAt = new Date();
-      console.log("New token cached at", tokenFetchedAt);
-    }
-
-    return token;
-  } catch (error) {
-    console.error("Error getting token:", error);
-    return null;
-  }
-};
+import { getToken } from "../../utils/get-token";
 
 
 export class AoEnrichmentService implements IEnrichmentService {
@@ -79,9 +28,18 @@ export class AoEnrichmentService implements IEnrichmentService {
       };
     }
     // var token = await getToken();
-    var token =
-      "bHpHdistczRpblVHeDRUdFZYaUVjSmY5alQ2UjZLMjlTbklYTnFuZ1l6OURwdUlFTU9uVGFodDN1Ky02SFB6dVhzRUloUmtDQW9ZWUUwU2h2SEdoKy05eHpxUElrVm1BYUNQYUxVV1JpdzdHSjhsdWlyT3BPb3l6a2taMWVmb2dBZXVmUnorLXMyYzBxbUVZbWZJblpFKy02UUNnY3loTlJVZWdnMHZZOEhyR0NPQVF2UzIxQkFTRkticWIwSWY3ZFN6QjRxMmZJbm5aQi9YL2dXcmFuMXpFaWdBK0FEMEFQUS0="; //await getToken()
+    var token = await getToken(); //await getToken()
     console.log("Token received: ", token);
+    if (!token) {
+      return {
+        sameFlightFare: 0,
+        lowestFlightFare: 0,
+        averageFare: 0,
+        availableStock: 0,
+        errorMessage: "Failed to retrieve AO API token",
+        remarks: "Token fetch failed",
+      };
+    }
     const [origin, destination] = flightSector.split("-");
     if (!origin || !destination) {
       return {

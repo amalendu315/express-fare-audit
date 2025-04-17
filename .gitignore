@@ -19,6 +19,8 @@ yarn-error.log*
 .env
 .env.*
 
+token-cache.json
+
 # Prisma generated client
 prisma/dev.db
 prisma/test.db
