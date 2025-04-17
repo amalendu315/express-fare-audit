@@ -80,20 +80,20 @@ export class AoEnrichmentService implements IEnrichmentService {
     }
     // var token = await getToken();
     var token =
-      "bUl5Yzc2UEZqS0ZUMU5Dbm5VS25La0NEdistMVEyQk9mdExlQ1R5cDdLcHg2N0RIem0zdU1zVmErLW96TDV0ZllyandxTFdVWnlJS3lOYzFWUE8zY09DMlpDY29LZFNZYistbE51YXc1Z1RZQmpsMVRMVFIrLVkxNDJ1L1BQREQ4Y2FuaElCd2xmbXNsSFlYNmNOM1FyaWVONmhnc1VGeXY2Ky1oZHp3SFpqSnIxellNYjlVTU9rWXEyVXNmd3lZd1lTYmFhQk16VHc3TmEyMistckpHQ2VDeWFrZytBRDBBUFEt";
+      "bHpHdistczRpblVHeDRUdFZYaUVjSmY5alQ2UjZLMjlTbklYTnFuZ1l6OURwdUlFTU9uVGFodDN1Ky02SFB6dVhzRUloUmtDQW9ZWUUwU2h2SEdoKy05eHpxUElrVm1BYUNQYUxVV1JpdzdHSjhsdWlyT3BPb3l6a2taMWVmb2dBZXVmUnorLXMyYzBxbUVZbWZJblpFKy02UUNnY3loTlJVZWdnMHZZOEhyR0NPQVF2UzIxQkFTRkticWIwSWY3ZFN6QjRxMmZJbm5aQi9YL2dXcmFuMXpFaWdBK0FEMEFQUS0="; //await getToken()
     console.log("Token received: ", token);
-     const [origin, destination] = flightSector.split("-");
-     if (!origin || !destination) {
-       return {
-         sameFlightFare: 0,
-         lowestFlightFare: 0,
-         averageFare: 0,
-         availableStock: 0,
-         errorMessage: "Invalid sector format",
-         remarks: "Expected format: ORIGIN-DEST",
-       };
-     }
-     console.log("Origin: ", origin, "Destination: ", destination);
+    const [origin, destination] = flightSector.split("-");
+    if (!origin || !destination) {
+      return {
+        sameFlightFare: 0,
+        lowestFlightFare: 0,
+        averageFare: 0,
+        availableStock: 0,
+        errorMessage: "Invalid sector format",
+        remarks: "Expected format: ORIGIN-DEST",
+      };
+    }
+    console.log("Origin: ", origin, "Destination: ", destination);
     const payload = {
       AgentInfo: {
         AgentId: "AQAG051265",
@@ -130,7 +130,7 @@ export class AoEnrichmentService implements IEnrichmentService {
         config
       );
       console.log("Response: ", res.data);
-      const items = res.data?.ItineraryFlightList?.[0]?.Items || [];;
+      const items = res.data?.ItineraryFlightList?.[0]?.Items || [];
 
       let sameFlightFare: number | undefined;
       let lowestFlightFare: number | undefined;
@@ -162,10 +162,11 @@ export class AoEnrichmentService implements IEnrichmentService {
         totalSeats = availSeats;
       }
       console.log("Total Fare Sum: ", totalFareSum);
-      const averageFare = totalFareCount > 0 ? totalFareSum / totalFareCount : 0;
+      const averageFare =
+        totalFareCount > 0 ? totalFareSum / totalFareCount : 0;
       return {
-        sameFlightFare : sameFlightFare || 0,
-        lowestFlightFare : lowestFlightFare || 0,
+        sameFlightFare: sameFlightFare || 0,
+        lowestFlightFare: lowestFlightFare || 0,
         averageFare: averageFare,
         availableStock: totalSeats,
         remarks: "AO API Enriched",
