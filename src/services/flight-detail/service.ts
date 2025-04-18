@@ -257,6 +257,9 @@ OUTER APPLY (
         SectorSaleFare.DailySale,
         DailyRefundAmount.DailyRefund,
         FDestID.aCode + '-' + FDestID.aCode2 as SectorCode,
+        FDestID.aCode as FromCode,
+        FDestID.aCode2 as ToCode,
+
         CASE
             WHEN EXISTS (
                 SELECT 1 FROM [Config].[SectorBlock] AS BlackOut
@@ -370,6 +373,8 @@ OUTER APPLY (
       ticketId: row.TicketID ?? null,
       fareLogId: row.FareLogID ?? null,
       sector: row.SectorCode,
+      fromCode: row.FromCode,
+      toCode: row.ToCode,
       airlineName: row.aName,
       travelDateTime: row.TravelDateTime,
       flightNumber: Number(row.FlightNumber),

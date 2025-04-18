@@ -5,6 +5,8 @@ export interface FlightDetailResultModel {
   ticketId?: number;
   fareLogId?: number;
   sector?: string;
+  fromCode?: string;
+  toCode?: string;
   airlineName?: string;
   travelDateTime: Date;
   flightNumber: number;
