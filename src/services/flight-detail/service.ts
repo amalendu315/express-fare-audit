@@ -266,11 +266,12 @@ OUTER APPLY (
         DailyRefundAmount.DailyRefund,
         ${
           type === "booking"
-            ? `FDestCTE.aCode + '-' + FDestCTE.aCode2 as SectorCode`
+            ? `FDestCTE.aCode + '-' + FDestCTE.aCode2 as SectorCode,
+       FDestCTE.aCode as FromCode,
+       FDestCTE.aCode2 as ToCode,`
             : `FDestID.aCode + '-' + FDestID.aCode2 as SectorCode,`
-        },
-        ${type === "booking" ? `FDestCTE.aCode as FromCode` : ``},
-        ${type === "booking" ? `FDestCTE.aCode2 as ToCode` : ``},
+        }
+
 
         CASE
             WHEN EXISTS (
