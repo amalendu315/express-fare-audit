@@ -215,6 +215,10 @@ OUTER APPLY (
       type === "booking" ? "WHERE SV.SaleID = @Id" : "WHERE SV.TicketID = @Id";
 
     const query = `
+    ;WITH FDestCTE AS (
+    SELECT FDestID, FDestName, aCode, aCode2
+    FROM Config.FDestination
+)
       SELECT TOP 1
         TicketEntrySummary.DestinationID,
         ${type === "booking" ? "SV.TicketID AS TicketID," : ""}
@@ -256,9 +260,9 @@ OUTER APPLY (
         FDestStockSummary.SectorWiseLiveAvgFare,
         SectorSaleFare.DailySale,
         DailyRefundAmount.DailyRefund,
-        FDestID.aCode + '-' + FDestID.aCode2 as SectorCode,
-        FDestID.aCode as FromCode,
-        FDestID.aCode2 as ToCode,
+        FDestCTE.aCode + '-' + FDestCTE.aCode2 as SectorCode,,
+        FDestCTE.aCode as FromCode,
+        FDestCTE.aCode2 as ToCode,
 
         CASE
             WHEN EXISTS (
