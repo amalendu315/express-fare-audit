@@ -215,10 +215,14 @@ OUTER APPLY (
       type === "booking" ? "WHERE SV.SaleID = @Id" : "WHERE SV.TicketID = @Id";
 
     const query = `
-    ;WITH FDestCTE AS (
+    ${
+      type === "booking"
+        ? `;WITH FDestCTE AS (
     SELECT FDestID, FDestName, aCode, aCode2
     FROM Config.FDestination
-)
+)`
+        : ``
+    }
       SELECT TOP 1
         TicketEntrySummary.DestinationID,
         ${type === "booking" ? "SV.TicketID AS TicketID," : ""}
@@ -260,9 +264,13 @@ OUTER APPLY (
         FDestStockSummary.SectorWiseLiveAvgFare,
         SectorSaleFare.DailySale,
         DailyRefundAmount.DailyRefund,
-        FDestCTE.aCode + '-' + FDestCTE.aCode2 as SectorCode,
-        FDestCTE.aCode as FromCode,
-        FDestCTE.aCode2 as ToCode,
+        ${
+          type === "booking"
+            ? `FDestCTE.aCode + '-' + FDestCTE.aCode2 as SectorCode`
+            : `FDestID.aCode + '-' + FDestID.aCode2 as SectorCode,`
+        },
+        ${type === "booking" ? `FDestCTE.aCode as FromCode` : ``},
+        ${type === "booking" ? `FDestCTE.aCode2 as ToCode` : ``},
 
         CASE
             WHEN EXISTS (
@@ -276,8 +284,12 @@ OUTER APPLY (
         type === "booking" ? "dbo.SaleTicketView" : "Config.TicketEntry"
       } AS SV
 
-      ${type === "booking" ? `LEFT JOIN FDestCTE
-    ON FDestCTE.FDestName = SV.FDestName`:``}
+      ${
+        type === "booking"
+          ? `LEFT JOIN FDestCTE
+    ON FDestCTE.FDestName = SV.FDestName`
+          : ``
+      }
 
       OUTER APPLY (
           SELECT
