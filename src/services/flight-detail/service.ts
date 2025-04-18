@@ -363,6 +363,8 @@ OUTER APPLY (
       return null;
     }
 
+    console.log("[🛩️] Flight detail found for ID:", id, row);
+
     return {
       destinationId: row.DestinationID,
       ticketId: row.TicketID ?? null,
