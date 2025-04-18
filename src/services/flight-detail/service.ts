@@ -377,7 +377,7 @@ OUTER APPLY (
 
       ${whereClause};
     `;
-
+      console.log("[🛩️] Query:", query);
     const result = await pool.request().input("Id", id).query(query);
     const row = result.recordset[0];
 
