@@ -260,7 +260,7 @@ OUTER APPLY (
         FDestStockSummary.SectorWiseLiveAvgFare,
         SectorSaleFare.DailySale,
         DailyRefundAmount.DailyRefund,
-        FDestCTE.aCode + '-' + FDestCTE.aCode2 as SectorCode,,
+        FDestCTE.aCode + '-' + FDestCTE.aCode2 as SectorCode,
         FDestCTE.aCode as FromCode,
         FDestCTE.aCode2 as ToCode,
 
@@ -275,6 +275,9 @@ OUTER APPLY (
       FROM ${
         type === "booking" ? "dbo.SaleTicketView" : "Config.TicketEntry"
       } AS SV
+
+      LEFT JOIN FDestCTE
+    ON FDestCTE.FDestName = SV.FDestName
 
       OUTER APPLY (
           SELECT
