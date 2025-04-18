@@ -21,6 +21,7 @@ export class AoEnrichmentService implements IEnrichmentService {
       return {
         sameFlightFare: 0,
         lowestFlightFare: 0,
+        sameFlightStock: 0,
         averageFare: 0,
         availableStock: 0,
         errorMessage: "Missing FlightSector or FlightDate",
@@ -34,6 +35,7 @@ export class AoEnrichmentService implements IEnrichmentService {
       return {
         sameFlightFare: 0,
         lowestFlightFare: 0,
+        sameFlightStock: 0,
         averageFare: 0,
         availableStock: 0,
         errorMessage: "Failed to retrieve AO API token",
@@ -45,6 +47,7 @@ export class AoEnrichmentService implements IEnrichmentService {
       return {
         sameFlightFare: 0,
         lowestFlightFare: 0,
+        sameFlightStock: 0,
         averageFare: 0,
         availableStock: 0,
         errorMessage: "Invalid sector format",
@@ -95,6 +98,7 @@ export class AoEnrichmentService implements IEnrichmentService {
       let totalFareSum = 0;
       let totalFareCount = 0;
       let totalSeats = 0;
+      let sameFlightSeats: number | undefined;
 
       for (const item of items) {
         const flightNo = item.FlightDetails?.[0]?.FlightNumber.split(" ").pop();
@@ -107,6 +111,7 @@ export class AoEnrichmentService implements IEnrichmentService {
 
           if (parseInt(flightNo) === flightNumber) {
             sameFlightFare ??= netAmount;
+            sameFlightSeats ??= availSeats;
           }
 
           if (!lowestFlightFare || netAmount < lowestFlightFare) {
@@ -125,6 +130,7 @@ export class AoEnrichmentService implements IEnrichmentService {
       return {
         sameFlightFare: sameFlightFare || 0,
         lowestFlightFare: lowestFlightFare || 0,
+        sameFlightStock: sameFlightSeats || 0,
         averageFare: averageFare,
         availableStock: totalSeats,
         remarks: "AO API Enriched",
@@ -133,6 +139,7 @@ export class AoEnrichmentService implements IEnrichmentService {
       return {
         sameFlightFare: 0,
         lowestFlightFare: 0,
+        sameFlightStock: 0,
         averageFare: 0,
         availableStock: 0,
         errorMessage: `AO API Error: ${e.message}`,

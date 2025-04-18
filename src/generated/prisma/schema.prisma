@@ -15,11 +15,11 @@ model FareAudit {
   fareLogId                     Int
   logType                       String   @db.NVarChar(100)
   source                        String   @db.NVarChar(100)
-  requestDateTime               DateTime
+  requestDateTime               DateTime @db.DateTime
   pnr                           String?  @db.NVarChar(50)
   flightSector                  String   @db.NVarChar(50)
   flightNumber                  String   @db.NVarChar(20)
-  travelDateTime                DateTime
+  travelDateTime                DateTime @db.DateTime
   fsSameFlightFare              Decimal? @db.Decimal(10, 2)
   fsLowestFlightFare            Decimal? @db.Decimal(10, 2)
   fsAvailableStock              Int?
@@ -40,7 +40,8 @@ model FareAudit {
   averageSellFare               Decimal? @db.Decimal(10, 2)
   status                        String?  @db.NVarChar(50)
   remark                        String?  @db.NVarChar(255)
-  taskCompletedDateTime         DateTime
+  taskCompletedDateTime         DateTime @db.DateTime
+  fsSameFlightStock             Int?
 }
 
 model EFMigrationsHistory {

@@ -150,7 +150,8 @@ exports.Prisma.FareAuditScalarFieldEnum = {
   averageSellFare: 'averageSellFare',
   status: 'status',
   remark: 'remark',
-  taskCompletedDateTime: 'taskCompletedDateTime'
+  taskCompletedDateTime: 'taskCompletedDateTime',
+  fsSameFlightStock: 'fsSameFlightStock'
 };
 
 exports.Prisma.EFMigrationsHistoryScalarFieldEnum = {

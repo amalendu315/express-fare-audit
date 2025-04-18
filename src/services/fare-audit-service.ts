@@ -42,15 +42,9 @@ export class FareAuditService {
   }
 
   async enrichFareManageAsync(log: FareAudit): Promise<void> {
-    const fd = await this.orchestrator.getFlightDetailEnrichmentAsync(
-      log.ticketId,
-      "fare"
-    );
-    if (!fd) return;
-
-    const sector = fd.sector!;
-    const flightDate = fd.travelDateTime;
-    const flightNumber = Number(fd.flightNumber);
+    const sector = log.flightSector!;
+    const flightDate = log.travelDateTime;
+    const flightNumber = Number(log.flightNumber);
 
     const [fs, ao] = await this.orchestrator.enrichBothAsync(
       flightNumber,
@@ -67,6 +61,7 @@ export class FareAuditService {
         fsSameFlightFare: fs?.sameFlightFare,
         fsLowestFlightFare: fs?.lowestFlightFare,
         fsAvailableStock: fs?.availableStock,
+        fsSameFlightStock: fs?.sameFlightStock,
         fsAverageFare: fs?.averageFare,
         fsErrorMessage: fs?.errorMessage,
 
@@ -91,15 +86,10 @@ export class FareAuditService {
       console.log(`[ENRICH DONE] TicketID: ${log.ticketId} - Not Enriched`);
       return;
     }
-    const fd = await this.orchestrator.getFlightDetailEnrichmentAsync(
-      log?.bookingId,
-      "booking"
-    );
-    if (!fd) return;
 
-    const sector = fd.sector!;
-    const flightDate = fd.travelDateTime;
-    const flightNumber = fd.flightNumber;
+    const sector = log.flightSector!;
+    const flightDate = log.travelDateTime;
+    const flightNumber = Number(log.flightNumber);
 
     const [fs, ao] = await this.orchestrator.enrichBothAsync(
       flightNumber,

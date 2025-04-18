@@ -21,6 +21,7 @@ export interface FareAudit {
   fsSameFlightFare: Decimal | null; // Nullable for fare manage logs
   fsLowestFlightFare: Decimal | null; // Nullable for fare manage logs;
   fsAvailableStock: number | null; // Nullable for fare manage logs
+  fsSameFlightStock: number | null; // Nullable for fare manage logs
   fsErrorMessage: string | null; // Nullable for fare manage logs
   fsAverageFare: Decimal | null; // Nullable for fare manage logs
 

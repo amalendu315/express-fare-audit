@@ -1143,6 +1143,7 @@ export namespace Prisma {
     routeWiseSeatsLeft: number | null
     routeWiseAverageCost: Decimal | null
     averageSellFare: Decimal | null
+    fsSameFlightStock: number | null
   }
 
   export type FareAuditSumAggregateOutputType = {
@@ -1166,6 +1167,7 @@ export namespace Prisma {
     routeWiseSeatsLeft: number | null
     routeWiseAverageCost: Decimal | null
     averageSellFare: Decimal | null
+    fsSameFlightStock: number | null
   }
 
   export type FareAuditMinAggregateOutputType = {
@@ -1201,6 +1203,7 @@ export namespace Prisma {
     status: string | null
     remark: string | null
     taskCompletedDateTime: Date | null
+    fsSameFlightStock: number | null
   }
 
   export type FareAuditMaxAggregateOutputType = {
@@ -1236,6 +1239,7 @@ export namespace Prisma {
     status: string | null
     remark: string | null
     taskCompletedDateTime: Date | null
+    fsSameFlightStock: number | null
   }
 
   export type FareAuditCountAggregateOutputType = {
@@ -1271,6 +1275,7 @@ export namespace Prisma {
     status: number
     remark: number
     taskCompletedDateTime: number
+    fsSameFlightStock: number
     _all: number
   }
 
@@ -1296,6 +1301,7 @@ export namespace Prisma {
     routeWiseSeatsLeft?: true
     routeWiseAverageCost?: true
     averageSellFare?: true
+    fsSameFlightStock?: true
   }
 
   export type FareAuditSumAggregateInputType = {
@@ -1319,6 +1325,7 @@ export namespace Prisma {
     routeWiseSeatsLeft?: true
     routeWiseAverageCost?: true
     averageSellFare?: true
+    fsSameFlightStock?: true
   }
 
   export type FareAuditMinAggregateInputType = {
@@ -1354,6 +1361,7 @@ export namespace Prisma {
     status?: true
     remark?: true
     taskCompletedDateTime?: true
+    fsSameFlightStock?: true
   }
 
   export type FareAuditMaxAggregateInputType = {
@@ -1389,6 +1397,7 @@ export namespace Prisma {
     status?: true
     remark?: true
     taskCompletedDateTime?: true
+    fsSameFlightStock?: true
   }
 
   export type FareAuditCountAggregateInputType = {
@@ -1424,6 +1433,7 @@ export namespace Prisma {
     status?: true
     remark?: true
     taskCompletedDateTime?: true
+    fsSameFlightStock?: true
     _all?: true
   }
 
@@ -1546,6 +1556,7 @@ export namespace Prisma {
     status: string | null
     remark: string | null
     taskCompletedDateTime: Date
+    fsSameFlightStock: number | null
     _count: FareAuditCountAggregateOutputType | null
     _avg: FareAuditAvgAggregateOutputType | null
     _sum: FareAuditSumAggregateOutputType | null
@@ -1600,6 +1611,7 @@ export namespace Prisma {
     status?: boolean
     remark?: boolean
     taskCompletedDateTime?: boolean
+    fsSameFlightStock?: boolean
   }, ExtArgs["result"]["fareAudit"]>
 
 
@@ -1637,9 +1649,10 @@ export namespace Prisma {
     status?: boolean
     remark?: boolean
     taskCompletedDateTime?: boolean
+    fsSameFlightStock?: boolean
   }
 
-  export type FareAuditOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookingId" | "ticketId" | "fareLogId" | "logType" | "source" | "requestDateTime" | "pnr" | "flightSector" | "flightNumber" | "travelDateTime" | "fsSameFlightFare" | "fsLowestFlightFare" | "fsAvailableStock" | "fsErrorMessage" | "fsAverageFare" | "aoSameFlightFare" | "aoLowestFare" | "aoAverageFare" | "aoErrorMessage" | "flightWiseTotalSeatsPurchased" | "flightWiseTotalSeatsSold" | "flightWiseTotalSeatsLeft" | "flightWiseAverageCost" | "routeWiseSeatsPurchased" | "routeWiseSeatsSold" | "routeWiseSeatsLeft" | "routeWiseAverageCost" | "averageSellFare" | "status" | "remark" | "taskCompletedDateTime", ExtArgs["result"]["fareAudit"]>
+  export type FareAuditOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookingId" | "ticketId" | "fareLogId" | "logType" | "source" | "requestDateTime" | "pnr" | "flightSector" | "flightNumber" | "travelDateTime" | "fsSameFlightFare" | "fsLowestFlightFare" | "fsAvailableStock" | "fsErrorMessage" | "fsAverageFare" | "aoSameFlightFare" | "aoLowestFare" | "aoAverageFare" | "aoErrorMessage" | "flightWiseTotalSeatsPurchased" | "flightWiseTotalSeatsSold" | "flightWiseTotalSeatsLeft" | "flightWiseAverageCost" | "routeWiseSeatsPurchased" | "routeWiseSeatsSold" | "routeWiseSeatsLeft" | "routeWiseAverageCost" | "averageSellFare" | "status" | "remark" | "taskCompletedDateTime" | "fsSameFlightStock", ExtArgs["result"]["fareAudit"]>
 
   export type $FareAuditPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FareAudit"
@@ -1677,6 +1690,7 @@ export namespace Prisma {
       status: string | null
       remark: string | null
       taskCompletedDateTime: Date
+      fsSameFlightStock: number | null
     }, ExtArgs["result"]["fareAudit"]>
     composites: {}
   }
@@ -2078,6 +2092,7 @@ export namespace Prisma {
     readonly status: FieldRef<"FareAudit", 'String'>
     readonly remark: FieldRef<"FareAudit", 'String'>
     readonly taskCompletedDateTime: FieldRef<"FareAudit", 'DateTime'>
+    readonly fsSameFlightStock: FieldRef<"FareAudit", 'Int'>
   }
     
 
@@ -5327,7 +5342,8 @@ export namespace Prisma {
     averageSellFare: 'averageSellFare',
     status: 'status',
     remark: 'remark',
-    taskCompletedDateTime: 'taskCompletedDateTime'
+    taskCompletedDateTime: 'taskCompletedDateTime',
+    fsSameFlightStock: 'fsSameFlightStock'
   };
 
   export type FareAuditScalarFieldEnum = (typeof FareAuditScalarFieldEnum)[keyof typeof FareAuditScalarFieldEnum]
@@ -5481,6 +5497,7 @@ export namespace Prisma {
     status?: StringNullableFilter<"FareAudit"> | string | null
     remark?: StringNullableFilter<"FareAudit"> | string | null
     taskCompletedDateTime?: DateTimeFilter<"FareAudit"> | Date | string
+    fsSameFlightStock?: IntNullableFilter<"FareAudit"> | number | null
   }
 
   export type FareAuditOrderByWithRelationInput = {
@@ -5516,6 +5533,7 @@ export namespace Prisma {
     status?: SortOrderInput | SortOrder
     remark?: SortOrderInput | SortOrder
     taskCompletedDateTime?: SortOrder
+    fsSameFlightStock?: SortOrderInput | SortOrder
   }
 
   export type FareAuditWhereUniqueInput = Prisma.AtLeast<{
@@ -5554,6 +5572,7 @@ export namespace Prisma {
     status?: StringNullableFilter<"FareAudit"> | string | null
     remark?: StringNullableFilter<"FareAudit"> | string | null
     taskCompletedDateTime?: DateTimeFilter<"FareAudit"> | Date | string
+    fsSameFlightStock?: IntNullableFilter<"FareAudit"> | number | null
   }, "id">
 
   export type FareAuditOrderByWithAggregationInput = {
@@ -5589,6 +5608,7 @@ export namespace Prisma {
     status?: SortOrderInput | SortOrder
     remark?: SortOrderInput | SortOrder
     taskCompletedDateTime?: SortOrder
+    fsSameFlightStock?: SortOrderInput | SortOrder
     _count?: FareAuditCountOrderByAggregateInput
     _avg?: FareAuditAvgOrderByAggregateInput
     _max?: FareAuditMaxOrderByAggregateInput
@@ -5632,6 +5652,7 @@ export namespace Prisma {
     status?: StringNullableWithAggregatesFilter<"FareAudit"> | string | null
     remark?: StringNullableWithAggregatesFilter<"FareAudit"> | string | null
     taskCompletedDateTime?: DateTimeWithAggregatesFilter<"FareAudit"> | Date | string
+    fsSameFlightStock?: IntNullableWithAggregatesFilter<"FareAudit"> | number | null
   }
 
   export type EFMigrationsHistoryWhereInput = {
@@ -5892,6 +5913,7 @@ export namespace Prisma {
     status?: string | null
     remark?: string | null
     taskCompletedDateTime: Date | string
+    fsSameFlightStock?: number | null
   }
 
   export type FareAuditUncheckedCreateInput = {
@@ -5927,6 +5949,7 @@ export namespace Prisma {
     status?: string | null
     remark?: string | null
     taskCompletedDateTime: Date | string
+    fsSameFlightStock?: number | null
   }
 
   export type FareAuditUpdateInput = {
@@ -5961,6 +5984,7 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     taskCompletedDateTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    fsSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FareAuditUncheckedUpdateInput = {
@@ -5996,6 +6020,7 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     taskCompletedDateTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    fsSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FareAuditCreateManyInput = {
@@ -6030,6 +6055,7 @@ export namespace Prisma {
     status?: string | null
     remark?: string | null
     taskCompletedDateTime: Date | string
+    fsSameFlightStock?: number | null
   }
 
   export type FareAuditUpdateManyMutationInput = {
@@ -6064,6 +6090,7 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     taskCompletedDateTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    fsSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FareAuditUncheckedUpdateManyInput = {
@@ -6099,6 +6126,7 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     taskCompletedDateTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    fsSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type EFMigrationsHistoryCreateInput = {
@@ -6462,6 +6490,7 @@ export namespace Prisma {
     status?: SortOrder
     remark?: SortOrder
     taskCompletedDateTime?: SortOrder
+    fsSameFlightStock?: SortOrder
   }
 
   export type FareAuditAvgOrderByAggregateInput = {
@@ -6485,6 +6514,7 @@ export namespace Prisma {
     routeWiseSeatsLeft?: SortOrder
     routeWiseAverageCost?: SortOrder
     averageSellFare?: SortOrder
+    fsSameFlightStock?: SortOrder
   }
 
   export type FareAuditMaxOrderByAggregateInput = {
@@ -6520,6 +6550,7 @@ export namespace Prisma {
     status?: SortOrder
     remark?: SortOrder
     taskCompletedDateTime?: SortOrder
+    fsSameFlightStock?: SortOrder
   }
 
   export type FareAuditMinOrderByAggregateInput = {
@@ -6555,6 +6586,7 @@ export namespace Prisma {
     status?: SortOrder
     remark?: SortOrder
     taskCompletedDateTime?: SortOrder
+    fsSameFlightStock?: SortOrder
   }
 
   export type FareAuditSumOrderByAggregateInput = {
@@ -6578,6 +6610,7 @@ export namespace Prisma {
     routeWiseSeatsLeft?: SortOrder
     routeWiseAverageCost?: SortOrder
     averageSellFare?: SortOrder
+    fsSameFlightStock?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {

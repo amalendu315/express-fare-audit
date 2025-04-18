@@ -14,6 +14,7 @@ export class FsEnrichmentService implements IEnrichmentService {
         sameFlightFare: 0,
         lowestFlightFare: 0,
         averageFare: 0,
+        sameFlightStock: 0,
         availableStock: 0,
         errorMessage: "Missing FlightSector or FlightDate",
         remarks: "Cannot enrich without flight info",
@@ -26,6 +27,7 @@ export class FsEnrichmentService implements IEnrichmentService {
         sameFlightFare: 0,
         lowestFlightFare: 0,
         averageFare: 0,
+        sameFlightStock: 0,
         availableStock: 0,
         errorMessage: "Invalid sector format",
         remarks: "Expected format: ORIGIN-DEST",
@@ -74,6 +76,7 @@ export class FsEnrichmentService implements IEnrichmentService {
       let totalFare = 0;
       let fareCount = 0;
       let totalSeats = 0;
+      let sameFlightSeats: number | undefined;
 
       for (const flight of flights) {
         const segmentFlightNumber = flight.Segments?.[0]?.Flight_Number;
@@ -87,6 +90,7 @@ export class FsEnrichmentService implements IEnrichmentService {
           const clean = (fn: string) => fn.replace(/\D/g, "");
           if (clean(segmentFlightNumber) === String(flightNumber)) {
             sameFlightFare ??= totalAmount;
+            sameFlightSeats ??= seats;
           }
 
           if (!lowestFare || totalAmount < lowestFare) {
@@ -101,6 +105,7 @@ export class FsEnrichmentService implements IEnrichmentService {
       return {
         sameFlightFare : sameFlightFare ?? 0,
         lowestFlightFare: lowestFare ?? 0,
+        sameFlightStock: sameFlightSeats ?? 0,
         averageFare: fareCount > 0 ? totalFare / fareCount : 0,
         availableStock: totalSeats,
         remarks: "FS API Enriched",
@@ -110,6 +115,7 @@ export class FsEnrichmentService implements IEnrichmentService {
         sameFlightFare: 0,
         lowestFlightFare: 0,
         averageFare: 0,
+        sameFlightStock: 0,
         availableStock: 0,
         errorMessage: `FS API Error: ${e.message}`,
         remarks: "Enrichment Error",
