@@ -276,8 +276,8 @@ OUTER APPLY (
         type === "booking" ? "dbo.SaleTicketView" : "Config.TicketEntry"
       } AS SV
 
-      LEFT JOIN FDestCTE
-    ON FDestCTE.FDestName = SV.FDestName
+      ${type === "booking" ? `LEFT JOIN FDestCTE
+    ON FDestCTE.FDestName = SV.FDestName`:``}
 
       OUTER APPLY (
           SELECT
