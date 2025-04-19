@@ -6,6 +6,12 @@ import { enrichmentQueue } from "./enrichment/queue";
 const prisma = new PrismaClient();
 // type FareAudit = Prisma.FareAuditScalarFieldEnum;
 
+   function getISTDate(): Date {
+     const now = new Date();
+     const offsetInMilliseconds = 5.5 * 60 * 60 * 1000;
+     return new Date(now.getTime() + offsetInMilliseconds);
+   }
+
 export class FareAuditService {
   private orchestrator = new EnrichmentOrchestrator();
 
@@ -70,7 +76,7 @@ export class FareAuditService {
         aoAverageFare: ao?.averageFare,
         aoErrorMessage: ao?.errorMessage,
 
-        taskCompletedDateTime: new Date(),
+        taskCompletedDateTime: getISTDate(),
         status:
           fs?.errorMessage || ao?.errorMessage
             ? "Partially Completed"
@@ -114,7 +120,7 @@ export class FareAuditService {
         aoAverageFare: ao?.averageFare,
         aoErrorMessage: ao?.errorMessage,
 
-        taskCompletedDateTime: new Date(),
+        taskCompletedDateTime: getISTDate(),
         status:
           fs?.errorMessage || ao?.errorMessage
             ? "Partially Completed"

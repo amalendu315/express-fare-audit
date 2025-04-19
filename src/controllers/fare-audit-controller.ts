@@ -19,6 +19,12 @@ function chunkArray<T>(arr: T[], size: number): T[][] {
   return result;
 }
 
+   function getISTDate(): Date {
+     const now = new Date();
+     const offsetInMilliseconds = 5.5 * 60 * 60 * 1000;
+     return new Date(now.getTime() + offsetInMilliseconds);
+   }
+
 
 export const logFareManage = async (
   req: Request,
@@ -34,6 +40,9 @@ export const logFareManage = async (
         message: "TicketIDs and FareLogIDs are not the same count",
       });
     }
+
+ 
+
 
     const newLogs: string[] = [];
     const duplicateLogs: string[] = [];
@@ -63,6 +72,8 @@ export const logFareManage = async (
         const averageSale =
           actualPaxSale !== 0 ? actualSale / actualPaxSale : 0;
 
+        const requestDateTime = getISTDate();
+
         const log = {
           ticketId: parseInt(ticketId),
           fareLogId: parseInt(fareLogId),
@@ -70,7 +81,7 @@ export const logFareManage = async (
           flightSector: flightDetails.sector!,
           flightNumber: flightDetails.flightNumber.toString(),
           travelDateTime: flightDetails.travelDateTime,
-          requestDateTime: new Date(),
+          requestDateTime: requestDateTime,
           flightWiseTotalSeatsPurchased: flightDetails.flightWiseStock,
           flightWiseTotalSeatsSold: flightDetails.flightWiseConfirmed,
           flightWiseTotalSeatsLeft: flightDetails.flightWiseLiveQty,
@@ -277,7 +288,7 @@ export const logBookingTicket = async (
       routeWiseSeatsLeft: flightDetails.sectorWiseLiveQty,
       routeWiseAverageCost: flightDetails.sectorWiseAvgCost || null,
       averageSellFare: averageSale as unknown as Decimal,
-      requestDateTime: new Date(),
+      requestDateTime: getISTDate(),
       status: "Pending",
       logType: "booking",
       source: request.source,
