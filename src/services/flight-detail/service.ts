@@ -189,7 +189,6 @@ OUTER APPLY (
 
       ${whereClause};
     `;
-      console.log("[🛩️] Query:", query);
     const result = await pool.request().input("Id", id).query(query);
     const row = result.recordset[0];
 
@@ -197,8 +196,6 @@ OUTER APPLY (
       console.warn(`[⚠️] No flight detail found for ${type} ID ${id}`);
       return null;
     }
-
-    console.log("[🛩️] Flight detail found for ID:", id, row);
 
     return {
       destinationId: row.DestinationID,

@@ -11,14 +11,6 @@ const service = new FareAuditService();
 const queue = enrichmentQueue;
 const fds = flightDetailService;
 
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  const result: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    result.push(arr.slice(i, i + size));
-  }
-  return result;
-}
-
    function getISTDate(): Date {
      const now = new Date();
      const offsetInMilliseconds = 5.5 * 60 * 60 * 1000;
