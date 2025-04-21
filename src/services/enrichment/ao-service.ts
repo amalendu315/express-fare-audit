@@ -33,13 +33,13 @@ export class AoEnrichmentService implements IEnrichmentService {
       };
     }
      const payload = {
-       "Sectors": flightSector,
-       "FlightDate": travelDateTime.toLocaleDateString("en-US",{
+       Sectors: flightSector,
+       FlightDate: travelDateTime.toLocaleDateString("en-US",{
             year: 'numeric',
             month: '2-digit',
             day: '2-digit',
           }).split('-').reverse().join('/'),
-       "FlightNumber": "", 
+       FlightNumber: "", 
      };
 
     try {
@@ -62,27 +62,34 @@ export class AoEnrichmentService implements IEnrichmentService {
       let sameFlightSeats: number | undefined;
 
       for (const item of items) {
-         const flightNo = item.AirlineNo?.split(" ")?.pop()?.trim() || "";
-        const availSeats = parseInt(item.AvailSeat || "0");
-        for (const fare of item.Fares || []) {
-           const grossAmountStr =
-             fare?.Pricedescription?.[0]?.GrossAmount || "0";
-           const netAmount = parseFloat(grossAmountStr);
+          const flightData = item.AirlinetList?.[0];
+          const priceList = item.PriceDetails || [];
 
-          if (parseInt(flightNo) === flightNumber) {
-            sameFlightFare ??= netAmount;
-            sameFlightSeats ??= availSeats;
+          if (!flightData) continue;
+
+          const flightNoRaw = flightData.AirlineNo || "";
+          const flightNo = flightNoRaw.split(" ").pop()?.trim();
+          const availSeats = parseInt(flightData.AvailSeat || "0");
+
+          for (const fare of priceList) {
+            const priceDesc = fare?.Pricedescription?.[0];
+            const grossAmountStr = priceDesc?.GrossAmount || "0";
+            const netAmount = parseFloat(grossAmountStr);
+
+            if (parseInt(flightNo) === flightNumber) {
+              sameFlightFare ??= netAmount;
+              sameFlightSeats ??= availSeats;
+            }
+
+            if (!lowestFlightFare || netAmount < lowestFlightFare) {
+              lowestFlightFare = netAmount;
+            }
+
+            totalFareSum += netAmount;
+            totalFareCount++;
           }
 
-          if (!lowestFlightFare || netAmount < lowestFlightFare) {
-            lowestFlightFare = netAmount;
-          }
-
-          totalFareSum += netAmount;
-          totalFareCount++;
-        }
-
-        totalSeats = availSeats;
+          totalSeats = availSeats;
       }
       console.log("Total Fare Sum: ", totalFareSum);
       const averageFare =
