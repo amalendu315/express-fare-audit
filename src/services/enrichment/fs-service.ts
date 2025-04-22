@@ -82,6 +82,18 @@ export class FsEnrichmentService implements IEnrichmentService {
         };
       }
 
+      if (flights === null || flights === undefined) {
+        return {
+          sameFlightFare: 0,
+          lowestFlightFare: 0,
+          averageFare: 0,
+          sameFlightStock: 0,
+          availableStock: 0,
+          errorMessage: "No flights found",
+          remarks: "No flights found for the given sector",
+        };
+      }
+
       let sameFlightFare: number | undefined;
       let lowestFare: number | undefined;
       let totalFare = 0;
