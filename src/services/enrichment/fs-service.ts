@@ -70,6 +70,17 @@ export class FsEnrichmentService implements IEnrichmentService {
         requestPayload
       );
       const flights = res.data?.TripDetails?.[0]?.Flights;
+      if(flights.length === 0) {
+        return {
+          sameFlightFare: 0,
+          lowestFlightFare: 0,
+          averageFare: 0,
+          sameFlightStock: 0,
+          availableStock: 0,
+          errorMessage: "No flights found",
+          remarks: "No flights found for the given sector",
+        };
+      }
 
       let sameFlightFare: number | undefined;
       let lowestFare: number | undefined;
@@ -88,9 +99,9 @@ export class FsEnrichmentService implements IEnrichmentService {
           totalSeats += parseInt(seats) || 0;
 
           const clean = (fn: string) => fn.replace(/\D/g, "");
-          if (clean(segmentFlightNumber) === String(flightNumber)) {
+          if (segmentFlightNumber === String(flightNumber)) {
             sameFlightFare ??= totalAmount;
-            sameFlightSeats ??= seats;
+            sameFlightSeats ??= parseInt(seats);
           }
 
           if (!lowestFare || totalAmount < lowestFare) {

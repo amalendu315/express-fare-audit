@@ -112,6 +112,7 @@ export class FareAuditService {
         fsSameFlightFare: fs?.sameFlightFare,
         fsLowestFlightFare: fs?.lowestFlightFare,
         fsAvailableStock: fs?.availableStock,
+        fsSameFlightStock: fs?.sameFlightStock,
         fsAverageFare: fs?.averageFare,
         fsErrorMessage: fs?.errorMessage,
 
