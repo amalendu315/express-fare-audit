@@ -70,7 +70,7 @@ export class FsEnrichmentService implements IEnrichmentService {
         requestPayload
       );
       const flights = res.data?.TripDetails?.[0]?.Flights;
-      if(flights.length === 0) {
+      if(flights?.length === 0) {
         return {
           sameFlightFare: 0,
           lowestFlightFare: 0,
