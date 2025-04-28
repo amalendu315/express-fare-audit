@@ -131,6 +131,7 @@ export class FsEnrichmentService implements IEnrichmentService {
         sameFlightStock: sameFlightSeats ?? 0,
         averageFare: fareCount > 0 ? totalFare / fareCount : 0,
         availableStock: totalSeats,
+        errorMessage: sameFlightFare ? "" : "Same Flight Fare Not Found",
         remarks: "FS API Enriched",
       };
     } catch (e: any) {

@@ -99,6 +99,7 @@ export class AoEnrichmentService implements IEnrichmentService {
         lowestFlightFare: lowestFlightFare || 0,
         sameFlightStock: sameFlightSeats || 0,
         averageFare: averageFare,
+        errorMessage: sameFlightFare ? "" : "Same Flight Fare Not Found",
         availableStock: totalSeats,
         remarks: "AO API Enriched",
       };
