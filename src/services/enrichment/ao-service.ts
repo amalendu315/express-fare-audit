@@ -54,6 +54,18 @@ export class AoEnrichmentService implements IEnrichmentService {
       );
        const items = res.data?.Flights?.[0]?.JourneysList?.[0]?.LIST || [];
 
+       if (items?.length === 0) {
+         return {
+           sameFlightFare: 0,
+           lowestFlightFare: 0,
+           averageFare: 0,
+           sameFlightStock: 0,
+           availableStock: 0,
+           errorMessage: "No flights found",
+           remarks: "No flights found for the given sector",
+         };
+       }
+
       let sameFlightFare: number | undefined;
       let lowestFlightFare: number | undefined;
       let totalFareSum = 0;
