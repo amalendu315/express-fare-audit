@@ -122,7 +122,7 @@ export class AoEnrichmentService implements IEnrichmentService {
             totalFareCount++;
           }
 
-          totalSeats = availSeats;
+           totalSeats += availSeats;
       }
       console.log("Total Fare Sum: ", totalFareSum);
       const averageFare =
