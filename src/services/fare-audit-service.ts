@@ -58,6 +58,12 @@ export class FareAuditService {
       flightDate
     );
 
+    console.log(
+      `FS and AO returned with values :_ ${JSON.stringify(fs)} ${JSON.stringify(
+        ao
+      )}`
+    );
+
     const updated = await prisma.fareAudit.update({
       where: { id: log.id },
       data: {
@@ -68,12 +74,18 @@ export class FareAuditService {
         fsLowestFlightFare: fs?.lowestFlightFare,
         fsAvailableStock: fs?.availableStock,
         fsSameFlightStock: fs?.sameFlightStock,
+        fsLowestFareFlightNumber: fs?.lowestFareFlightNumber,
+        fsLowestFareFlightDepartureTime: fs?.lowestFareFlightDepartureTime,
         fsAverageFare: fs?.averageFare,
         fsErrorMessage: fs?.errorMessage,
 
         aoSameFlightFare: ao?.sameFlightFare,
         aoLowestFare: ao?.lowestFlightFare,
         aoAverageFare: ao?.averageFare,
+        aoLowestFareFlightNumber: ao?.lowestFareFlightNumber,
+        aoAvailableStock: ao?.availableStock,
+        aoLowestFareFlightDepartureTime: ao?.lowestFareFlightDepartureTime,
+        aoSameFlightStock: ao?.sameFlightStock,
         aoErrorMessage: ao?.errorMessage,
 
         taskCompletedDateTime: getISTDate(),
@@ -82,8 +94,12 @@ export class FareAuditService {
             ? "Partially Completed"
             : "Completed",
         remark: "Auto enriched",
+        fareAuditRemarks:"",
       },
     });
+    console.log(
+      `Updated log with ID ${updated.id} and status ${updated.status}`
+    );
     console.log(`[ENRICH DONE] TicketID: ${log.ticketId}`);
   }
 
@@ -103,32 +119,46 @@ export class FareAuditService {
       flightDate
     );
 
-    await prisma.fareAudit.update({
-      where: { id: log.id },
-      data: {
-        flightSector: sector,
-        travelDateTime: flightDate,
+   try {
+     const updated = await prisma.fareAudit.update({
+       where: { id: log.id },
+       data: {
+         flightSector: sector,
+         travelDateTime: flightDate,
 
-        fsSameFlightFare: fs?.sameFlightFare,
-        fsLowestFlightFare: fs?.lowestFlightFare,
-        fsAvailableStock: fs?.availableStock,
-        fsSameFlightStock: fs?.sameFlightStock,
-        fsAverageFare: fs?.averageFare,
-        fsErrorMessage: fs?.errorMessage,
+         fsSameFlightFare: fs?.sameFlightFare,
+         fsLowestFlightFare: fs?.lowestFlightFare,
+         fsAvailableStock: fs?.availableStock,
+         fsSameFlightStock: fs?.sameFlightStock,
+         fsLowestFareFlightNumber: fs?.lowestFareFlightNumber,
+         fsLowestFareFlightDepartureTime: fs?.lowestFareFlightDepartureTime,
+         fsAverageFare: fs?.averageFare,
+         fsErrorMessage: fs?.errorMessage,
 
-        aoSameFlightFare: ao?.sameFlightFare,
-        aoLowestFare: ao?.lowestFlightFare,
-        aoAverageFare: ao?.averageFare,
-        aoErrorMessage: ao?.errorMessage,
+         aoSameFlightFare: ao?.sameFlightFare,
+         aoLowestFare: ao?.lowestFlightFare,
+         aoAverageFare: ao?.averageFare,
+         aoLowestFareFlightNumber: ao?.lowestFareFlightNumber,
+         aoAvailableStock: ao?.availableStock,
+         aoLowestFareFlightDepartureTime: ao?.lowestFareFlightDepartureTime,
+         aoSameFlightStock: ao?.sameFlightStock,
+         aoErrorMessage: ao?.errorMessage,
 
-        taskCompletedDateTime: getISTDate(),
-        status:
-          fs?.errorMessage || ao?.errorMessage
-            ? "Partially Completed"
-            : "Completed",
-        remark: "Auto enriched",
-      },
-    });
+         taskCompletedDateTime: getISTDate(),
+         status:
+           fs?.errorMessage || ao?.errorMessage
+             ? "Partially Completed"
+             : "Completed",
+         remark: "Auto enriched",
+         fareAuditRemarks: "",
+       },
+     });
+      console.log(
+        `Updated log with ID ${updated.id} and status ${updated.status}`
+      );
+   } catch (error) {
+      console.error("🔥 Error during fareAudit.update:", (error as Error).message);
+   }
 
     console.log(`[ENRICH DONE] BookingID: ${log.bookingId}`);
   }

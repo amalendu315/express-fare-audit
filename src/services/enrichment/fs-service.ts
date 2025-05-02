@@ -1,6 +1,7 @@
 import axios from "axios";
 import crypto from "crypto";
 import { IEnrichmentService } from "./interface";
+import { parse, isValid } from "date-fns";
 import { EnrichmentResultModel } from "../../models/enrichment-result-model";
 
 export class FsEnrichmentService implements IEnrichmentService {
@@ -16,6 +17,8 @@ export class FsEnrichmentService implements IEnrichmentService {
         averageFare: 0,
         sameFlightStock: 0,
         availableStock: 0,
+        lowestFareFlightNumber: 0,
+        lowestFareFlightDepartureTime: null,
         errorMessage: "Missing FlightSector or FlightDate",
         remarks: "Cannot enrich without flight info",
       };
@@ -29,6 +32,8 @@ export class FsEnrichmentService implements IEnrichmentService {
         averageFare: 0,
         sameFlightStock: 0,
         availableStock: 0,
+        lowestFareFlightNumber: 0,
+        lowestFareFlightDepartureTime: null,
         errorMessage: "Invalid sector format",
         remarks: "Expected format: ORIGIN-DEST",
       };
@@ -77,6 +82,8 @@ export class FsEnrichmentService implements IEnrichmentService {
           averageFare: 0,
           sameFlightStock: 0,
           availableStock: 0,
+          lowestFareFlightNumber: 0,
+          lowestFareFlightDepartureTime: null,
           errorMessage: "No flights found",
           remarks: "No flights found for the given sector",
         };
@@ -89,6 +96,8 @@ export class FsEnrichmentService implements IEnrichmentService {
           averageFare: 0,
           sameFlightStock: 0,
           availableStock: 0,
+          lowestFareFlightNumber: 0,
+          lowestFareFlightDepartureTime: null,
           errorMessage: "No flights found",
           remarks: "No flights found for the given sector",
         };
@@ -100,17 +109,27 @@ export class FsEnrichmentService implements IEnrichmentService {
       let fareCount = 0;
       let totalSeats = 0;
       let sameFlightSeats: number | undefined;
+      let lowestFareFlightNumber: number | null = null;
+      let lowestFareFlightDepartureTime: Date | null = null;
 
       for (const flight of flights) {
         const segmentFlightNumber = flight.Segments?.[0]?.Flight_Number;
+        const segmentDepartureTime = flight.Segments?.[0]?.Departure_DateTime;
+        let segmentDepartureDate: Date | null = null;
+        if (segmentDepartureTime) {
+          const parsed = parse(
+            segmentDepartureTime,
+            "MM/dd/yyyy HH:mm",
+            new Date()
+          );
+          segmentDepartureDate = isValid(parsed) ? parsed : null;
+        }
         const fares = flight.Fares;
 
         for (const fare of fares) {
           const totalAmount = fare.FareDetails?.[0]?.Total_Amount;
           const seats = fare?.Seats_Available;
           totalSeats += parseInt(seats) || 0;
-
-          const clean = (fn: string) => fn.replace(/\D/g, "");
           if (segmentFlightNumber === String(flightNumber)) {
             sameFlightFare ??= totalAmount;
             sameFlightSeats ??= parseInt(seats);
@@ -118,6 +137,8 @@ export class FsEnrichmentService implements IEnrichmentService {
 
           if (!lowestFare || totalAmount < lowestFare) {
             lowestFare = totalAmount;
+            lowestFareFlightNumber = parseInt(segmentFlightNumber);
+            lowestFareFlightDepartureTime = segmentDepartureDate;
           }
 
           totalFare += totalAmount;
@@ -126,11 +147,13 @@ export class FsEnrichmentService implements IEnrichmentService {
       }
 
       return {
-        sameFlightFare : sameFlightFare ?? 0,
+        sameFlightFare: sameFlightFare ?? 0,
         lowestFlightFare: lowestFare ?? 0,
         sameFlightStock: sameFlightSeats ?? 0,
         averageFare: fareCount > 0 ? totalFare / fareCount : 0,
         availableStock: totalSeats,
+        lowestFareFlightNumber:lowestFareFlightNumber ?? 0,
+        lowestFareFlightDepartureTime: lowestFareFlightDepartureTime ?? null,
         errorMessage: sameFlightFare ? "" : "Same Flight Fare Not Found",
         remarks: "FS API Enriched",
       };
@@ -141,6 +164,8 @@ export class FsEnrichmentService implements IEnrichmentService {
         averageFare: 0,
         sameFlightStock: 0,
         availableStock: 0,
+        lowestFareFlightNumber: 0,
+        lowestFareFlightDepartureTime: null,
         errorMessage: `FS API Error: ${e.message}`,
         remarks: "Enrichment Error",
       };

@@ -9,39 +9,46 @@ datasource db {
 }
 
 model FareAudit {
-  id                            Int      @id(map: "PK__FareAudi__3213E83FE4946D4A") @default(autoincrement())
-  bookingId                     Int?
-  ticketId                      Int
-  fareLogId                     Int
-  logType                       String   @db.NVarChar(100)
-  source                        String   @db.NVarChar(100)
-  requestDateTime               DateTime @db.DateTime
-  pnr                           String?  @db.NVarChar(50)
-  flightSector                  String   @db.NVarChar(50)
-  flightNumber                  String   @db.NVarChar(20)
-  travelDateTime                DateTime @db.DateTime
-  fsSameFlightFare              Decimal? @db.Decimal(10, 2)
-  fsLowestFlightFare            Decimal? @db.Decimal(10, 2)
-  fsAvailableStock              Int?
-  fsErrorMessage                String?  @db.NVarChar(255)
-  fsAverageFare                 Decimal? @db.Decimal(10, 2)
-  aoSameFlightFare              Decimal? @db.Decimal(10, 2)
-  aoLowestFare                  Decimal? @db.Decimal(10, 2)
-  aoAverageFare                 Decimal? @db.Decimal(10, 2)
-  aoErrorMessage                String?  @db.NVarChar(255)
-  flightWiseTotalSeatsPurchased Int?
-  flightWiseTotalSeatsSold      Int?
-  flightWiseTotalSeatsLeft      Int?
-  flightWiseAverageCost         Decimal? @db.Decimal(10, 2)
-  routeWiseSeatsPurchased       Int?
-  routeWiseSeatsSold            Int?
-  routeWiseSeatsLeft            Int?
-  routeWiseAverageCost          Decimal? @db.Decimal(10, 2)
-  averageSellFare               Decimal? @db.Decimal(10, 2)
-  status                        String?  @db.NVarChar(50)
-  remark                        String?  @db.NVarChar(255)
-  taskCompletedDateTime         DateTime @db.DateTime
-  fsSameFlightStock             Int?
+  id                              Int       @id(map: "PK__FareAudi__3213E83FE4946D4A") @default(autoincrement())
+  bookingId                       Int?
+  ticketId                        Int
+  fareLogId                       Int
+  logType                         String    @db.NVarChar(100)
+  source                          String    @db.NVarChar(100)
+  requestDateTime                 DateTime  @db.DateTime
+  pnr                             String?   @db.NVarChar(50)
+  flightSector                    String    @db.NVarChar(50)
+  flightNumber                    String    @db.NVarChar(20)
+  travelDateTime                  DateTime  @db.DateTime
+  fsSameFlightFare                Decimal?  @db.Decimal(10, 2)
+  fsLowestFlightFare              Decimal?  @db.Decimal(10, 2)
+  fsAvailableStock                Int?
+  fsErrorMessage                  String?   @db.NVarChar(255)
+  fsAverageFare                   Decimal?  @db.Decimal(10, 2)
+  aoSameFlightFare                Decimal?  @db.Decimal(10, 2)
+  aoLowestFare                    Decimal?  @db.Decimal(10, 2)
+  aoAverageFare                   Decimal?  @db.Decimal(10, 2)
+  aoErrorMessage                  String?   @db.NVarChar(255)
+  flightWiseTotalSeatsPurchased   Int?
+  flightWiseTotalSeatsSold        Int?
+  flightWiseTotalSeatsLeft        Int?
+  flightWiseAverageCost           Decimal?  @db.Decimal(10, 2)
+  routeWiseSeatsPurchased         Int?
+  routeWiseSeatsSold              Int?
+  routeWiseSeatsLeft              Int?
+  routeWiseAverageCost            Decimal?  @db.Decimal(10, 2)
+  averageSellFare                 Decimal?  @db.Decimal(10, 2)
+  status                          String?   @db.NVarChar(50)
+  remark                          String?   @db.NVarChar(255)
+  taskCompletedDateTime           DateTime  @db.DateTime
+  fsSameFlightStock               Int?
+  fsLowestFareFlightNumber        Int?
+  fsLowestFareFlightDepartureTime DateTime? @db.DateTime
+  aoLowestFareFlightNumber        Int?
+  aoSameFlightStock               Int?
+  aoLowestFareFlightDepartureTime DateTime? @db.DateTime
+  fareAuditRemarks                String?   @db.NVarChar(100)
+  aoAvailableStock                Int?
 }
 
 model EFMigrationsHistory {

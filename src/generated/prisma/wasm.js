@@ -151,7 +151,14 @@ exports.Prisma.FareAuditScalarFieldEnum = {
   status: 'status',
   remark: 'remark',
   taskCompletedDateTime: 'taskCompletedDateTime',
-  fsSameFlightStock: 'fsSameFlightStock'
+  fsSameFlightStock: 'fsSameFlightStock',
+  fsLowestFareFlightNumber: 'fsLowestFareFlightNumber',
+  fsLowestFareFlightDepartureTime: 'fsLowestFareFlightDepartureTime',
+  aoLowestFareFlightNumber: 'aoLowestFareFlightNumber',
+  aoSameFlightStock: 'aoSameFlightStock',
+  aoLowestFareFlightDepartureTime: 'aoLowestFareFlightDepartureTime',
+  fareAuditRemarks: 'fareAuditRemarks',
+  aoAvailableStock: 'aoAvailableStock'
 };
 
 exports.Prisma.EFMigrationsHistoryScalarFieldEnum = {

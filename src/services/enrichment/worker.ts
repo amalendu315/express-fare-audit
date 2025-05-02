@@ -8,7 +8,7 @@ export function startEnrichmentWorker() {
   enrichmentQueue.subscribe(async (log: FareAudit) => {
     try {
       console.log(
-        `[QUEUE] Enriching ${log.logType}: ${log.ticketId ?? log.bookingId}`
+        `[QUEUE] Enriching ${log.logType}: ${log.logType === "fare" ? log.ticketId : log.bookingId}`
       );
 
       if (log.logType === "fare") {

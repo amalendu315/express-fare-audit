@@ -1144,6 +1144,10 @@ export namespace Prisma {
     routeWiseAverageCost: Decimal | null
     averageSellFare: Decimal | null
     fsSameFlightStock: number | null
+    fsLowestFareFlightNumber: number | null
+    aoLowestFareFlightNumber: number | null
+    aoSameFlightStock: number | null
+    aoAvailableStock: number | null
   }
 
   export type FareAuditSumAggregateOutputType = {
@@ -1168,6 +1172,10 @@ export namespace Prisma {
     routeWiseAverageCost: Decimal | null
     averageSellFare: Decimal | null
     fsSameFlightStock: number | null
+    fsLowestFareFlightNumber: number | null
+    aoLowestFareFlightNumber: number | null
+    aoSameFlightStock: number | null
+    aoAvailableStock: number | null
   }
 
   export type FareAuditMinAggregateOutputType = {
@@ -1204,6 +1212,13 @@ export namespace Prisma {
     remark: string | null
     taskCompletedDateTime: Date | null
     fsSameFlightStock: number | null
+    fsLowestFareFlightNumber: number | null
+    fsLowestFareFlightDepartureTime: Date | null
+    aoLowestFareFlightNumber: number | null
+    aoSameFlightStock: number | null
+    aoLowestFareFlightDepartureTime: Date | null
+    fareAuditRemarks: string | null
+    aoAvailableStock: number | null
   }
 
   export type FareAuditMaxAggregateOutputType = {
@@ -1240,6 +1255,13 @@ export namespace Prisma {
     remark: string | null
     taskCompletedDateTime: Date | null
     fsSameFlightStock: number | null
+    fsLowestFareFlightNumber: number | null
+    fsLowestFareFlightDepartureTime: Date | null
+    aoLowestFareFlightNumber: number | null
+    aoSameFlightStock: number | null
+    aoLowestFareFlightDepartureTime: Date | null
+    fareAuditRemarks: string | null
+    aoAvailableStock: number | null
   }
 
   export type FareAuditCountAggregateOutputType = {
@@ -1276,6 +1298,13 @@ export namespace Prisma {
     remark: number
     taskCompletedDateTime: number
     fsSameFlightStock: number
+    fsLowestFareFlightNumber: number
+    fsLowestFareFlightDepartureTime: number
+    aoLowestFareFlightNumber: number
+    aoSameFlightStock: number
+    aoLowestFareFlightDepartureTime: number
+    fareAuditRemarks: number
+    aoAvailableStock: number
     _all: number
   }
 
@@ -1302,6 +1331,10 @@ export namespace Prisma {
     routeWiseAverageCost?: true
     averageSellFare?: true
     fsSameFlightStock?: true
+    fsLowestFareFlightNumber?: true
+    aoLowestFareFlightNumber?: true
+    aoSameFlightStock?: true
+    aoAvailableStock?: true
   }
 
   export type FareAuditSumAggregateInputType = {
@@ -1326,6 +1359,10 @@ export namespace Prisma {
     routeWiseAverageCost?: true
     averageSellFare?: true
     fsSameFlightStock?: true
+    fsLowestFareFlightNumber?: true
+    aoLowestFareFlightNumber?: true
+    aoSameFlightStock?: true
+    aoAvailableStock?: true
   }
 
   export type FareAuditMinAggregateInputType = {
@@ -1362,6 +1399,13 @@ export namespace Prisma {
     remark?: true
     taskCompletedDateTime?: true
     fsSameFlightStock?: true
+    fsLowestFareFlightNumber?: true
+    fsLowestFareFlightDepartureTime?: true
+    aoLowestFareFlightNumber?: true
+    aoSameFlightStock?: true
+    aoLowestFareFlightDepartureTime?: true
+    fareAuditRemarks?: true
+    aoAvailableStock?: true
   }
 
   export type FareAuditMaxAggregateInputType = {
@@ -1398,6 +1442,13 @@ export namespace Prisma {
     remark?: true
     taskCompletedDateTime?: true
     fsSameFlightStock?: true
+    fsLowestFareFlightNumber?: true
+    fsLowestFareFlightDepartureTime?: true
+    aoLowestFareFlightNumber?: true
+    aoSameFlightStock?: true
+    aoLowestFareFlightDepartureTime?: true
+    fareAuditRemarks?: true
+    aoAvailableStock?: true
   }
 
   export type FareAuditCountAggregateInputType = {
@@ -1434,6 +1485,13 @@ export namespace Prisma {
     remark?: true
     taskCompletedDateTime?: true
     fsSameFlightStock?: true
+    fsLowestFareFlightNumber?: true
+    fsLowestFareFlightDepartureTime?: true
+    aoLowestFareFlightNumber?: true
+    aoSameFlightStock?: true
+    aoLowestFareFlightDepartureTime?: true
+    fareAuditRemarks?: true
+    aoAvailableStock?: true
     _all?: true
   }
 
@@ -1557,6 +1615,13 @@ export namespace Prisma {
     remark: string | null
     taskCompletedDateTime: Date
     fsSameFlightStock: number | null
+    fsLowestFareFlightNumber: number | null
+    fsLowestFareFlightDepartureTime: Date | null
+    aoLowestFareFlightNumber: number | null
+    aoSameFlightStock: number | null
+    aoLowestFareFlightDepartureTime: Date | null
+    fareAuditRemarks: string | null
+    aoAvailableStock: number | null
     _count: FareAuditCountAggregateOutputType | null
     _avg: FareAuditAvgAggregateOutputType | null
     _sum: FareAuditSumAggregateOutputType | null
@@ -1612,6 +1677,13 @@ export namespace Prisma {
     remark?: boolean
     taskCompletedDateTime?: boolean
     fsSameFlightStock?: boolean
+    fsLowestFareFlightNumber?: boolean
+    fsLowestFareFlightDepartureTime?: boolean
+    aoLowestFareFlightNumber?: boolean
+    aoSameFlightStock?: boolean
+    aoLowestFareFlightDepartureTime?: boolean
+    fareAuditRemarks?: boolean
+    aoAvailableStock?: boolean
   }, ExtArgs["result"]["fareAudit"]>
 
 
@@ -1650,9 +1722,16 @@ export namespace Prisma {
     remark?: boolean
     taskCompletedDateTime?: boolean
     fsSameFlightStock?: boolean
+    fsLowestFareFlightNumber?: boolean
+    fsLowestFareFlightDepartureTime?: boolean
+    aoLowestFareFlightNumber?: boolean
+    aoSameFlightStock?: boolean
+    aoLowestFareFlightDepartureTime?: boolean
+    fareAuditRemarks?: boolean
+    aoAvailableStock?: boolean
   }
 
-  export type FareAuditOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookingId" | "ticketId" | "fareLogId" | "logType" | "source" | "requestDateTime" | "pnr" | "flightSector" | "flightNumber" | "travelDateTime" | "fsSameFlightFare" | "fsLowestFlightFare" | "fsAvailableStock" | "fsErrorMessage" | "fsAverageFare" | "aoSameFlightFare" | "aoLowestFare" | "aoAverageFare" | "aoErrorMessage" | "flightWiseTotalSeatsPurchased" | "flightWiseTotalSeatsSold" | "flightWiseTotalSeatsLeft" | "flightWiseAverageCost" | "routeWiseSeatsPurchased" | "routeWiseSeatsSold" | "routeWiseSeatsLeft" | "routeWiseAverageCost" | "averageSellFare" | "status" | "remark" | "taskCompletedDateTime" | "fsSameFlightStock", ExtArgs["result"]["fareAudit"]>
+  export type FareAuditOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookingId" | "ticketId" | "fareLogId" | "logType" | "source" | "requestDateTime" | "pnr" | "flightSector" | "flightNumber" | "travelDateTime" | "fsSameFlightFare" | "fsLowestFlightFare" | "fsAvailableStock" | "fsErrorMessage" | "fsAverageFare" | "aoSameFlightFare" | "aoLowestFare" | "aoAverageFare" | "aoErrorMessage" | "flightWiseTotalSeatsPurchased" | "flightWiseTotalSeatsSold" | "flightWiseTotalSeatsLeft" | "flightWiseAverageCost" | "routeWiseSeatsPurchased" | "routeWiseSeatsSold" | "routeWiseSeatsLeft" | "routeWiseAverageCost" | "averageSellFare" | "status" | "remark" | "taskCompletedDateTime" | "fsSameFlightStock" | "fsLowestFareFlightNumber" | "fsLowestFareFlightDepartureTime" | "aoLowestFareFlightNumber" | "aoSameFlightStock" | "aoLowestFareFlightDepartureTime" | "fareAuditRemarks" | "aoAvailableStock", ExtArgs["result"]["fareAudit"]>
 
   export type $FareAuditPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FareAudit"
@@ -1691,6 +1770,13 @@ export namespace Prisma {
       remark: string | null
       taskCompletedDateTime: Date
       fsSameFlightStock: number | null
+      fsLowestFareFlightNumber: number | null
+      fsLowestFareFlightDepartureTime: Date | null
+      aoLowestFareFlightNumber: number | null
+      aoSameFlightStock: number | null
+      aoLowestFareFlightDepartureTime: Date | null
+      fareAuditRemarks: string | null
+      aoAvailableStock: number | null
     }, ExtArgs["result"]["fareAudit"]>
     composites: {}
   }
@@ -2093,6 +2179,13 @@ export namespace Prisma {
     readonly remark: FieldRef<"FareAudit", 'String'>
     readonly taskCompletedDateTime: FieldRef<"FareAudit", 'DateTime'>
     readonly fsSameFlightStock: FieldRef<"FareAudit", 'Int'>
+    readonly fsLowestFareFlightNumber: FieldRef<"FareAudit", 'Int'>
+    readonly fsLowestFareFlightDepartureTime: FieldRef<"FareAudit", 'DateTime'>
+    readonly aoLowestFareFlightNumber: FieldRef<"FareAudit", 'Int'>
+    readonly aoSameFlightStock: FieldRef<"FareAudit", 'Int'>
+    readonly aoLowestFareFlightDepartureTime: FieldRef<"FareAudit", 'DateTime'>
+    readonly fareAuditRemarks: FieldRef<"FareAudit", 'String'>
+    readonly aoAvailableStock: FieldRef<"FareAudit", 'Int'>
   }
     
 
@@ -5343,7 +5436,14 @@ export namespace Prisma {
     status: 'status',
     remark: 'remark',
     taskCompletedDateTime: 'taskCompletedDateTime',
-    fsSameFlightStock: 'fsSameFlightStock'
+    fsSameFlightStock: 'fsSameFlightStock',
+    fsLowestFareFlightNumber: 'fsLowestFareFlightNumber',
+    fsLowestFareFlightDepartureTime: 'fsLowestFareFlightDepartureTime',
+    aoLowestFareFlightNumber: 'aoLowestFareFlightNumber',
+    aoSameFlightStock: 'aoSameFlightStock',
+    aoLowestFareFlightDepartureTime: 'aoLowestFareFlightDepartureTime',
+    fareAuditRemarks: 'fareAuditRemarks',
+    aoAvailableStock: 'aoAvailableStock'
   };
 
   export type FareAuditScalarFieldEnum = (typeof FareAuditScalarFieldEnum)[keyof typeof FareAuditScalarFieldEnum]
@@ -5498,6 +5598,13 @@ export namespace Prisma {
     remark?: StringNullableFilter<"FareAudit"> | string | null
     taskCompletedDateTime?: DateTimeFilter<"FareAudit"> | Date | string
     fsSameFlightStock?: IntNullableFilter<"FareAudit"> | number | null
+    fsLowestFareFlightNumber?: IntNullableFilter<"FareAudit"> | number | null
+    fsLowestFareFlightDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
+    aoLowestFareFlightNumber?: IntNullableFilter<"FareAudit"> | number | null
+    aoSameFlightStock?: IntNullableFilter<"FareAudit"> | number | null
+    aoLowestFareFlightDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
+    fareAuditRemarks?: StringNullableFilter<"FareAudit"> | string | null
+    aoAvailableStock?: IntNullableFilter<"FareAudit"> | number | null
   }
 
   export type FareAuditOrderByWithRelationInput = {
@@ -5534,6 +5641,13 @@ export namespace Prisma {
     remark?: SortOrderInput | SortOrder
     taskCompletedDateTime?: SortOrder
     fsSameFlightStock?: SortOrderInput | SortOrder
+    fsLowestFareFlightNumber?: SortOrderInput | SortOrder
+    fsLowestFareFlightDepartureTime?: SortOrderInput | SortOrder
+    aoLowestFareFlightNumber?: SortOrderInput | SortOrder
+    aoSameFlightStock?: SortOrderInput | SortOrder
+    aoLowestFareFlightDepartureTime?: SortOrderInput | SortOrder
+    fareAuditRemarks?: SortOrderInput | SortOrder
+    aoAvailableStock?: SortOrderInput | SortOrder
   }
 
   export type FareAuditWhereUniqueInput = Prisma.AtLeast<{
@@ -5573,6 +5687,13 @@ export namespace Prisma {
     remark?: StringNullableFilter<"FareAudit"> | string | null
     taskCompletedDateTime?: DateTimeFilter<"FareAudit"> | Date | string
     fsSameFlightStock?: IntNullableFilter<"FareAudit"> | number | null
+    fsLowestFareFlightNumber?: IntNullableFilter<"FareAudit"> | number | null
+    fsLowestFareFlightDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
+    aoLowestFareFlightNumber?: IntNullableFilter<"FareAudit"> | number | null
+    aoSameFlightStock?: IntNullableFilter<"FareAudit"> | number | null
+    aoLowestFareFlightDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
+    fareAuditRemarks?: StringNullableFilter<"FareAudit"> | string | null
+    aoAvailableStock?: IntNullableFilter<"FareAudit"> | number | null
   }, "id">
 
   export type FareAuditOrderByWithAggregationInput = {
@@ -5609,6 +5730,13 @@ export namespace Prisma {
     remark?: SortOrderInput | SortOrder
     taskCompletedDateTime?: SortOrder
     fsSameFlightStock?: SortOrderInput | SortOrder
+    fsLowestFareFlightNumber?: SortOrderInput | SortOrder
+    fsLowestFareFlightDepartureTime?: SortOrderInput | SortOrder
+    aoLowestFareFlightNumber?: SortOrderInput | SortOrder
+    aoSameFlightStock?: SortOrderInput | SortOrder
+    aoLowestFareFlightDepartureTime?: SortOrderInput | SortOrder
+    fareAuditRemarks?: SortOrderInput | SortOrder
+    aoAvailableStock?: SortOrderInput | SortOrder
     _count?: FareAuditCountOrderByAggregateInput
     _avg?: FareAuditAvgOrderByAggregateInput
     _max?: FareAuditMaxOrderByAggregateInput
@@ -5653,6 +5781,13 @@ export namespace Prisma {
     remark?: StringNullableWithAggregatesFilter<"FareAudit"> | string | null
     taskCompletedDateTime?: DateTimeWithAggregatesFilter<"FareAudit"> | Date | string
     fsSameFlightStock?: IntNullableWithAggregatesFilter<"FareAudit"> | number | null
+    fsLowestFareFlightNumber?: IntNullableWithAggregatesFilter<"FareAudit"> | number | null
+    fsLowestFareFlightDepartureTime?: DateTimeNullableWithAggregatesFilter<"FareAudit"> | Date | string | null
+    aoLowestFareFlightNumber?: IntNullableWithAggregatesFilter<"FareAudit"> | number | null
+    aoSameFlightStock?: IntNullableWithAggregatesFilter<"FareAudit"> | number | null
+    aoLowestFareFlightDepartureTime?: DateTimeNullableWithAggregatesFilter<"FareAudit"> | Date | string | null
+    fareAuditRemarks?: StringNullableWithAggregatesFilter<"FareAudit"> | string | null
+    aoAvailableStock?: IntNullableWithAggregatesFilter<"FareAudit"> | number | null
   }
 
   export type EFMigrationsHistoryWhereInput = {
@@ -5914,6 +6049,13 @@ export namespace Prisma {
     remark?: string | null
     taskCompletedDateTime: Date | string
     fsSameFlightStock?: number | null
+    fsLowestFareFlightNumber?: number | null
+    fsLowestFareFlightDepartureTime?: Date | string | null
+    aoLowestFareFlightNumber?: number | null
+    aoSameFlightStock?: number | null
+    aoLowestFareFlightDepartureTime?: Date | string | null
+    fareAuditRemarks?: string | null
+    aoAvailableStock?: number | null
   }
 
   export type FareAuditUncheckedCreateInput = {
@@ -5950,6 +6092,13 @@ export namespace Prisma {
     remark?: string | null
     taskCompletedDateTime: Date | string
     fsSameFlightStock?: number | null
+    fsLowestFareFlightNumber?: number | null
+    fsLowestFareFlightDepartureTime?: Date | string | null
+    aoLowestFareFlightNumber?: number | null
+    aoSameFlightStock?: number | null
+    aoLowestFareFlightDepartureTime?: Date | string | null
+    fareAuditRemarks?: string | null
+    aoAvailableStock?: number | null
   }
 
   export type FareAuditUpdateInput = {
@@ -5985,6 +6134,13 @@ export namespace Prisma {
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     taskCompletedDateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     fsSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
+    fsLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    fsLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aoLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    aoSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
+    aoLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fareAuditRemarks?: NullableStringFieldUpdateOperationsInput | string | null
+    aoAvailableStock?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FareAuditUncheckedUpdateInput = {
@@ -6021,6 +6177,13 @@ export namespace Prisma {
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     taskCompletedDateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     fsSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
+    fsLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    fsLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aoLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    aoSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
+    aoLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fareAuditRemarks?: NullableStringFieldUpdateOperationsInput | string | null
+    aoAvailableStock?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FareAuditCreateManyInput = {
@@ -6056,6 +6219,13 @@ export namespace Prisma {
     remark?: string | null
     taskCompletedDateTime: Date | string
     fsSameFlightStock?: number | null
+    fsLowestFareFlightNumber?: number | null
+    fsLowestFareFlightDepartureTime?: Date | string | null
+    aoLowestFareFlightNumber?: number | null
+    aoSameFlightStock?: number | null
+    aoLowestFareFlightDepartureTime?: Date | string | null
+    fareAuditRemarks?: string | null
+    aoAvailableStock?: number | null
   }
 
   export type FareAuditUpdateManyMutationInput = {
@@ -6091,6 +6261,13 @@ export namespace Prisma {
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     taskCompletedDateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     fsSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
+    fsLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    fsLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aoLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    aoSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
+    aoLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fareAuditRemarks?: NullableStringFieldUpdateOperationsInput | string | null
+    aoAvailableStock?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FareAuditUncheckedUpdateManyInput = {
@@ -6127,6 +6304,13 @@ export namespace Prisma {
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     taskCompletedDateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     fsSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
+    fsLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    fsLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aoLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    aoSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
+    aoLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fareAuditRemarks?: NullableStringFieldUpdateOperationsInput | string | null
+    aoAvailableStock?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type EFMigrationsHistoryCreateInput = {
@@ -6452,6 +6636,17 @@ export namespace Prisma {
     not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -6491,6 +6686,13 @@ export namespace Prisma {
     remark?: SortOrder
     taskCompletedDateTime?: SortOrder
     fsSameFlightStock?: SortOrder
+    fsLowestFareFlightNumber?: SortOrder
+    fsLowestFareFlightDepartureTime?: SortOrder
+    aoLowestFareFlightNumber?: SortOrder
+    aoSameFlightStock?: SortOrder
+    aoLowestFareFlightDepartureTime?: SortOrder
+    fareAuditRemarks?: SortOrder
+    aoAvailableStock?: SortOrder
   }
 
   export type FareAuditAvgOrderByAggregateInput = {
@@ -6515,6 +6717,10 @@ export namespace Prisma {
     routeWiseAverageCost?: SortOrder
     averageSellFare?: SortOrder
     fsSameFlightStock?: SortOrder
+    fsLowestFareFlightNumber?: SortOrder
+    aoLowestFareFlightNumber?: SortOrder
+    aoSameFlightStock?: SortOrder
+    aoAvailableStock?: SortOrder
   }
 
   export type FareAuditMaxOrderByAggregateInput = {
@@ -6551,6 +6757,13 @@ export namespace Prisma {
     remark?: SortOrder
     taskCompletedDateTime?: SortOrder
     fsSameFlightStock?: SortOrder
+    fsLowestFareFlightNumber?: SortOrder
+    fsLowestFareFlightDepartureTime?: SortOrder
+    aoLowestFareFlightNumber?: SortOrder
+    aoSameFlightStock?: SortOrder
+    aoLowestFareFlightDepartureTime?: SortOrder
+    fareAuditRemarks?: SortOrder
+    aoAvailableStock?: SortOrder
   }
 
   export type FareAuditMinOrderByAggregateInput = {
@@ -6587,6 +6800,13 @@ export namespace Prisma {
     remark?: SortOrder
     taskCompletedDateTime?: SortOrder
     fsSameFlightStock?: SortOrder
+    fsLowestFareFlightNumber?: SortOrder
+    fsLowestFareFlightDepartureTime?: SortOrder
+    aoLowestFareFlightNumber?: SortOrder
+    aoSameFlightStock?: SortOrder
+    aoLowestFareFlightDepartureTime?: SortOrder
+    fareAuditRemarks?: SortOrder
+    aoAvailableStock?: SortOrder
   }
 
   export type FareAuditSumOrderByAggregateInput = {
@@ -6611,6 +6831,10 @@ export namespace Prisma {
     routeWiseAverageCost?: SortOrder
     averageSellFare?: SortOrder
     fsSameFlightStock?: SortOrder
+    fsLowestFareFlightNumber?: SortOrder
+    aoLowestFareFlightNumber?: SortOrder
+    aoSameFlightStock?: SortOrder
+    aoAvailableStock?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -6709,6 +6933,20 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type EFMigrationsHistoryCountOrderByAggregateInput = {
     MigrationId?: SortOrder
     ProductVersion?: SortOrder
@@ -6733,17 +6971,6 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type FlightsCountOrderByAggregateInput = {
@@ -6852,20 +7079,6 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type BytesNullableFilter<$PrismaModel = never> = {
     equals?: Uint8Array | BytesFieldRefInput<$PrismaModel> | null
     in?: Uint8Array[] | null
@@ -6960,16 +7173,16 @@ export namespace Prisma {
     divide?: Decimal | DecimalJsLike | number | string
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type DecimalFieldUpdateOperationsInput = {
     set?: Decimal | DecimalJsLike | number | string
     increment?: Decimal | DecimalJsLike | number | string
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type NullableBytesFieldUpdateOperationsInput = {
@@ -7046,6 +7259,17 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -7166,6 +7390,20 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedDecimalFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     in?: Decimal[] | DecimalJsLike[] | number[] | string[]
@@ -7175,17 +7413,6 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -7202,20 +7429,6 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedBytesNullableFilter<$PrismaModel = never> = {

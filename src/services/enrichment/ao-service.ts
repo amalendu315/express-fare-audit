@@ -1,5 +1,6 @@
 import axios from "axios";
 import { IEnrichmentService } from "./interface";
+import { parse, isValid } from "date-fns";
 import { EnrichmentResultModel } from "../../models/enrichment-result-model";
 
 
@@ -16,6 +17,8 @@ export class AoEnrichmentService implements IEnrichmentService {
         sameFlightStock: 0,
         averageFare: 0,
         availableStock: 0,
+        lowestFareFlightNumber: 0,
+        lowestFareFlightDepartureTime: null,
         errorMessage: "Missing FlightSector or FlightDate",
         remarks: "Cannot enrich without flight info",
       };
@@ -28,6 +31,8 @@ export class AoEnrichmentService implements IEnrichmentService {
         sameFlightStock: 0,
         averageFare: 0,
         availableStock: 0,
+        lowestFareFlightNumber: 0,
+        lowestFareFlightDepartureTime: null,
         errorMessage: "Invalid sector format",
         remarks: "Expected format: ORIGIN-DEST",
       };
@@ -61,6 +66,8 @@ export class AoEnrichmentService implements IEnrichmentService {
            averageFare: 0,
            sameFlightStock: 0,
            availableStock: 0,
+            lowestFareFlightNumber: 0,
+            lowestFareFlightDepartureTime: null,
            errorMessage: "No flights found",
            remarks: "No flights found for the given sector",
          };
@@ -71,6 +78,8 @@ export class AoEnrichmentService implements IEnrichmentService {
       let totalFareSum = 0;
       let totalFareCount = 0;
       let totalSeats = 0;
+      let lowestFareFlightNumber: number | null = null;
+      let lowestFareFlightDepartureTime: Date | null = null;
       let sameFlightSeats: number | undefined;
 
       for (const item of items) {
@@ -82,6 +91,16 @@ export class AoEnrichmentService implements IEnrichmentService {
           const flightNoRaw = flightData.AirlineNo || "";
           const flightNo = flightNoRaw.split(" ").pop()?.trim();
           const availSeats = parseInt(flightData.AvailSeat || "0");
+          const departureDateTime = flightData.DepartureDateTime || "";
+         let segmentDepartureDate: Date | null = null;
+         if (departureDateTime) {
+           const parsed = parse(
+             departureDateTime,
+             "dd MMM yyyy HH:mm",
+             new Date()
+           );
+           segmentDepartureDate = isValid(parsed) ? parsed : null;
+         }
 
           for (const fare of priceList) {
             const priceDesc = fare?.Pricedescription?.[0];
@@ -95,6 +114,8 @@ export class AoEnrichmentService implements IEnrichmentService {
 
             if (!lowestFlightFare || netAmount < lowestFlightFare) {
               lowestFlightFare = netAmount;
+              lowestFareFlightNumber = parseInt(flightNo);
+              lowestFareFlightDepartureTime = segmentDepartureDate;
             }
 
             totalFareSum += netAmount;
@@ -111,6 +132,8 @@ export class AoEnrichmentService implements IEnrichmentService {
         lowestFlightFare: lowestFlightFare || 0,
         sameFlightStock: sameFlightSeats || 0,
         averageFare: averageFare,
+        lowestFareFlightNumber: lowestFareFlightNumber ?? 0,
+        lowestFareFlightDepartureTime: lowestFareFlightDepartureTime || null,
         errorMessage: sameFlightFare ? "" : "Same Flight Fare Not Found",
         availableStock: totalSeats,
         remarks: "AO API Enriched",
@@ -122,6 +145,8 @@ export class AoEnrichmentService implements IEnrichmentService {
         sameFlightStock: 0,
         averageFare: 0,
         availableStock: 0,
+        lowestFareFlightNumber: 0,
+        lowestFareFlightDepartureTime: null,
         errorMessage: `AO API Error: ${e.message}`,
         remarks: "Enrichment Error",
       };
