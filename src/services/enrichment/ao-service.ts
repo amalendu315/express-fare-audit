@@ -17,7 +17,7 @@ export class AoEnrichmentService implements IEnrichmentService {
         sameFlightStock: 0,
         averageFare: 0,
         availableStock: 0,
-        lowestFareFlightNumber: 0,
+        lowestFareFlightNumber: null,
         lowestFareFlightDepartureTime: null,
         errorMessage: "Missing FlightSector or FlightDate",
         remarks: "Cannot enrich without flight info",
@@ -31,7 +31,7 @@ export class AoEnrichmentService implements IEnrichmentService {
         sameFlightStock: 0,
         averageFare: 0,
         availableStock: 0,
-        lowestFareFlightNumber: 0,
+        lowestFareFlightNumber: null,
         lowestFareFlightDepartureTime: null,
         errorMessage: "Invalid sector format",
         remarks: "Expected format: ORIGIN-DEST",
@@ -66,7 +66,7 @@ export class AoEnrichmentService implements IEnrichmentService {
            averageFare: 0,
            sameFlightStock: 0,
            availableStock: 0,
-            lowestFareFlightNumber: 0,
+            lowestFareFlightNumber: null,
             lowestFareFlightDepartureTime: null,
            errorMessage: "No flights found",
            remarks: "No flights found for the given sector",
@@ -78,7 +78,7 @@ export class AoEnrichmentService implements IEnrichmentService {
       let totalFareSum = 0;
       let totalFareCount = 0;
       let totalSeats = 0;
-      let lowestFareFlightNumber: number | null = null;
+      let lowestFareFlightNumber: string | null = null;
       let lowestFareFlightDepartureTime: Date | null = null;
       let sameFlightSeats: number | undefined;
 
@@ -114,7 +114,7 @@ export class AoEnrichmentService implements IEnrichmentService {
 
             if (!lowestFlightFare || netAmount < lowestFlightFare) {
               lowestFlightFare = netAmount;
-              lowestFareFlightNumber = parseInt(flightNo);
+              lowestFareFlightNumber = flightNoRaw;
               lowestFareFlightDepartureTime = segmentDepartureDate;
             }
 
@@ -132,7 +132,7 @@ export class AoEnrichmentService implements IEnrichmentService {
         lowestFlightFare: lowestFlightFare || 0,
         sameFlightStock: sameFlightSeats || 0,
         averageFare: averageFare,
-        lowestFareFlightNumber: lowestFareFlightNumber ?? 0,
+        lowestFareFlightNumber: lowestFareFlightNumber ?? null,
         lowestFareFlightDepartureTime: lowestFareFlightDepartureTime || null,
         errorMessage: sameFlightFare ? "" : "Same Flight Fare Not Found",
         availableStock: totalSeats,
@@ -145,7 +145,7 @@ export class AoEnrichmentService implements IEnrichmentService {
         sameFlightStock: 0,
         averageFare: 0,
         availableStock: 0,
-        lowestFareFlightNumber: 0,
+        lowestFareFlightNumber: null,
         lowestFareFlightDepartureTime: null,
         errorMessage: `AO API Error: ${e.message}`,
         remarks: "Enrichment Error",

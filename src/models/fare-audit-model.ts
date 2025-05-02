@@ -24,7 +24,7 @@ export interface FareAudit {
   fsSameFlightStock: number | null; // Nullable for fare manage logs
   fsErrorMessage: string | null; // Nullable for fare manage logs
   fsAverageFare: Decimal | null; // Nullable for fare manage logs
-  fsLowestFareFlightNumber: number | null; // Nullable for fare manage logs
+  fsLowestFareFlightNumber: string | null; // Nullable for fare manage logs
   fsLowestFareFlightDepartureTime: Date | null; // Nullable for fare manage logs
 
   // AO Enrichment Data
@@ -33,7 +33,7 @@ export interface FareAudit {
   aoAverageFare: Decimal | null; // Nullable for fare manage logs;
   aoErrorMessage: string | null; // Nullable for fare manage logs;
   aoSameFlightStock: number | null; // Nullable for fare manage logs
-  aoLowestFareFlightNumber: number | null; // Nullable for fare manage logs
+  aoLowestFareFlightNumber: string | null; // Nullable for fare manage logs
   aoLowestFareFlightDepartureTime: Date | null; // Nullable for fare manage logs
   aoAvailableStock: number | null; // Nullable for fare manage logs
 

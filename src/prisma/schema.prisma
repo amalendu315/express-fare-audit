@@ -42,12 +42,12 @@ model FareAudit {
   remark                          String?   @db.NVarChar(255)
   taskCompletedDateTime           DateTime  @db.DateTime
   fsSameFlightStock               Int?
-  fsLowestFareFlightNumber        Int?
+  fsLowestFareFlightNumber        String?   @db.NVarChar(20)
   fsLowestFareFlightDepartureTime DateTime? @db.DateTime
-  aoLowestFareFlightNumber        Int?
+  aoLowestFareFlightNumber        String?   @db.NVarChar(20)
   aoSameFlightStock               Int?
   aoLowestFareFlightDepartureTime DateTime? @db.DateTime
-  fareAuditRemarks                String?   @db.NVarChar(100)
+  fareAuditRemarks                String?   @db.NVarChar(Max)
   aoAvailableStock                Int?
 }
 
@@ -90,4 +90,14 @@ model sysdiagrams {
   definition   Bytes?
 
   @@unique([principal_id, name], map: "UK_principal_name")
+}
+
+model LogSheet {
+  LogSheetID Int       @id(map: "PK__LogSheet__99C839195DAF02C1") @default(autoincrement())
+  FormName   String?   @db.NVarChar(100)
+  RefID      Int?
+  UserID     Int?
+  UserName   String?   @db.NVarChar(100)
+  DateTime   DateTime? @db.DateTime
+  Remarks    String?   @db.NVarChar(Max)
 }

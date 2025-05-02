@@ -3,7 +3,7 @@ export interface EnrichmentResultModel {
   lowestFlightFare: number;
   availableStock: number;
   sameFlightStock: number;
-  lowestFareFlightNumber: number;
+  lowestFareFlightNumber: string | null;
   lowestFareFlightDepartureTime: Date | null;
   averageFare: number;
   errorMessage?: string;

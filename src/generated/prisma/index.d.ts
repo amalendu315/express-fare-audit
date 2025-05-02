@@ -33,6 +33,11 @@ export type Flights = $Result.DefaultSelection<Prisma.$FlightsPayload>
  * 
  */
 export type sysdiagrams = $Result.DefaultSelection<Prisma.$sysdiagramsPayload>
+/**
+ * Model LogSheet
+ * 
+ */
+export type LogSheet = $Result.DefaultSelection<Prisma.$LogSheetPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -198,6 +203,16 @@ export class PrismaClient<
     * ```
     */
   get sysdiagrams(): Prisma.sysdiagramsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.logSheet`: Exposes CRUD operations for the **LogSheet** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LogSheets
+    * const logSheets = await prisma.logSheet.findMany()
+    * ```
+    */
+  get logSheet(): Prisma.LogSheetDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -641,7 +656,8 @@ export namespace Prisma {
     FareAudit: 'FareAudit',
     EFMigrationsHistory: 'EFMigrationsHistory',
     Flights: 'Flights',
-    sysdiagrams: 'sysdiagrams'
+    sysdiagrams: 'sysdiagrams',
+    LogSheet: 'LogSheet'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -660,7 +676,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "fareAudit" | "eFMigrationsHistory" | "flights" | "sysdiagrams"
+      modelProps: "fareAudit" | "eFMigrationsHistory" | "flights" | "sysdiagrams" | "logSheet"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -928,6 +944,72 @@ export namespace Prisma {
           }
         }
       }
+      LogSheet: {
+        payload: Prisma.$LogSheetPayload<ExtArgs>
+        fields: Prisma.LogSheetFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LogSheetFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogSheetPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LogSheetFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogSheetPayload>
+          }
+          findFirst: {
+            args: Prisma.LogSheetFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogSheetPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LogSheetFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogSheetPayload>
+          }
+          findMany: {
+            args: Prisma.LogSheetFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogSheetPayload>[]
+          }
+          create: {
+            args: Prisma.LogSheetCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogSheetPayload>
+          }
+          createMany: {
+            args: Prisma.LogSheetCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.LogSheetDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogSheetPayload>
+          }
+          update: {
+            args: Prisma.LogSheetUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogSheetPayload>
+          }
+          deleteMany: {
+            args: Prisma.LogSheetDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LogSheetUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.LogSheetUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogSheetPayload>
+          }
+          aggregate: {
+            args: Prisma.LogSheetAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLogSheet>
+          }
+          groupBy: {
+            args: Prisma.LogSheetGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LogSheetGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LogSheetCountArgs<ExtArgs>
+            result: $Utils.Optional<LogSheetCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1016,6 +1098,7 @@ export namespace Prisma {
     eFMigrationsHistory?: EFMigrationsHistoryOmit
     flights?: FlightsOmit
     sysdiagrams?: sysdiagramsOmit
+    logSheet?: LogSheetOmit
   }
 
   /* Types for Logging */
@@ -1144,8 +1227,6 @@ export namespace Prisma {
     routeWiseAverageCost: Decimal | null
     averageSellFare: Decimal | null
     fsSameFlightStock: number | null
-    fsLowestFareFlightNumber: number | null
-    aoLowestFareFlightNumber: number | null
     aoSameFlightStock: number | null
     aoAvailableStock: number | null
   }
@@ -1172,8 +1253,6 @@ export namespace Prisma {
     routeWiseAverageCost: Decimal | null
     averageSellFare: Decimal | null
     fsSameFlightStock: number | null
-    fsLowestFareFlightNumber: number | null
-    aoLowestFareFlightNumber: number | null
     aoSameFlightStock: number | null
     aoAvailableStock: number | null
   }
@@ -1212,9 +1291,9 @@ export namespace Prisma {
     remark: string | null
     taskCompletedDateTime: Date | null
     fsSameFlightStock: number | null
-    fsLowestFareFlightNumber: number | null
+    fsLowestFareFlightNumber: string | null
     fsLowestFareFlightDepartureTime: Date | null
-    aoLowestFareFlightNumber: number | null
+    aoLowestFareFlightNumber: string | null
     aoSameFlightStock: number | null
     aoLowestFareFlightDepartureTime: Date | null
     fareAuditRemarks: string | null
@@ -1255,9 +1334,9 @@ export namespace Prisma {
     remark: string | null
     taskCompletedDateTime: Date | null
     fsSameFlightStock: number | null
-    fsLowestFareFlightNumber: number | null
+    fsLowestFareFlightNumber: string | null
     fsLowestFareFlightDepartureTime: Date | null
-    aoLowestFareFlightNumber: number | null
+    aoLowestFareFlightNumber: string | null
     aoSameFlightStock: number | null
     aoLowestFareFlightDepartureTime: Date | null
     fareAuditRemarks: string | null
@@ -1331,8 +1410,6 @@ export namespace Prisma {
     routeWiseAverageCost?: true
     averageSellFare?: true
     fsSameFlightStock?: true
-    fsLowestFareFlightNumber?: true
-    aoLowestFareFlightNumber?: true
     aoSameFlightStock?: true
     aoAvailableStock?: true
   }
@@ -1359,8 +1436,6 @@ export namespace Prisma {
     routeWiseAverageCost?: true
     averageSellFare?: true
     fsSameFlightStock?: true
-    fsLowestFareFlightNumber?: true
-    aoLowestFareFlightNumber?: true
     aoSameFlightStock?: true
     aoAvailableStock?: true
   }
@@ -1615,9 +1690,9 @@ export namespace Prisma {
     remark: string | null
     taskCompletedDateTime: Date
     fsSameFlightStock: number | null
-    fsLowestFareFlightNumber: number | null
+    fsLowestFareFlightNumber: string | null
     fsLowestFareFlightDepartureTime: Date | null
-    aoLowestFareFlightNumber: number | null
+    aoLowestFareFlightNumber: string | null
     aoSameFlightStock: number | null
     aoLowestFareFlightDepartureTime: Date | null
     fareAuditRemarks: string | null
@@ -1770,9 +1845,9 @@ export namespace Prisma {
       remark: string | null
       taskCompletedDateTime: Date
       fsSameFlightStock: number | null
-      fsLowestFareFlightNumber: number | null
+      fsLowestFareFlightNumber: string | null
       fsLowestFareFlightDepartureTime: Date | null
-      aoLowestFareFlightNumber: number | null
+      aoLowestFareFlightNumber: string | null
       aoSameFlightStock: number | null
       aoLowestFareFlightDepartureTime: Date | null
       fareAuditRemarks: string | null
@@ -2179,9 +2254,9 @@ export namespace Prisma {
     readonly remark: FieldRef<"FareAudit", 'String'>
     readonly taskCompletedDateTime: FieldRef<"FareAudit", 'DateTime'>
     readonly fsSameFlightStock: FieldRef<"FareAudit", 'Int'>
-    readonly fsLowestFareFlightNumber: FieldRef<"FareAudit", 'Int'>
+    readonly fsLowestFareFlightNumber: FieldRef<"FareAudit", 'String'>
     readonly fsLowestFareFlightDepartureTime: FieldRef<"FareAudit", 'DateTime'>
-    readonly aoLowestFareFlightNumber: FieldRef<"FareAudit", 'Int'>
+    readonly aoLowestFareFlightNumber: FieldRef<"FareAudit", 'String'>
     readonly aoSameFlightStock: FieldRef<"FareAudit", 'Int'>
     readonly aoLowestFareFlightDepartureTime: FieldRef<"FareAudit", 'DateTime'>
     readonly fareAuditRemarks: FieldRef<"FareAudit", 'String'>
@@ -5389,6 +5464,951 @@ export namespace Prisma {
 
 
   /**
+   * Model LogSheet
+   */
+
+  export type AggregateLogSheet = {
+    _count: LogSheetCountAggregateOutputType | null
+    _avg: LogSheetAvgAggregateOutputType | null
+    _sum: LogSheetSumAggregateOutputType | null
+    _min: LogSheetMinAggregateOutputType | null
+    _max: LogSheetMaxAggregateOutputType | null
+  }
+
+  export type LogSheetAvgAggregateOutputType = {
+    LogSheetID: number | null
+    RefID: number | null
+    UserID: number | null
+  }
+
+  export type LogSheetSumAggregateOutputType = {
+    LogSheetID: number | null
+    RefID: number | null
+    UserID: number | null
+  }
+
+  export type LogSheetMinAggregateOutputType = {
+    LogSheetID: number | null
+    FormName: string | null
+    RefID: number | null
+    UserID: number | null
+    UserName: string | null
+    DateTime: Date | null
+    Remarks: string | null
+  }
+
+  export type LogSheetMaxAggregateOutputType = {
+    LogSheetID: number | null
+    FormName: string | null
+    RefID: number | null
+    UserID: number | null
+    UserName: string | null
+    DateTime: Date | null
+    Remarks: string | null
+  }
+
+  export type LogSheetCountAggregateOutputType = {
+    LogSheetID: number
+    FormName: number
+    RefID: number
+    UserID: number
+    UserName: number
+    DateTime: number
+    Remarks: number
+    _all: number
+  }
+
+
+  export type LogSheetAvgAggregateInputType = {
+    LogSheetID?: true
+    RefID?: true
+    UserID?: true
+  }
+
+  export type LogSheetSumAggregateInputType = {
+    LogSheetID?: true
+    RefID?: true
+    UserID?: true
+  }
+
+  export type LogSheetMinAggregateInputType = {
+    LogSheetID?: true
+    FormName?: true
+    RefID?: true
+    UserID?: true
+    UserName?: true
+    DateTime?: true
+    Remarks?: true
+  }
+
+  export type LogSheetMaxAggregateInputType = {
+    LogSheetID?: true
+    FormName?: true
+    RefID?: true
+    UserID?: true
+    UserName?: true
+    DateTime?: true
+    Remarks?: true
+  }
+
+  export type LogSheetCountAggregateInputType = {
+    LogSheetID?: true
+    FormName?: true
+    RefID?: true
+    UserID?: true
+    UserName?: true
+    DateTime?: true
+    Remarks?: true
+    _all?: true
+  }
+
+  export type LogSheetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LogSheet to aggregate.
+     */
+    where?: LogSheetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LogSheets to fetch.
+     */
+    orderBy?: LogSheetOrderByWithRelationInput | LogSheetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LogSheetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LogSheets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LogSheets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LogSheets
+    **/
+    _count?: true | LogSheetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LogSheetAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LogSheetSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LogSheetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LogSheetMaxAggregateInputType
+  }
+
+  export type GetLogSheetAggregateType<T extends LogSheetAggregateArgs> = {
+        [P in keyof T & keyof AggregateLogSheet]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLogSheet[P]>
+      : GetScalarType<T[P], AggregateLogSheet[P]>
+  }
+
+
+
+
+  export type LogSheetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LogSheetWhereInput
+    orderBy?: LogSheetOrderByWithAggregationInput | LogSheetOrderByWithAggregationInput[]
+    by: LogSheetScalarFieldEnum[] | LogSheetScalarFieldEnum
+    having?: LogSheetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LogSheetCountAggregateInputType | true
+    _avg?: LogSheetAvgAggregateInputType
+    _sum?: LogSheetSumAggregateInputType
+    _min?: LogSheetMinAggregateInputType
+    _max?: LogSheetMaxAggregateInputType
+  }
+
+  export type LogSheetGroupByOutputType = {
+    LogSheetID: number
+    FormName: string | null
+    RefID: number | null
+    UserID: number | null
+    UserName: string | null
+    DateTime: Date | null
+    Remarks: string | null
+    _count: LogSheetCountAggregateOutputType | null
+    _avg: LogSheetAvgAggregateOutputType | null
+    _sum: LogSheetSumAggregateOutputType | null
+    _min: LogSheetMinAggregateOutputType | null
+    _max: LogSheetMaxAggregateOutputType | null
+  }
+
+  type GetLogSheetGroupByPayload<T extends LogSheetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LogSheetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LogSheetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LogSheetGroupByOutputType[P]>
+            : GetScalarType<T[P], LogSheetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LogSheetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    LogSheetID?: boolean
+    FormName?: boolean
+    RefID?: boolean
+    UserID?: boolean
+    UserName?: boolean
+    DateTime?: boolean
+    Remarks?: boolean
+  }, ExtArgs["result"]["logSheet"]>
+
+
+
+  export type LogSheetSelectScalar = {
+    LogSheetID?: boolean
+    FormName?: boolean
+    RefID?: boolean
+    UserID?: boolean
+    UserName?: boolean
+    DateTime?: boolean
+    Remarks?: boolean
+  }
+
+  export type LogSheetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"LogSheetID" | "FormName" | "RefID" | "UserID" | "UserName" | "DateTime" | "Remarks", ExtArgs["result"]["logSheet"]>
+
+  export type $LogSheetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LogSheet"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      LogSheetID: number
+      FormName: string | null
+      RefID: number | null
+      UserID: number | null
+      UserName: string | null
+      DateTime: Date | null
+      Remarks: string | null
+    }, ExtArgs["result"]["logSheet"]>
+    composites: {}
+  }
+
+  type LogSheetGetPayload<S extends boolean | null | undefined | LogSheetDefaultArgs> = $Result.GetResult<Prisma.$LogSheetPayload, S>
+
+  type LogSheetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LogSheetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LogSheetCountAggregateInputType | true
+    }
+
+  export interface LogSheetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LogSheet'], meta: { name: 'LogSheet' } }
+    /**
+     * Find zero or one LogSheet that matches the filter.
+     * @param {LogSheetFindUniqueArgs} args - Arguments to find a LogSheet
+     * @example
+     * // Get one LogSheet
+     * const logSheet = await prisma.logSheet.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LogSheetFindUniqueArgs>(args: SelectSubset<T, LogSheetFindUniqueArgs<ExtArgs>>): Prisma__LogSheetClient<$Result.GetResult<Prisma.$LogSheetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LogSheet that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LogSheetFindUniqueOrThrowArgs} args - Arguments to find a LogSheet
+     * @example
+     * // Get one LogSheet
+     * const logSheet = await prisma.logSheet.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LogSheetFindUniqueOrThrowArgs>(args: SelectSubset<T, LogSheetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LogSheetClient<$Result.GetResult<Prisma.$LogSheetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LogSheet that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogSheetFindFirstArgs} args - Arguments to find a LogSheet
+     * @example
+     * // Get one LogSheet
+     * const logSheet = await prisma.logSheet.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LogSheetFindFirstArgs>(args?: SelectSubset<T, LogSheetFindFirstArgs<ExtArgs>>): Prisma__LogSheetClient<$Result.GetResult<Prisma.$LogSheetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LogSheet that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogSheetFindFirstOrThrowArgs} args - Arguments to find a LogSheet
+     * @example
+     * // Get one LogSheet
+     * const logSheet = await prisma.logSheet.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LogSheetFindFirstOrThrowArgs>(args?: SelectSubset<T, LogSheetFindFirstOrThrowArgs<ExtArgs>>): Prisma__LogSheetClient<$Result.GetResult<Prisma.$LogSheetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LogSheets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogSheetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LogSheets
+     * const logSheets = await prisma.logSheet.findMany()
+     * 
+     * // Get first 10 LogSheets
+     * const logSheets = await prisma.logSheet.findMany({ take: 10 })
+     * 
+     * // Only select the `LogSheetID`
+     * const logSheetWithLogSheetIDOnly = await prisma.logSheet.findMany({ select: { LogSheetID: true } })
+     * 
+     */
+    findMany<T extends LogSheetFindManyArgs>(args?: SelectSubset<T, LogSheetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LogSheetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LogSheet.
+     * @param {LogSheetCreateArgs} args - Arguments to create a LogSheet.
+     * @example
+     * // Create one LogSheet
+     * const LogSheet = await prisma.logSheet.create({
+     *   data: {
+     *     // ... data to create a LogSheet
+     *   }
+     * })
+     * 
+     */
+    create<T extends LogSheetCreateArgs>(args: SelectSubset<T, LogSheetCreateArgs<ExtArgs>>): Prisma__LogSheetClient<$Result.GetResult<Prisma.$LogSheetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LogSheets.
+     * @param {LogSheetCreateManyArgs} args - Arguments to create many LogSheets.
+     * @example
+     * // Create many LogSheets
+     * const logSheet = await prisma.logSheet.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LogSheetCreateManyArgs>(args?: SelectSubset<T, LogSheetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a LogSheet.
+     * @param {LogSheetDeleteArgs} args - Arguments to delete one LogSheet.
+     * @example
+     * // Delete one LogSheet
+     * const LogSheet = await prisma.logSheet.delete({
+     *   where: {
+     *     // ... filter to delete one LogSheet
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LogSheetDeleteArgs>(args: SelectSubset<T, LogSheetDeleteArgs<ExtArgs>>): Prisma__LogSheetClient<$Result.GetResult<Prisma.$LogSheetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LogSheet.
+     * @param {LogSheetUpdateArgs} args - Arguments to update one LogSheet.
+     * @example
+     * // Update one LogSheet
+     * const logSheet = await prisma.logSheet.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LogSheetUpdateArgs>(args: SelectSubset<T, LogSheetUpdateArgs<ExtArgs>>): Prisma__LogSheetClient<$Result.GetResult<Prisma.$LogSheetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LogSheets.
+     * @param {LogSheetDeleteManyArgs} args - Arguments to filter LogSheets to delete.
+     * @example
+     * // Delete a few LogSheets
+     * const { count } = await prisma.logSheet.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LogSheetDeleteManyArgs>(args?: SelectSubset<T, LogSheetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LogSheets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogSheetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LogSheets
+     * const logSheet = await prisma.logSheet.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LogSheetUpdateManyArgs>(args: SelectSubset<T, LogSheetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one LogSheet.
+     * @param {LogSheetUpsertArgs} args - Arguments to update or create a LogSheet.
+     * @example
+     * // Update or create a LogSheet
+     * const logSheet = await prisma.logSheet.upsert({
+     *   create: {
+     *     // ... data to create a LogSheet
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LogSheet we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LogSheetUpsertArgs>(args: SelectSubset<T, LogSheetUpsertArgs<ExtArgs>>): Prisma__LogSheetClient<$Result.GetResult<Prisma.$LogSheetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LogSheets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogSheetCountArgs} args - Arguments to filter LogSheets to count.
+     * @example
+     * // Count the number of LogSheets
+     * const count = await prisma.logSheet.count({
+     *   where: {
+     *     // ... the filter for the LogSheets we want to count
+     *   }
+     * })
+    **/
+    count<T extends LogSheetCountArgs>(
+      args?: Subset<T, LogSheetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LogSheetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LogSheet.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogSheetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LogSheetAggregateArgs>(args: Subset<T, LogSheetAggregateArgs>): Prisma.PrismaPromise<GetLogSheetAggregateType<T>>
+
+    /**
+     * Group by LogSheet.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogSheetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LogSheetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LogSheetGroupByArgs['orderBy'] }
+        : { orderBy?: LogSheetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LogSheetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLogSheetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LogSheet model
+   */
+  readonly fields: LogSheetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LogSheet.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LogSheetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LogSheet model
+   */
+  interface LogSheetFieldRefs {
+    readonly LogSheetID: FieldRef<"LogSheet", 'Int'>
+    readonly FormName: FieldRef<"LogSheet", 'String'>
+    readonly RefID: FieldRef<"LogSheet", 'Int'>
+    readonly UserID: FieldRef<"LogSheet", 'Int'>
+    readonly UserName: FieldRef<"LogSheet", 'String'>
+    readonly DateTime: FieldRef<"LogSheet", 'DateTime'>
+    readonly Remarks: FieldRef<"LogSheet", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LogSheet findUnique
+   */
+  export type LogSheetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogSheet
+     */
+    select?: LogSheetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogSheet
+     */
+    omit?: LogSheetOmit<ExtArgs> | null
+    /**
+     * Filter, which LogSheet to fetch.
+     */
+    where: LogSheetWhereUniqueInput
+  }
+
+  /**
+   * LogSheet findUniqueOrThrow
+   */
+  export type LogSheetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogSheet
+     */
+    select?: LogSheetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogSheet
+     */
+    omit?: LogSheetOmit<ExtArgs> | null
+    /**
+     * Filter, which LogSheet to fetch.
+     */
+    where: LogSheetWhereUniqueInput
+  }
+
+  /**
+   * LogSheet findFirst
+   */
+  export type LogSheetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogSheet
+     */
+    select?: LogSheetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogSheet
+     */
+    omit?: LogSheetOmit<ExtArgs> | null
+    /**
+     * Filter, which LogSheet to fetch.
+     */
+    where?: LogSheetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LogSheets to fetch.
+     */
+    orderBy?: LogSheetOrderByWithRelationInput | LogSheetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LogSheets.
+     */
+    cursor?: LogSheetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LogSheets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LogSheets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LogSheets.
+     */
+    distinct?: LogSheetScalarFieldEnum | LogSheetScalarFieldEnum[]
+  }
+
+  /**
+   * LogSheet findFirstOrThrow
+   */
+  export type LogSheetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogSheet
+     */
+    select?: LogSheetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogSheet
+     */
+    omit?: LogSheetOmit<ExtArgs> | null
+    /**
+     * Filter, which LogSheet to fetch.
+     */
+    where?: LogSheetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LogSheets to fetch.
+     */
+    orderBy?: LogSheetOrderByWithRelationInput | LogSheetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LogSheets.
+     */
+    cursor?: LogSheetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LogSheets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LogSheets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LogSheets.
+     */
+    distinct?: LogSheetScalarFieldEnum | LogSheetScalarFieldEnum[]
+  }
+
+  /**
+   * LogSheet findMany
+   */
+  export type LogSheetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogSheet
+     */
+    select?: LogSheetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogSheet
+     */
+    omit?: LogSheetOmit<ExtArgs> | null
+    /**
+     * Filter, which LogSheets to fetch.
+     */
+    where?: LogSheetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LogSheets to fetch.
+     */
+    orderBy?: LogSheetOrderByWithRelationInput | LogSheetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LogSheets.
+     */
+    cursor?: LogSheetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LogSheets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LogSheets.
+     */
+    skip?: number
+    distinct?: LogSheetScalarFieldEnum | LogSheetScalarFieldEnum[]
+  }
+
+  /**
+   * LogSheet create
+   */
+  export type LogSheetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogSheet
+     */
+    select?: LogSheetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogSheet
+     */
+    omit?: LogSheetOmit<ExtArgs> | null
+    /**
+     * The data needed to create a LogSheet.
+     */
+    data?: XOR<LogSheetCreateInput, LogSheetUncheckedCreateInput>
+  }
+
+  /**
+   * LogSheet createMany
+   */
+  export type LogSheetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LogSheets.
+     */
+    data: LogSheetCreateManyInput | LogSheetCreateManyInput[]
+  }
+
+  /**
+   * LogSheet update
+   */
+  export type LogSheetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogSheet
+     */
+    select?: LogSheetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogSheet
+     */
+    omit?: LogSheetOmit<ExtArgs> | null
+    /**
+     * The data needed to update a LogSheet.
+     */
+    data: XOR<LogSheetUpdateInput, LogSheetUncheckedUpdateInput>
+    /**
+     * Choose, which LogSheet to update.
+     */
+    where: LogSheetWhereUniqueInput
+  }
+
+  /**
+   * LogSheet updateMany
+   */
+  export type LogSheetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LogSheets.
+     */
+    data: XOR<LogSheetUpdateManyMutationInput, LogSheetUncheckedUpdateManyInput>
+    /**
+     * Filter which LogSheets to update
+     */
+    where?: LogSheetWhereInput
+    /**
+     * Limit how many LogSheets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LogSheet upsert
+   */
+  export type LogSheetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogSheet
+     */
+    select?: LogSheetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogSheet
+     */
+    omit?: LogSheetOmit<ExtArgs> | null
+    /**
+     * The filter to search for the LogSheet to update in case it exists.
+     */
+    where: LogSheetWhereUniqueInput
+    /**
+     * In case the LogSheet found by the `where` argument doesn't exist, create a new LogSheet with this data.
+     */
+    create: XOR<LogSheetCreateInput, LogSheetUncheckedCreateInput>
+    /**
+     * In case the LogSheet was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LogSheetUpdateInput, LogSheetUncheckedUpdateInput>
+  }
+
+  /**
+   * LogSheet delete
+   */
+  export type LogSheetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogSheet
+     */
+    select?: LogSheetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogSheet
+     */
+    omit?: LogSheetOmit<ExtArgs> | null
+    /**
+     * Filter which LogSheet to delete.
+     */
+    where: LogSheetWhereUniqueInput
+  }
+
+  /**
+   * LogSheet deleteMany
+   */
+  export type LogSheetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LogSheets to delete
+     */
+    where?: LogSheetWhereInput
+    /**
+     * Limit how many LogSheets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LogSheet without action
+   */
+  export type LogSheetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogSheet
+     */
+    select?: LogSheetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogSheet
+     */
+    omit?: LogSheetOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5495,6 +6515,19 @@ export namespace Prisma {
   export type SysdiagramsScalarFieldEnum = (typeof SysdiagramsScalarFieldEnum)[keyof typeof SysdiagramsScalarFieldEnum]
 
 
+  export const LogSheetScalarFieldEnum: {
+    LogSheetID: 'LogSheetID',
+    FormName: 'FormName',
+    RefID: 'RefID',
+    UserID: 'UserID',
+    UserName: 'UserName',
+    DateTime: 'DateTime',
+    Remarks: 'Remarks'
+  };
+
+  export type LogSheetScalarFieldEnum = (typeof LogSheetScalarFieldEnum)[keyof typeof LogSheetScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -5598,9 +6631,9 @@ export namespace Prisma {
     remark?: StringNullableFilter<"FareAudit"> | string | null
     taskCompletedDateTime?: DateTimeFilter<"FareAudit"> | Date | string
     fsSameFlightStock?: IntNullableFilter<"FareAudit"> | number | null
-    fsLowestFareFlightNumber?: IntNullableFilter<"FareAudit"> | number | null
+    fsLowestFareFlightNumber?: StringNullableFilter<"FareAudit"> | string | null
     fsLowestFareFlightDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
-    aoLowestFareFlightNumber?: IntNullableFilter<"FareAudit"> | number | null
+    aoLowestFareFlightNumber?: StringNullableFilter<"FareAudit"> | string | null
     aoSameFlightStock?: IntNullableFilter<"FareAudit"> | number | null
     aoLowestFareFlightDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
     fareAuditRemarks?: StringNullableFilter<"FareAudit"> | string | null
@@ -5687,9 +6720,9 @@ export namespace Prisma {
     remark?: StringNullableFilter<"FareAudit"> | string | null
     taskCompletedDateTime?: DateTimeFilter<"FareAudit"> | Date | string
     fsSameFlightStock?: IntNullableFilter<"FareAudit"> | number | null
-    fsLowestFareFlightNumber?: IntNullableFilter<"FareAudit"> | number | null
+    fsLowestFareFlightNumber?: StringNullableFilter<"FareAudit"> | string | null
     fsLowestFareFlightDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
-    aoLowestFareFlightNumber?: IntNullableFilter<"FareAudit"> | number | null
+    aoLowestFareFlightNumber?: StringNullableFilter<"FareAudit"> | string | null
     aoSameFlightStock?: IntNullableFilter<"FareAudit"> | number | null
     aoLowestFareFlightDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
     fareAuditRemarks?: StringNullableFilter<"FareAudit"> | string | null
@@ -5781,9 +6814,9 @@ export namespace Prisma {
     remark?: StringNullableWithAggregatesFilter<"FareAudit"> | string | null
     taskCompletedDateTime?: DateTimeWithAggregatesFilter<"FareAudit"> | Date | string
     fsSameFlightStock?: IntNullableWithAggregatesFilter<"FareAudit"> | number | null
-    fsLowestFareFlightNumber?: IntNullableWithAggregatesFilter<"FareAudit"> | number | null
+    fsLowestFareFlightNumber?: StringNullableWithAggregatesFilter<"FareAudit"> | string | null
     fsLowestFareFlightDepartureTime?: DateTimeNullableWithAggregatesFilter<"FareAudit"> | Date | string | null
-    aoLowestFareFlightNumber?: IntNullableWithAggregatesFilter<"FareAudit"> | number | null
+    aoLowestFareFlightNumber?: StringNullableWithAggregatesFilter<"FareAudit"> | string | null
     aoSameFlightStock?: IntNullableWithAggregatesFilter<"FareAudit"> | number | null
     aoLowestFareFlightDepartureTime?: DateTimeNullableWithAggregatesFilter<"FareAudit"> | Date | string | null
     fareAuditRemarks?: StringNullableWithAggregatesFilter<"FareAudit"> | string | null
@@ -6016,6 +7049,70 @@ export namespace Prisma {
     definition?: BytesNullableWithAggregatesFilter<"sysdiagrams"> | Uint8Array | null
   }
 
+  export type LogSheetWhereInput = {
+    AND?: LogSheetWhereInput | LogSheetWhereInput[]
+    OR?: LogSheetWhereInput[]
+    NOT?: LogSheetWhereInput | LogSheetWhereInput[]
+    LogSheetID?: IntFilter<"LogSheet"> | number
+    FormName?: StringNullableFilter<"LogSheet"> | string | null
+    RefID?: IntNullableFilter<"LogSheet"> | number | null
+    UserID?: IntNullableFilter<"LogSheet"> | number | null
+    UserName?: StringNullableFilter<"LogSheet"> | string | null
+    DateTime?: DateTimeNullableFilter<"LogSheet"> | Date | string | null
+    Remarks?: StringNullableFilter<"LogSheet"> | string | null
+  }
+
+  export type LogSheetOrderByWithRelationInput = {
+    LogSheetID?: SortOrder
+    FormName?: SortOrderInput | SortOrder
+    RefID?: SortOrderInput | SortOrder
+    UserID?: SortOrderInput | SortOrder
+    UserName?: SortOrderInput | SortOrder
+    DateTime?: SortOrderInput | SortOrder
+    Remarks?: SortOrderInput | SortOrder
+  }
+
+  export type LogSheetWhereUniqueInput = Prisma.AtLeast<{
+    LogSheetID?: number
+    AND?: LogSheetWhereInput | LogSheetWhereInput[]
+    OR?: LogSheetWhereInput[]
+    NOT?: LogSheetWhereInput | LogSheetWhereInput[]
+    FormName?: StringNullableFilter<"LogSheet"> | string | null
+    RefID?: IntNullableFilter<"LogSheet"> | number | null
+    UserID?: IntNullableFilter<"LogSheet"> | number | null
+    UserName?: StringNullableFilter<"LogSheet"> | string | null
+    DateTime?: DateTimeNullableFilter<"LogSheet"> | Date | string | null
+    Remarks?: StringNullableFilter<"LogSheet"> | string | null
+  }, "LogSheetID">
+
+  export type LogSheetOrderByWithAggregationInput = {
+    LogSheetID?: SortOrder
+    FormName?: SortOrderInput | SortOrder
+    RefID?: SortOrderInput | SortOrder
+    UserID?: SortOrderInput | SortOrder
+    UserName?: SortOrderInput | SortOrder
+    DateTime?: SortOrderInput | SortOrder
+    Remarks?: SortOrderInput | SortOrder
+    _count?: LogSheetCountOrderByAggregateInput
+    _avg?: LogSheetAvgOrderByAggregateInput
+    _max?: LogSheetMaxOrderByAggregateInput
+    _min?: LogSheetMinOrderByAggregateInput
+    _sum?: LogSheetSumOrderByAggregateInput
+  }
+
+  export type LogSheetScalarWhereWithAggregatesInput = {
+    AND?: LogSheetScalarWhereWithAggregatesInput | LogSheetScalarWhereWithAggregatesInput[]
+    OR?: LogSheetScalarWhereWithAggregatesInput[]
+    NOT?: LogSheetScalarWhereWithAggregatesInput | LogSheetScalarWhereWithAggregatesInput[]
+    LogSheetID?: IntWithAggregatesFilter<"LogSheet"> | number
+    FormName?: StringNullableWithAggregatesFilter<"LogSheet"> | string | null
+    RefID?: IntNullableWithAggregatesFilter<"LogSheet"> | number | null
+    UserID?: IntNullableWithAggregatesFilter<"LogSheet"> | number | null
+    UserName?: StringNullableWithAggregatesFilter<"LogSheet"> | string | null
+    DateTime?: DateTimeNullableWithAggregatesFilter<"LogSheet"> | Date | string | null
+    Remarks?: StringNullableWithAggregatesFilter<"LogSheet"> | string | null
+  }
+
   export type FareAuditCreateInput = {
     bookingId?: number | null
     ticketId: number
@@ -6049,9 +7146,9 @@ export namespace Prisma {
     remark?: string | null
     taskCompletedDateTime: Date | string
     fsSameFlightStock?: number | null
-    fsLowestFareFlightNumber?: number | null
+    fsLowestFareFlightNumber?: string | null
     fsLowestFareFlightDepartureTime?: Date | string | null
-    aoLowestFareFlightNumber?: number | null
+    aoLowestFareFlightNumber?: string | null
     aoSameFlightStock?: number | null
     aoLowestFareFlightDepartureTime?: Date | string | null
     fareAuditRemarks?: string | null
@@ -6092,9 +7189,9 @@ export namespace Prisma {
     remark?: string | null
     taskCompletedDateTime: Date | string
     fsSameFlightStock?: number | null
-    fsLowestFareFlightNumber?: number | null
+    fsLowestFareFlightNumber?: string | null
     fsLowestFareFlightDepartureTime?: Date | string | null
-    aoLowestFareFlightNumber?: number | null
+    aoLowestFareFlightNumber?: string | null
     aoSameFlightStock?: number | null
     aoLowestFareFlightDepartureTime?: Date | string | null
     fareAuditRemarks?: string | null
@@ -6134,9 +7231,9 @@ export namespace Prisma {
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     taskCompletedDateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     fsSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
-    fsLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    fsLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
     fsLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    aoLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    aoLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
     aoSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
     aoLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fareAuditRemarks?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6177,9 +7274,9 @@ export namespace Prisma {
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     taskCompletedDateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     fsSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
-    fsLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    fsLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
     fsLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    aoLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    aoLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
     aoSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
     aoLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fareAuditRemarks?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6219,9 +7316,9 @@ export namespace Prisma {
     remark?: string | null
     taskCompletedDateTime: Date | string
     fsSameFlightStock?: number | null
-    fsLowestFareFlightNumber?: number | null
+    fsLowestFareFlightNumber?: string | null
     fsLowestFareFlightDepartureTime?: Date | string | null
-    aoLowestFareFlightNumber?: number | null
+    aoLowestFareFlightNumber?: string | null
     aoSameFlightStock?: number | null
     aoLowestFareFlightDepartureTime?: Date | string | null
     fareAuditRemarks?: string | null
@@ -6261,9 +7358,9 @@ export namespace Prisma {
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     taskCompletedDateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     fsSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
-    fsLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    fsLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
     fsLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    aoLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    aoLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
     aoSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
     aoLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fareAuditRemarks?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6304,9 +7401,9 @@ export namespace Prisma {
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     taskCompletedDateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     fsSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
-    fsLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    fsLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
     fsLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    aoLowestFareFlightNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    aoLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
     aoSameFlightStock?: NullableIntFieldUpdateOperationsInput | number | null
     aoLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fareAuditRemarks?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6564,6 +7661,72 @@ export namespace Prisma {
     definition?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
   }
 
+  export type LogSheetCreateInput = {
+    FormName?: string | null
+    RefID?: number | null
+    UserID?: number | null
+    UserName?: string | null
+    DateTime?: Date | string | null
+    Remarks?: string | null
+  }
+
+  export type LogSheetUncheckedCreateInput = {
+    LogSheetID?: number
+    FormName?: string | null
+    RefID?: number | null
+    UserID?: number | null
+    UserName?: string | null
+    DateTime?: Date | string | null
+    Remarks?: string | null
+  }
+
+  export type LogSheetUpdateInput = {
+    FormName?: NullableStringFieldUpdateOperationsInput | string | null
+    RefID?: NullableIntFieldUpdateOperationsInput | number | null
+    UserID?: NullableIntFieldUpdateOperationsInput | number | null
+    UserName?: NullableStringFieldUpdateOperationsInput | string | null
+    DateTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Remarks?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type LogSheetUncheckedUpdateInput = {
+    LogSheetID?: IntFieldUpdateOperationsInput | number
+    FormName?: NullableStringFieldUpdateOperationsInput | string | null
+    RefID?: NullableIntFieldUpdateOperationsInput | number | null
+    UserID?: NullableIntFieldUpdateOperationsInput | number | null
+    UserName?: NullableStringFieldUpdateOperationsInput | string | null
+    DateTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Remarks?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type LogSheetCreateManyInput = {
+    FormName?: string | null
+    RefID?: number | null
+    UserID?: number | null
+    UserName?: string | null
+    DateTime?: Date | string | null
+    Remarks?: string | null
+  }
+
+  export type LogSheetUpdateManyMutationInput = {
+    FormName?: NullableStringFieldUpdateOperationsInput | string | null
+    RefID?: NullableIntFieldUpdateOperationsInput | number | null
+    UserID?: NullableIntFieldUpdateOperationsInput | number | null
+    UserName?: NullableStringFieldUpdateOperationsInput | string | null
+    DateTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Remarks?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type LogSheetUncheckedUpdateManyInput = {
+    LogSheetID?: IntFieldUpdateOperationsInput | number
+    FormName?: NullableStringFieldUpdateOperationsInput | string | null
+    RefID?: NullableIntFieldUpdateOperationsInput | number | null
+    UserID?: NullableIntFieldUpdateOperationsInput | number | null
+    UserName?: NullableStringFieldUpdateOperationsInput | string | null
+    DateTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Remarks?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -6717,8 +7880,6 @@ export namespace Prisma {
     routeWiseAverageCost?: SortOrder
     averageSellFare?: SortOrder
     fsSameFlightStock?: SortOrder
-    fsLowestFareFlightNumber?: SortOrder
-    aoLowestFareFlightNumber?: SortOrder
     aoSameFlightStock?: SortOrder
     aoAvailableStock?: SortOrder
   }
@@ -6831,8 +7992,6 @@ export namespace Prisma {
     routeWiseAverageCost?: SortOrder
     averageSellFare?: SortOrder
     fsSameFlightStock?: SortOrder
-    fsLowestFareFlightNumber?: SortOrder
-    aoLowestFareFlightNumber?: SortOrder
     aoSameFlightStock?: SortOrder
     aoAvailableStock?: SortOrder
   }
@@ -7135,6 +8294,48 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBytesNullableFilter<$PrismaModel>
     _max?: NestedBytesNullableFilter<$PrismaModel>
+  }
+
+  export type LogSheetCountOrderByAggregateInput = {
+    LogSheetID?: SortOrder
+    FormName?: SortOrder
+    RefID?: SortOrder
+    UserID?: SortOrder
+    UserName?: SortOrder
+    DateTime?: SortOrder
+    Remarks?: SortOrder
+  }
+
+  export type LogSheetAvgOrderByAggregateInput = {
+    LogSheetID?: SortOrder
+    RefID?: SortOrder
+    UserID?: SortOrder
+  }
+
+  export type LogSheetMaxOrderByAggregateInput = {
+    LogSheetID?: SortOrder
+    FormName?: SortOrder
+    RefID?: SortOrder
+    UserID?: SortOrder
+    UserName?: SortOrder
+    DateTime?: SortOrder
+    Remarks?: SortOrder
+  }
+
+  export type LogSheetMinOrderByAggregateInput = {
+    LogSheetID?: SortOrder
+    FormName?: SortOrder
+    RefID?: SortOrder
+    UserID?: SortOrder
+    UserName?: SortOrder
+    DateTime?: SortOrder
+    Remarks?: SortOrder
+  }
+
+  export type LogSheetSumOrderByAggregateInput = {
+    LogSheetID?: SortOrder
+    RefID?: SortOrder
+    UserID?: SortOrder
   }
 
   export type NullableIntFieldUpdateOperationsInput = {

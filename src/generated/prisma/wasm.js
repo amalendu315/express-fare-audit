@@ -198,6 +198,16 @@ exports.Prisma.SysdiagramsScalarFieldEnum = {
   definition: 'definition'
 };
 
+exports.Prisma.LogSheetScalarFieldEnum = {
+  LogSheetID: 'LogSheetID',
+  FormName: 'FormName',
+  RefID: 'RefID',
+  UserID: 'UserID',
+  UserName: 'UserName',
+  DateTime: 'DateTime',
+  Remarks: 'Remarks'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -213,7 +223,8 @@ exports.Prisma.ModelName = {
   FareAudit: 'FareAudit',
   EFMigrationsHistory: 'EFMigrationsHistory',
   Flights: 'Flights',
-  sysdiagrams: 'sysdiagrams'
+  sysdiagrams: 'sysdiagrams',
+  LogSheet: 'LogSheet'
 };
 
 /**
