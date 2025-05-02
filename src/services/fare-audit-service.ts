@@ -58,12 +58,6 @@ export class FareAuditService {
       flightDate
     );
 
-    console.log(
-      `FS and AO returned with values :_ ${JSON.stringify(fs)} ${JSON.stringify(
-        ao
-      )}`
-    );
-
     const updated = await prisma.fareAudit.update({
       where: { id: log.id },
       data: {
@@ -97,9 +91,6 @@ export class FareAuditService {
         fareAuditRemarks:"",
       },
     });
-    console.log(
-      `Updated log with ID ${updated.id} and status ${updated.status}`
-    );
     console.log(`[ENRICH DONE] TicketID: ${log.ticketId}`);
   }
 
@@ -153,9 +144,6 @@ export class FareAuditService {
          fareAuditRemarks: "",
        },
      });
-      console.log(
-        `Updated log with ID ${updated.id} and status ${updated.status}`
-      );
    } catch (error) {
       console.error("🔥 Error during fareAudit.update:", (error as Error).message);
    }
