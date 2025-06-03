@@ -53,8 +53,6 @@ export class AoEnrichmentService implements IEnrichmentService {
        FlightNumber: "", 
      };
 
-     console.log("Enrichment Payload:", JSON.stringify(payload, null, 2));
-
     try {
       const res = await axios.post(
         "http://13.203.38.118:8080/B2BFareTest/Availability",
