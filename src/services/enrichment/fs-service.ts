@@ -211,9 +211,9 @@ export class FsEnrichmentService implements IEnrichmentService {
         availableStock: totalSeats,
         lowestFareFlightNumber: lowestFareFlightNumber ?? null,
         lowestFareFlightDepartureTime: lowestFareFlightDepartureTime ?? null,
-        windowedLowestFare: windowedLowestFare ?? null,
-        windowedLowestFareFlightNumber: windowedLowestFareFlightNumber ?? null,
-        windowedLowestFareDepartureTime: windowedLowestFareDepartureTime ?? null,
+        windowedLowestFare: windowedLowestFare ?? lowestFare ?? null,
+        windowedLowestFareFlightNumber: windowedLowestFareFlightNumber ?? lowestFareFlightNumber ?? null,
+        windowedLowestFareDepartureTime: windowedLowestFareDepartureTime ?? lowestFareFlightDepartureTime ?? null,
         errorMessage: sameFlightFare ? "" : "Same Flight Fare Not Found",
         remarks: "FS API Enriched",
       };

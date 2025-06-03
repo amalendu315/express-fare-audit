@@ -218,11 +218,11 @@ export class AoEnrichmentService implements IEnrichmentService {
             lowestFareFlightNumber: lowestFareFlightNumber ?? null,
             lowestFareFlightDepartureTime:
               lowestFareFlightDepartureTime || null,
-            windowedLowestFare: windowedLowestFare || null,
+            windowedLowestFare: windowedLowestFare || lowestFlightFare || null,
             windowedLowestFareFlightNumber:
-              windowedLowestFareFlightNumber || null,
+              windowedLowestFareFlightNumber || lowestFareFlightNumber || null,
             windowedLowestFareDepartureTime:
-              windowedLowestFareDepartureTime || null,
+              windowedLowestFareDepartureTime || lowestFareFlightDepartureTime || null,
             errorMessage: sameFlightFare ? "" : "Same Flight Fare Not Found",
             availableStock: totalSeats,
             remarks: "AO API Enriched",
