@@ -19,11 +19,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type FareAudit = $Result.DefaultSelection<Prisma.$FareAuditPayload>
 /**
- * Model EFMigrationsHistory
- * 
- */
-export type EFMigrationsHistory = $Result.DefaultSelection<Prisma.$EFMigrationsHistoryPayload>
-/**
  * Model Flights
  * 
  */
@@ -38,6 +33,21 @@ export type sysdiagrams = $Result.DefaultSelection<Prisma.$sysdiagramsPayload>
  * 
  */
 export type LogSheet = $Result.DefaultSelection<Prisma.$LogSheetPayload>
+/**
+ * Model FlightOps
+ * 
+ */
+export type FlightOps = $Result.DefaultSelection<Prisma.$FlightOpsPayload>
+/**
+ * Model TallyUsers
+ * 
+ */
+export type TallyUsers = $Result.DefaultSelection<Prisma.$TallyUsersPayload>
+/**
+ * Model TallyVoucherSyncLog
+ * 
+ */
+export type TallyVoucherSyncLog = $Result.DefaultSelection<Prisma.$TallyVoucherSyncLogPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -175,16 +185,6 @@ export class PrismaClient<
   get fareAudit(): Prisma.FareAuditDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.eFMigrationsHistory`: Exposes CRUD operations for the **EFMigrationsHistory** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more EFMigrationsHistories
-    * const eFMigrationsHistories = await prisma.eFMigrationsHistory.findMany()
-    * ```
-    */
-  get eFMigrationsHistory(): Prisma.EFMigrationsHistoryDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.flights`: Exposes CRUD operations for the **Flights** model.
     * Example usage:
     * ```ts
@@ -213,6 +213,36 @@ export class PrismaClient<
     * ```
     */
   get logSheet(): Prisma.LogSheetDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.flightOps`: Exposes CRUD operations for the **FlightOps** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FlightOps
+    * const flightOps = await prisma.flightOps.findMany()
+    * ```
+    */
+  get flightOps(): Prisma.FlightOpsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tallyUsers`: Exposes CRUD operations for the **TallyUsers** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TallyUsers
+    * const tallyUsers = await prisma.tallyUsers.findMany()
+    * ```
+    */
+  get tallyUsers(): Prisma.TallyUsersDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tallyVoucherSyncLog`: Exposes CRUD operations for the **TallyVoucherSyncLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TallyVoucherSyncLogs
+    * const tallyVoucherSyncLogs = await prisma.tallyVoucherSyncLog.findMany()
+    * ```
+    */
+  get tallyVoucherSyncLog(): Prisma.TallyVoucherSyncLogDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -654,10 +684,12 @@ export namespace Prisma {
 
   export const ModelName: {
     FareAudit: 'FareAudit',
-    EFMigrationsHistory: 'EFMigrationsHistory',
     Flights: 'Flights',
     sysdiagrams: 'sysdiagrams',
-    LogSheet: 'LogSheet'
+    LogSheet: 'LogSheet',
+    FlightOps: 'FlightOps',
+    TallyUsers: 'TallyUsers',
+    TallyVoucherSyncLog: 'TallyVoucherSyncLog'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -676,7 +708,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "fareAudit" | "eFMigrationsHistory" | "flights" | "sysdiagrams" | "logSheet"
+      modelProps: "fareAudit" | "flights" | "sysdiagrams" | "logSheet" | "flightOps" | "tallyUsers" | "tallyVoucherSyncLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -743,72 +775,6 @@ export namespace Prisma {
           count: {
             args: Prisma.FareAuditCountArgs<ExtArgs>
             result: $Utils.Optional<FareAuditCountAggregateOutputType> | number
-          }
-        }
-      }
-      EFMigrationsHistory: {
-        payload: Prisma.$EFMigrationsHistoryPayload<ExtArgs>
-        fields: Prisma.EFMigrationsHistoryFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.EFMigrationsHistoryFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EFMigrationsHistoryPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.EFMigrationsHistoryFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EFMigrationsHistoryPayload>
-          }
-          findFirst: {
-            args: Prisma.EFMigrationsHistoryFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EFMigrationsHistoryPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.EFMigrationsHistoryFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EFMigrationsHistoryPayload>
-          }
-          findMany: {
-            args: Prisma.EFMigrationsHistoryFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EFMigrationsHistoryPayload>[]
-          }
-          create: {
-            args: Prisma.EFMigrationsHistoryCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EFMigrationsHistoryPayload>
-          }
-          createMany: {
-            args: Prisma.EFMigrationsHistoryCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.EFMigrationsHistoryDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EFMigrationsHistoryPayload>
-          }
-          update: {
-            args: Prisma.EFMigrationsHistoryUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EFMigrationsHistoryPayload>
-          }
-          deleteMany: {
-            args: Prisma.EFMigrationsHistoryDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.EFMigrationsHistoryUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.EFMigrationsHistoryUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EFMigrationsHistoryPayload>
-          }
-          aggregate: {
-            args: Prisma.EFMigrationsHistoryAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateEFMigrationsHistory>
-          }
-          groupBy: {
-            args: Prisma.EFMigrationsHistoryGroupByArgs<ExtArgs>
-            result: $Utils.Optional<EFMigrationsHistoryGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.EFMigrationsHistoryCountArgs<ExtArgs>
-            result: $Utils.Optional<EFMigrationsHistoryCountAggregateOutputType> | number
           }
         }
       }
@@ -1010,6 +976,204 @@ export namespace Prisma {
           }
         }
       }
+      FlightOps: {
+        payload: Prisma.$FlightOpsPayload<ExtArgs>
+        fields: Prisma.FlightOpsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FlightOpsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlightOpsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FlightOpsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlightOpsPayload>
+          }
+          findFirst: {
+            args: Prisma.FlightOpsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlightOpsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FlightOpsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlightOpsPayload>
+          }
+          findMany: {
+            args: Prisma.FlightOpsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlightOpsPayload>[]
+          }
+          create: {
+            args: Prisma.FlightOpsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlightOpsPayload>
+          }
+          createMany: {
+            args: Prisma.FlightOpsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.FlightOpsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlightOpsPayload>
+          }
+          update: {
+            args: Prisma.FlightOpsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlightOpsPayload>
+          }
+          deleteMany: {
+            args: Prisma.FlightOpsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FlightOpsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.FlightOpsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlightOpsPayload>
+          }
+          aggregate: {
+            args: Prisma.FlightOpsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFlightOps>
+          }
+          groupBy: {
+            args: Prisma.FlightOpsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FlightOpsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FlightOpsCountArgs<ExtArgs>
+            result: $Utils.Optional<FlightOpsCountAggregateOutputType> | number
+          }
+        }
+      }
+      TallyUsers: {
+        payload: Prisma.$TallyUsersPayload<ExtArgs>
+        fields: Prisma.TallyUsersFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TallyUsersFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyUsersPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TallyUsersFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyUsersPayload>
+          }
+          findFirst: {
+            args: Prisma.TallyUsersFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyUsersPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TallyUsersFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyUsersPayload>
+          }
+          findMany: {
+            args: Prisma.TallyUsersFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyUsersPayload>[]
+          }
+          create: {
+            args: Prisma.TallyUsersCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyUsersPayload>
+          }
+          createMany: {
+            args: Prisma.TallyUsersCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.TallyUsersDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyUsersPayload>
+          }
+          update: {
+            args: Prisma.TallyUsersUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyUsersPayload>
+          }
+          deleteMany: {
+            args: Prisma.TallyUsersDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TallyUsersUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.TallyUsersUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyUsersPayload>
+          }
+          aggregate: {
+            args: Prisma.TallyUsersAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTallyUsers>
+          }
+          groupBy: {
+            args: Prisma.TallyUsersGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TallyUsersGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TallyUsersCountArgs<ExtArgs>
+            result: $Utils.Optional<TallyUsersCountAggregateOutputType> | number
+          }
+        }
+      }
+      TallyVoucherSyncLog: {
+        payload: Prisma.$TallyVoucherSyncLogPayload<ExtArgs>
+        fields: Prisma.TallyVoucherSyncLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TallyVoucherSyncLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyVoucherSyncLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TallyVoucherSyncLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyVoucherSyncLogPayload>
+          }
+          findFirst: {
+            args: Prisma.TallyVoucherSyncLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyVoucherSyncLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TallyVoucherSyncLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyVoucherSyncLogPayload>
+          }
+          findMany: {
+            args: Prisma.TallyVoucherSyncLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyVoucherSyncLogPayload>[]
+          }
+          create: {
+            args: Prisma.TallyVoucherSyncLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyVoucherSyncLogPayload>
+          }
+          createMany: {
+            args: Prisma.TallyVoucherSyncLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.TallyVoucherSyncLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyVoucherSyncLogPayload>
+          }
+          update: {
+            args: Prisma.TallyVoucherSyncLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyVoucherSyncLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.TallyVoucherSyncLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TallyVoucherSyncLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.TallyVoucherSyncLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TallyVoucherSyncLogPayload>
+          }
+          aggregate: {
+            args: Prisma.TallyVoucherSyncLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTallyVoucherSyncLog>
+          }
+          groupBy: {
+            args: Prisma.TallyVoucherSyncLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TallyVoucherSyncLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TallyVoucherSyncLogCountArgs<ExtArgs>
+            result: $Utils.Optional<TallyVoucherSyncLogCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1095,10 +1259,12 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     fareAudit?: FareAuditOmit
-    eFMigrationsHistory?: EFMigrationsHistoryOmit
     flights?: FlightsOmit
     sysdiagrams?: sysdiagramsOmit
     logSheet?: LogSheetOmit
+    flightOps?: FlightOpsOmit
+    tallyUsers?: TallyUsersOmit
+    tallyVoucherSyncLog?: TallyVoucherSyncLogOmit
   }
 
   /* Types for Logging */
@@ -1188,6 +1354,36 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type TallyUsersCountOutputType
+   */
+
+  export type TallyUsersCountOutputType = {
+    TallyVoucherSyncLog: number
+  }
+
+  export type TallyUsersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    TallyVoucherSyncLog?: boolean | TallyUsersCountOutputTypeCountTallyVoucherSyncLogArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TallyUsersCountOutputType without action
+   */
+  export type TallyUsersCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyUsersCountOutputType
+     */
+    select?: TallyUsersCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TallyUsersCountOutputType without action
+   */
+  export type TallyUsersCountOutputTypeCountTallyVoucherSyncLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TallyVoucherSyncLogWhereInput
+  }
+
 
   /**
    * Models
@@ -1229,6 +1425,10 @@ export namespace Prisma {
     fsSameFlightStock: number | null
     aoSameFlightStock: number | null
     aoAvailableStock: number | null
+    actualManagedFare: Decimal | null
+    bookedPaxQty: number | null
+    fsWindowedLowestFare: Decimal | null
+    aoWindowedLowestFare: Decimal | null
   }
 
   export type FareAuditSumAggregateOutputType = {
@@ -1255,6 +1455,10 @@ export namespace Prisma {
     fsSameFlightStock: number | null
     aoSameFlightStock: number | null
     aoAvailableStock: number | null
+    actualManagedFare: Decimal | null
+    bookedPaxQty: number | null
+    fsWindowedLowestFare: Decimal | null
+    aoWindowedLowestFare: Decimal | null
   }
 
   export type FareAuditMinAggregateOutputType = {
@@ -1298,6 +1502,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime: Date | null
     fareAuditRemarks: string | null
     aoAvailableStock: number | null
+    actualManagedFare: Decimal | null
+    bookedPaxQty: number | null
+    fsWindowedLowestFare: Decimal | null
+    fsWindowedLowestFareFlightNumber: string | null
+    fsWindowedLowestFareDepartureTime: Date | null
+    aoWindowedLowestFare: Decimal | null
+    aoWindowedLowestFareFlightNumber: string | null
+    aoWindowedLowestFareDepartureTime: Date | null
   }
 
   export type FareAuditMaxAggregateOutputType = {
@@ -1341,6 +1553,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime: Date | null
     fareAuditRemarks: string | null
     aoAvailableStock: number | null
+    actualManagedFare: Decimal | null
+    bookedPaxQty: number | null
+    fsWindowedLowestFare: Decimal | null
+    fsWindowedLowestFareFlightNumber: string | null
+    fsWindowedLowestFareDepartureTime: Date | null
+    aoWindowedLowestFare: Decimal | null
+    aoWindowedLowestFareFlightNumber: string | null
+    aoWindowedLowestFareDepartureTime: Date | null
   }
 
   export type FareAuditCountAggregateOutputType = {
@@ -1384,6 +1604,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime: number
     fareAuditRemarks: number
     aoAvailableStock: number
+    actualManagedFare: number
+    bookedPaxQty: number
+    fsWindowedLowestFare: number
+    fsWindowedLowestFareFlightNumber: number
+    fsWindowedLowestFareDepartureTime: number
+    aoWindowedLowestFare: number
+    aoWindowedLowestFareFlightNumber: number
+    aoWindowedLowestFareDepartureTime: number
     _all: number
   }
 
@@ -1412,6 +1640,10 @@ export namespace Prisma {
     fsSameFlightStock?: true
     aoSameFlightStock?: true
     aoAvailableStock?: true
+    actualManagedFare?: true
+    bookedPaxQty?: true
+    fsWindowedLowestFare?: true
+    aoWindowedLowestFare?: true
   }
 
   export type FareAuditSumAggregateInputType = {
@@ -1438,6 +1670,10 @@ export namespace Prisma {
     fsSameFlightStock?: true
     aoSameFlightStock?: true
     aoAvailableStock?: true
+    actualManagedFare?: true
+    bookedPaxQty?: true
+    fsWindowedLowestFare?: true
+    aoWindowedLowestFare?: true
   }
 
   export type FareAuditMinAggregateInputType = {
@@ -1481,6 +1717,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: true
     fareAuditRemarks?: true
     aoAvailableStock?: true
+    actualManagedFare?: true
+    bookedPaxQty?: true
+    fsWindowedLowestFare?: true
+    fsWindowedLowestFareFlightNumber?: true
+    fsWindowedLowestFareDepartureTime?: true
+    aoWindowedLowestFare?: true
+    aoWindowedLowestFareFlightNumber?: true
+    aoWindowedLowestFareDepartureTime?: true
   }
 
   export type FareAuditMaxAggregateInputType = {
@@ -1524,6 +1768,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: true
     fareAuditRemarks?: true
     aoAvailableStock?: true
+    actualManagedFare?: true
+    bookedPaxQty?: true
+    fsWindowedLowestFare?: true
+    fsWindowedLowestFareFlightNumber?: true
+    fsWindowedLowestFareDepartureTime?: true
+    aoWindowedLowestFare?: true
+    aoWindowedLowestFareFlightNumber?: true
+    aoWindowedLowestFareDepartureTime?: true
   }
 
   export type FareAuditCountAggregateInputType = {
@@ -1567,6 +1819,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: true
     fareAuditRemarks?: true
     aoAvailableStock?: true
+    actualManagedFare?: true
+    bookedPaxQty?: true
+    fsWindowedLowestFare?: true
+    fsWindowedLowestFareFlightNumber?: true
+    fsWindowedLowestFareDepartureTime?: true
+    aoWindowedLowestFare?: true
+    aoWindowedLowestFareFlightNumber?: true
+    aoWindowedLowestFareDepartureTime?: true
     _all?: true
   }
 
@@ -1697,6 +1957,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime: Date | null
     fareAuditRemarks: string | null
     aoAvailableStock: number | null
+    actualManagedFare: Decimal | null
+    bookedPaxQty: number | null
+    fsWindowedLowestFare: Decimal | null
+    fsWindowedLowestFareFlightNumber: string | null
+    fsWindowedLowestFareDepartureTime: Date | null
+    aoWindowedLowestFare: Decimal | null
+    aoWindowedLowestFareFlightNumber: string | null
+    aoWindowedLowestFareDepartureTime: Date | null
     _count: FareAuditCountAggregateOutputType | null
     _avg: FareAuditAvgAggregateOutputType | null
     _sum: FareAuditSumAggregateOutputType | null
@@ -1759,6 +2027,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: boolean
     fareAuditRemarks?: boolean
     aoAvailableStock?: boolean
+    actualManagedFare?: boolean
+    bookedPaxQty?: boolean
+    fsWindowedLowestFare?: boolean
+    fsWindowedLowestFareFlightNumber?: boolean
+    fsWindowedLowestFareDepartureTime?: boolean
+    aoWindowedLowestFare?: boolean
+    aoWindowedLowestFareFlightNumber?: boolean
+    aoWindowedLowestFareDepartureTime?: boolean
   }, ExtArgs["result"]["fareAudit"]>
 
 
@@ -1804,9 +2080,17 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: boolean
     fareAuditRemarks?: boolean
     aoAvailableStock?: boolean
+    actualManagedFare?: boolean
+    bookedPaxQty?: boolean
+    fsWindowedLowestFare?: boolean
+    fsWindowedLowestFareFlightNumber?: boolean
+    fsWindowedLowestFareDepartureTime?: boolean
+    aoWindowedLowestFare?: boolean
+    aoWindowedLowestFareFlightNumber?: boolean
+    aoWindowedLowestFareDepartureTime?: boolean
   }
 
-  export type FareAuditOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookingId" | "ticketId" | "fareLogId" | "logType" | "source" | "requestDateTime" | "pnr" | "flightSector" | "flightNumber" | "travelDateTime" | "fsSameFlightFare" | "fsLowestFlightFare" | "fsAvailableStock" | "fsErrorMessage" | "fsAverageFare" | "aoSameFlightFare" | "aoLowestFare" | "aoAverageFare" | "aoErrorMessage" | "flightWiseTotalSeatsPurchased" | "flightWiseTotalSeatsSold" | "flightWiseTotalSeatsLeft" | "flightWiseAverageCost" | "routeWiseSeatsPurchased" | "routeWiseSeatsSold" | "routeWiseSeatsLeft" | "routeWiseAverageCost" | "averageSellFare" | "status" | "remark" | "taskCompletedDateTime" | "fsSameFlightStock" | "fsLowestFareFlightNumber" | "fsLowestFareFlightDepartureTime" | "aoLowestFareFlightNumber" | "aoSameFlightStock" | "aoLowestFareFlightDepartureTime" | "fareAuditRemarks" | "aoAvailableStock", ExtArgs["result"]["fareAudit"]>
+  export type FareAuditOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookingId" | "ticketId" | "fareLogId" | "logType" | "source" | "requestDateTime" | "pnr" | "flightSector" | "flightNumber" | "travelDateTime" | "fsSameFlightFare" | "fsLowestFlightFare" | "fsAvailableStock" | "fsErrorMessage" | "fsAverageFare" | "aoSameFlightFare" | "aoLowestFare" | "aoAverageFare" | "aoErrorMessage" | "flightWiseTotalSeatsPurchased" | "flightWiseTotalSeatsSold" | "flightWiseTotalSeatsLeft" | "flightWiseAverageCost" | "routeWiseSeatsPurchased" | "routeWiseSeatsSold" | "routeWiseSeatsLeft" | "routeWiseAverageCost" | "averageSellFare" | "status" | "remark" | "taskCompletedDateTime" | "fsSameFlightStock" | "fsLowestFareFlightNumber" | "fsLowestFareFlightDepartureTime" | "aoLowestFareFlightNumber" | "aoSameFlightStock" | "aoLowestFareFlightDepartureTime" | "fareAuditRemarks" | "aoAvailableStock" | "actualManagedFare" | "bookedPaxQty" | "fsWindowedLowestFare" | "fsWindowedLowestFareFlightNumber" | "fsWindowedLowestFareDepartureTime" | "aoWindowedLowestFare" | "aoWindowedLowestFareFlightNumber" | "aoWindowedLowestFareDepartureTime", ExtArgs["result"]["fareAudit"]>
 
   export type $FareAuditPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FareAudit"
@@ -1852,6 +2136,14 @@ export namespace Prisma {
       aoLowestFareFlightDepartureTime: Date | null
       fareAuditRemarks: string | null
       aoAvailableStock: number | null
+      actualManagedFare: Prisma.Decimal | null
+      bookedPaxQty: number | null
+      fsWindowedLowestFare: Prisma.Decimal | null
+      fsWindowedLowestFareFlightNumber: string | null
+      fsWindowedLowestFareDepartureTime: Date | null
+      aoWindowedLowestFare: Prisma.Decimal | null
+      aoWindowedLowestFareFlightNumber: string | null
+      aoWindowedLowestFareDepartureTime: Date | null
     }, ExtArgs["result"]["fareAudit"]>
     composites: {}
   }
@@ -2261,6 +2553,14 @@ export namespace Prisma {
     readonly aoLowestFareFlightDepartureTime: FieldRef<"FareAudit", 'DateTime'>
     readonly fareAuditRemarks: FieldRef<"FareAudit", 'String'>
     readonly aoAvailableStock: FieldRef<"FareAudit", 'Int'>
+    readonly actualManagedFare: FieldRef<"FareAudit", 'Decimal'>
+    readonly bookedPaxQty: FieldRef<"FareAudit", 'Int'>
+    readonly fsWindowedLowestFare: FieldRef<"FareAudit", 'Decimal'>
+    readonly fsWindowedLowestFareFlightNumber: FieldRef<"FareAudit", 'String'>
+    readonly fsWindowedLowestFareDepartureTime: FieldRef<"FareAudit", 'DateTime'>
+    readonly aoWindowedLowestFare: FieldRef<"FareAudit", 'Decimal'>
+    readonly aoWindowedLowestFareFlightNumber: FieldRef<"FareAudit", 'String'>
+    readonly aoWindowedLowestFareDepartureTime: FieldRef<"FareAudit", 'DateTime'>
   }
     
 
@@ -2578,854 +2878,6 @@ export namespace Prisma {
      * Omit specific fields from the FareAudit
      */
     omit?: FareAuditOmit<ExtArgs> | null
-  }
-
-
-  /**
-   * Model EFMigrationsHistory
-   */
-
-  export type AggregateEFMigrationsHistory = {
-    _count: EFMigrationsHistoryCountAggregateOutputType | null
-    _min: EFMigrationsHistoryMinAggregateOutputType | null
-    _max: EFMigrationsHistoryMaxAggregateOutputType | null
-  }
-
-  export type EFMigrationsHistoryMinAggregateOutputType = {
-    MigrationId: string | null
-    ProductVersion: string | null
-  }
-
-  export type EFMigrationsHistoryMaxAggregateOutputType = {
-    MigrationId: string | null
-    ProductVersion: string | null
-  }
-
-  export type EFMigrationsHistoryCountAggregateOutputType = {
-    MigrationId: number
-    ProductVersion: number
-    _all: number
-  }
-
-
-  export type EFMigrationsHistoryMinAggregateInputType = {
-    MigrationId?: true
-    ProductVersion?: true
-  }
-
-  export type EFMigrationsHistoryMaxAggregateInputType = {
-    MigrationId?: true
-    ProductVersion?: true
-  }
-
-  export type EFMigrationsHistoryCountAggregateInputType = {
-    MigrationId?: true
-    ProductVersion?: true
-    _all?: true
-  }
-
-  export type EFMigrationsHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which EFMigrationsHistory to aggregate.
-     */
-    where?: EFMigrationsHistoryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EFMigrationsHistories to fetch.
-     */
-    orderBy?: EFMigrationsHistoryOrderByWithRelationInput | EFMigrationsHistoryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: EFMigrationsHistoryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EFMigrationsHistories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EFMigrationsHistories.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned EFMigrationsHistories
-    **/
-    _count?: true | EFMigrationsHistoryCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: EFMigrationsHistoryMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: EFMigrationsHistoryMaxAggregateInputType
-  }
-
-  export type GetEFMigrationsHistoryAggregateType<T extends EFMigrationsHistoryAggregateArgs> = {
-        [P in keyof T & keyof AggregateEFMigrationsHistory]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateEFMigrationsHistory[P]>
-      : GetScalarType<T[P], AggregateEFMigrationsHistory[P]>
-  }
-
-
-
-
-  export type EFMigrationsHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EFMigrationsHistoryWhereInput
-    orderBy?: EFMigrationsHistoryOrderByWithAggregationInput | EFMigrationsHistoryOrderByWithAggregationInput[]
-    by: EFMigrationsHistoryScalarFieldEnum[] | EFMigrationsHistoryScalarFieldEnum
-    having?: EFMigrationsHistoryScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: EFMigrationsHistoryCountAggregateInputType | true
-    _min?: EFMigrationsHistoryMinAggregateInputType
-    _max?: EFMigrationsHistoryMaxAggregateInputType
-  }
-
-  export type EFMigrationsHistoryGroupByOutputType = {
-    MigrationId: string
-    ProductVersion: string
-    _count: EFMigrationsHistoryCountAggregateOutputType | null
-    _min: EFMigrationsHistoryMinAggregateOutputType | null
-    _max: EFMigrationsHistoryMaxAggregateOutputType | null
-  }
-
-  type GetEFMigrationsHistoryGroupByPayload<T extends EFMigrationsHistoryGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<EFMigrationsHistoryGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof EFMigrationsHistoryGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], EFMigrationsHistoryGroupByOutputType[P]>
-            : GetScalarType<T[P], EFMigrationsHistoryGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type EFMigrationsHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    MigrationId?: boolean
-    ProductVersion?: boolean
-  }, ExtArgs["result"]["eFMigrationsHistory"]>
-
-
-
-  export type EFMigrationsHistorySelectScalar = {
-    MigrationId?: boolean
-    ProductVersion?: boolean
-  }
-
-  export type EFMigrationsHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"MigrationId" | "ProductVersion", ExtArgs["result"]["eFMigrationsHistory"]>
-
-  export type $EFMigrationsHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "EFMigrationsHistory"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      MigrationId: string
-      ProductVersion: string
-    }, ExtArgs["result"]["eFMigrationsHistory"]>
-    composites: {}
-  }
-
-  type EFMigrationsHistoryGetPayload<S extends boolean | null | undefined | EFMigrationsHistoryDefaultArgs> = $Result.GetResult<Prisma.$EFMigrationsHistoryPayload, S>
-
-  type EFMigrationsHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EFMigrationsHistoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: EFMigrationsHistoryCountAggregateInputType | true
-    }
-
-  export interface EFMigrationsHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EFMigrationsHistory'], meta: { name: 'EFMigrationsHistory' } }
-    /**
-     * Find zero or one EFMigrationsHistory that matches the filter.
-     * @param {EFMigrationsHistoryFindUniqueArgs} args - Arguments to find a EFMigrationsHistory
-     * @example
-     * // Get one EFMigrationsHistory
-     * const eFMigrationsHistory = await prisma.eFMigrationsHistory.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends EFMigrationsHistoryFindUniqueArgs>(args: SelectSubset<T, EFMigrationsHistoryFindUniqueArgs<ExtArgs>>): Prisma__EFMigrationsHistoryClient<$Result.GetResult<Prisma.$EFMigrationsHistoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one EFMigrationsHistory that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {EFMigrationsHistoryFindUniqueOrThrowArgs} args - Arguments to find a EFMigrationsHistory
-     * @example
-     * // Get one EFMigrationsHistory
-     * const eFMigrationsHistory = await prisma.eFMigrationsHistory.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends EFMigrationsHistoryFindUniqueOrThrowArgs>(args: SelectSubset<T, EFMigrationsHistoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EFMigrationsHistoryClient<$Result.GetResult<Prisma.$EFMigrationsHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first EFMigrationsHistory that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EFMigrationsHistoryFindFirstArgs} args - Arguments to find a EFMigrationsHistory
-     * @example
-     * // Get one EFMigrationsHistory
-     * const eFMigrationsHistory = await prisma.eFMigrationsHistory.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends EFMigrationsHistoryFindFirstArgs>(args?: SelectSubset<T, EFMigrationsHistoryFindFirstArgs<ExtArgs>>): Prisma__EFMigrationsHistoryClient<$Result.GetResult<Prisma.$EFMigrationsHistoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first EFMigrationsHistory that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EFMigrationsHistoryFindFirstOrThrowArgs} args - Arguments to find a EFMigrationsHistory
-     * @example
-     * // Get one EFMigrationsHistory
-     * const eFMigrationsHistory = await prisma.eFMigrationsHistory.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends EFMigrationsHistoryFindFirstOrThrowArgs>(args?: SelectSubset<T, EFMigrationsHistoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__EFMigrationsHistoryClient<$Result.GetResult<Prisma.$EFMigrationsHistoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more EFMigrationsHistories that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EFMigrationsHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all EFMigrationsHistories
-     * const eFMigrationsHistories = await prisma.eFMigrationsHistory.findMany()
-     * 
-     * // Get first 10 EFMigrationsHistories
-     * const eFMigrationsHistories = await prisma.eFMigrationsHistory.findMany({ take: 10 })
-     * 
-     * // Only select the `MigrationId`
-     * const eFMigrationsHistoryWithMigrationIdOnly = await prisma.eFMigrationsHistory.findMany({ select: { MigrationId: true } })
-     * 
-     */
-    findMany<T extends EFMigrationsHistoryFindManyArgs>(args?: SelectSubset<T, EFMigrationsHistoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EFMigrationsHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a EFMigrationsHistory.
-     * @param {EFMigrationsHistoryCreateArgs} args - Arguments to create a EFMigrationsHistory.
-     * @example
-     * // Create one EFMigrationsHistory
-     * const EFMigrationsHistory = await prisma.eFMigrationsHistory.create({
-     *   data: {
-     *     // ... data to create a EFMigrationsHistory
-     *   }
-     * })
-     * 
-     */
-    create<T extends EFMigrationsHistoryCreateArgs>(args: SelectSubset<T, EFMigrationsHistoryCreateArgs<ExtArgs>>): Prisma__EFMigrationsHistoryClient<$Result.GetResult<Prisma.$EFMigrationsHistoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many EFMigrationsHistories.
-     * @param {EFMigrationsHistoryCreateManyArgs} args - Arguments to create many EFMigrationsHistories.
-     * @example
-     * // Create many EFMigrationsHistories
-     * const eFMigrationsHistory = await prisma.eFMigrationsHistory.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends EFMigrationsHistoryCreateManyArgs>(args?: SelectSubset<T, EFMigrationsHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a EFMigrationsHistory.
-     * @param {EFMigrationsHistoryDeleteArgs} args - Arguments to delete one EFMigrationsHistory.
-     * @example
-     * // Delete one EFMigrationsHistory
-     * const EFMigrationsHistory = await prisma.eFMigrationsHistory.delete({
-     *   where: {
-     *     // ... filter to delete one EFMigrationsHistory
-     *   }
-     * })
-     * 
-     */
-    delete<T extends EFMigrationsHistoryDeleteArgs>(args: SelectSubset<T, EFMigrationsHistoryDeleteArgs<ExtArgs>>): Prisma__EFMigrationsHistoryClient<$Result.GetResult<Prisma.$EFMigrationsHistoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one EFMigrationsHistory.
-     * @param {EFMigrationsHistoryUpdateArgs} args - Arguments to update one EFMigrationsHistory.
-     * @example
-     * // Update one EFMigrationsHistory
-     * const eFMigrationsHistory = await prisma.eFMigrationsHistory.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends EFMigrationsHistoryUpdateArgs>(args: SelectSubset<T, EFMigrationsHistoryUpdateArgs<ExtArgs>>): Prisma__EFMigrationsHistoryClient<$Result.GetResult<Prisma.$EFMigrationsHistoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more EFMigrationsHistories.
-     * @param {EFMigrationsHistoryDeleteManyArgs} args - Arguments to filter EFMigrationsHistories to delete.
-     * @example
-     * // Delete a few EFMigrationsHistories
-     * const { count } = await prisma.eFMigrationsHistory.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends EFMigrationsHistoryDeleteManyArgs>(args?: SelectSubset<T, EFMigrationsHistoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more EFMigrationsHistories.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EFMigrationsHistoryUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many EFMigrationsHistories
-     * const eFMigrationsHistory = await prisma.eFMigrationsHistory.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends EFMigrationsHistoryUpdateManyArgs>(args: SelectSubset<T, EFMigrationsHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one EFMigrationsHistory.
-     * @param {EFMigrationsHistoryUpsertArgs} args - Arguments to update or create a EFMigrationsHistory.
-     * @example
-     * // Update or create a EFMigrationsHistory
-     * const eFMigrationsHistory = await prisma.eFMigrationsHistory.upsert({
-     *   create: {
-     *     // ... data to create a EFMigrationsHistory
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the EFMigrationsHistory we want to update
-     *   }
-     * })
-     */
-    upsert<T extends EFMigrationsHistoryUpsertArgs>(args: SelectSubset<T, EFMigrationsHistoryUpsertArgs<ExtArgs>>): Prisma__EFMigrationsHistoryClient<$Result.GetResult<Prisma.$EFMigrationsHistoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of EFMigrationsHistories.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EFMigrationsHistoryCountArgs} args - Arguments to filter EFMigrationsHistories to count.
-     * @example
-     * // Count the number of EFMigrationsHistories
-     * const count = await prisma.eFMigrationsHistory.count({
-     *   where: {
-     *     // ... the filter for the EFMigrationsHistories we want to count
-     *   }
-     * })
-    **/
-    count<T extends EFMigrationsHistoryCountArgs>(
-      args?: Subset<T, EFMigrationsHistoryCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], EFMigrationsHistoryCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a EFMigrationsHistory.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EFMigrationsHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends EFMigrationsHistoryAggregateArgs>(args: Subset<T, EFMigrationsHistoryAggregateArgs>): Prisma.PrismaPromise<GetEFMigrationsHistoryAggregateType<T>>
-
-    /**
-     * Group by EFMigrationsHistory.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EFMigrationsHistoryGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends EFMigrationsHistoryGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EFMigrationsHistoryGroupByArgs['orderBy'] }
-        : { orderBy?: EFMigrationsHistoryGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, EFMigrationsHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEFMigrationsHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the EFMigrationsHistory model
-   */
-  readonly fields: EFMigrationsHistoryFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for EFMigrationsHistory.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__EFMigrationsHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the EFMigrationsHistory model
-   */
-  interface EFMigrationsHistoryFieldRefs {
-    readonly MigrationId: FieldRef<"EFMigrationsHistory", 'String'>
-    readonly ProductVersion: FieldRef<"EFMigrationsHistory", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * EFMigrationsHistory findUnique
-   */
-  export type EFMigrationsHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EFMigrationsHistory
-     */
-    select?: EFMigrationsHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EFMigrationsHistory
-     */
-    omit?: EFMigrationsHistoryOmit<ExtArgs> | null
-    /**
-     * Filter, which EFMigrationsHistory to fetch.
-     */
-    where: EFMigrationsHistoryWhereUniqueInput
-  }
-
-  /**
-   * EFMigrationsHistory findUniqueOrThrow
-   */
-  export type EFMigrationsHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EFMigrationsHistory
-     */
-    select?: EFMigrationsHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EFMigrationsHistory
-     */
-    omit?: EFMigrationsHistoryOmit<ExtArgs> | null
-    /**
-     * Filter, which EFMigrationsHistory to fetch.
-     */
-    where: EFMigrationsHistoryWhereUniqueInput
-  }
-
-  /**
-   * EFMigrationsHistory findFirst
-   */
-  export type EFMigrationsHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EFMigrationsHistory
-     */
-    select?: EFMigrationsHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EFMigrationsHistory
-     */
-    omit?: EFMigrationsHistoryOmit<ExtArgs> | null
-    /**
-     * Filter, which EFMigrationsHistory to fetch.
-     */
-    where?: EFMigrationsHistoryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EFMigrationsHistories to fetch.
-     */
-    orderBy?: EFMigrationsHistoryOrderByWithRelationInput | EFMigrationsHistoryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for EFMigrationsHistories.
-     */
-    cursor?: EFMigrationsHistoryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EFMigrationsHistories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EFMigrationsHistories.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of EFMigrationsHistories.
-     */
-    distinct?: EFMigrationsHistoryScalarFieldEnum | EFMigrationsHistoryScalarFieldEnum[]
-  }
-
-  /**
-   * EFMigrationsHistory findFirstOrThrow
-   */
-  export type EFMigrationsHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EFMigrationsHistory
-     */
-    select?: EFMigrationsHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EFMigrationsHistory
-     */
-    omit?: EFMigrationsHistoryOmit<ExtArgs> | null
-    /**
-     * Filter, which EFMigrationsHistory to fetch.
-     */
-    where?: EFMigrationsHistoryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EFMigrationsHistories to fetch.
-     */
-    orderBy?: EFMigrationsHistoryOrderByWithRelationInput | EFMigrationsHistoryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for EFMigrationsHistories.
-     */
-    cursor?: EFMigrationsHistoryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EFMigrationsHistories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EFMigrationsHistories.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of EFMigrationsHistories.
-     */
-    distinct?: EFMigrationsHistoryScalarFieldEnum | EFMigrationsHistoryScalarFieldEnum[]
-  }
-
-  /**
-   * EFMigrationsHistory findMany
-   */
-  export type EFMigrationsHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EFMigrationsHistory
-     */
-    select?: EFMigrationsHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EFMigrationsHistory
-     */
-    omit?: EFMigrationsHistoryOmit<ExtArgs> | null
-    /**
-     * Filter, which EFMigrationsHistories to fetch.
-     */
-    where?: EFMigrationsHistoryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EFMigrationsHistories to fetch.
-     */
-    orderBy?: EFMigrationsHistoryOrderByWithRelationInput | EFMigrationsHistoryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing EFMigrationsHistories.
-     */
-    cursor?: EFMigrationsHistoryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EFMigrationsHistories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EFMigrationsHistories.
-     */
-    skip?: number
-    distinct?: EFMigrationsHistoryScalarFieldEnum | EFMigrationsHistoryScalarFieldEnum[]
-  }
-
-  /**
-   * EFMigrationsHistory create
-   */
-  export type EFMigrationsHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EFMigrationsHistory
-     */
-    select?: EFMigrationsHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EFMigrationsHistory
-     */
-    omit?: EFMigrationsHistoryOmit<ExtArgs> | null
-    /**
-     * The data needed to create a EFMigrationsHistory.
-     */
-    data: XOR<EFMigrationsHistoryCreateInput, EFMigrationsHistoryUncheckedCreateInput>
-  }
-
-  /**
-   * EFMigrationsHistory createMany
-   */
-  export type EFMigrationsHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many EFMigrationsHistories.
-     */
-    data: EFMigrationsHistoryCreateManyInput | EFMigrationsHistoryCreateManyInput[]
-  }
-
-  /**
-   * EFMigrationsHistory update
-   */
-  export type EFMigrationsHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EFMigrationsHistory
-     */
-    select?: EFMigrationsHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EFMigrationsHistory
-     */
-    omit?: EFMigrationsHistoryOmit<ExtArgs> | null
-    /**
-     * The data needed to update a EFMigrationsHistory.
-     */
-    data: XOR<EFMigrationsHistoryUpdateInput, EFMigrationsHistoryUncheckedUpdateInput>
-    /**
-     * Choose, which EFMigrationsHistory to update.
-     */
-    where: EFMigrationsHistoryWhereUniqueInput
-  }
-
-  /**
-   * EFMigrationsHistory updateMany
-   */
-  export type EFMigrationsHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update EFMigrationsHistories.
-     */
-    data: XOR<EFMigrationsHistoryUpdateManyMutationInput, EFMigrationsHistoryUncheckedUpdateManyInput>
-    /**
-     * Filter which EFMigrationsHistories to update
-     */
-    where?: EFMigrationsHistoryWhereInput
-    /**
-     * Limit how many EFMigrationsHistories to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * EFMigrationsHistory upsert
-   */
-  export type EFMigrationsHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EFMigrationsHistory
-     */
-    select?: EFMigrationsHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EFMigrationsHistory
-     */
-    omit?: EFMigrationsHistoryOmit<ExtArgs> | null
-    /**
-     * The filter to search for the EFMigrationsHistory to update in case it exists.
-     */
-    where: EFMigrationsHistoryWhereUniqueInput
-    /**
-     * In case the EFMigrationsHistory found by the `where` argument doesn't exist, create a new EFMigrationsHistory with this data.
-     */
-    create: XOR<EFMigrationsHistoryCreateInput, EFMigrationsHistoryUncheckedCreateInput>
-    /**
-     * In case the EFMigrationsHistory was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<EFMigrationsHistoryUpdateInput, EFMigrationsHistoryUncheckedUpdateInput>
-  }
-
-  /**
-   * EFMigrationsHistory delete
-   */
-  export type EFMigrationsHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EFMigrationsHistory
-     */
-    select?: EFMigrationsHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EFMigrationsHistory
-     */
-    omit?: EFMigrationsHistoryOmit<ExtArgs> | null
-    /**
-     * Filter which EFMigrationsHistory to delete.
-     */
-    where: EFMigrationsHistoryWhereUniqueInput
-  }
-
-  /**
-   * EFMigrationsHistory deleteMany
-   */
-  export type EFMigrationsHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which EFMigrationsHistories to delete
-     */
-    where?: EFMigrationsHistoryWhereInput
-    /**
-     * Limit how many EFMigrationsHistories to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * EFMigrationsHistory without action
-   */
-  export type EFMigrationsHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EFMigrationsHistory
-     */
-    select?: EFMigrationsHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EFMigrationsHistory
-     */
-    omit?: EFMigrationsHistoryOmit<ExtArgs> | null
   }
 
 
@@ -6409,6 +5861,2965 @@ export namespace Prisma {
 
 
   /**
+   * Model FlightOps
+   */
+
+  export type AggregateFlightOps = {
+    _count: FlightOpsCountAggregateOutputType | null
+    _avg: FlightOpsAvgAggregateOutputType | null
+    _sum: FlightOpsSumAggregateOutputType | null
+    _min: FlightOpsMinAggregateOutputType | null
+    _max: FlightOpsMaxAggregateOutputType | null
+  }
+
+  export type FlightOpsAvgAggregateOutputType = {
+    FlightOpsID: number | null
+    Keyid: number | null
+  }
+
+  export type FlightOpsSumAggregateOutputType = {
+    FlightOpsID: number | null
+    Keyid: number | null
+  }
+
+  export type FlightOpsMinAggregateOutputType = {
+    FlightOpsID: number | null
+    Keyid: number | null
+    Image: string | null
+  }
+
+  export type FlightOpsMaxAggregateOutputType = {
+    FlightOpsID: number | null
+    Keyid: number | null
+    Image: string | null
+  }
+
+  export type FlightOpsCountAggregateOutputType = {
+    FlightOpsID: number
+    Keyid: number
+    Image: number
+    _all: number
+  }
+
+
+  export type FlightOpsAvgAggregateInputType = {
+    FlightOpsID?: true
+    Keyid?: true
+  }
+
+  export type FlightOpsSumAggregateInputType = {
+    FlightOpsID?: true
+    Keyid?: true
+  }
+
+  export type FlightOpsMinAggregateInputType = {
+    FlightOpsID?: true
+    Keyid?: true
+    Image?: true
+  }
+
+  export type FlightOpsMaxAggregateInputType = {
+    FlightOpsID?: true
+    Keyid?: true
+    Image?: true
+  }
+
+  export type FlightOpsCountAggregateInputType = {
+    FlightOpsID?: true
+    Keyid?: true
+    Image?: true
+    _all?: true
+  }
+
+  export type FlightOpsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FlightOps to aggregate.
+     */
+    where?: FlightOpsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlightOps to fetch.
+     */
+    orderBy?: FlightOpsOrderByWithRelationInput | FlightOpsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FlightOpsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlightOps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlightOps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FlightOps
+    **/
+    _count?: true | FlightOpsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FlightOpsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FlightOpsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FlightOpsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FlightOpsMaxAggregateInputType
+  }
+
+  export type GetFlightOpsAggregateType<T extends FlightOpsAggregateArgs> = {
+        [P in keyof T & keyof AggregateFlightOps]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFlightOps[P]>
+      : GetScalarType<T[P], AggregateFlightOps[P]>
+  }
+
+
+
+
+  export type FlightOpsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlightOpsWhereInput
+    orderBy?: FlightOpsOrderByWithAggregationInput | FlightOpsOrderByWithAggregationInput[]
+    by: FlightOpsScalarFieldEnum[] | FlightOpsScalarFieldEnum
+    having?: FlightOpsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FlightOpsCountAggregateInputType | true
+    _avg?: FlightOpsAvgAggregateInputType
+    _sum?: FlightOpsSumAggregateInputType
+    _min?: FlightOpsMinAggregateInputType
+    _max?: FlightOpsMaxAggregateInputType
+  }
+
+  export type FlightOpsGroupByOutputType = {
+    FlightOpsID: number
+    Keyid: number | null
+    Image: string | null
+    _count: FlightOpsCountAggregateOutputType | null
+    _avg: FlightOpsAvgAggregateOutputType | null
+    _sum: FlightOpsSumAggregateOutputType | null
+    _min: FlightOpsMinAggregateOutputType | null
+    _max: FlightOpsMaxAggregateOutputType | null
+  }
+
+  type GetFlightOpsGroupByPayload<T extends FlightOpsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FlightOpsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FlightOpsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FlightOpsGroupByOutputType[P]>
+            : GetScalarType<T[P], FlightOpsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FlightOpsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    FlightOpsID?: boolean
+    Keyid?: boolean
+    Image?: boolean
+  }, ExtArgs["result"]["flightOps"]>
+
+
+
+  export type FlightOpsSelectScalar = {
+    FlightOpsID?: boolean
+    Keyid?: boolean
+    Image?: boolean
+  }
+
+  export type FlightOpsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"FlightOpsID" | "Keyid" | "Image", ExtArgs["result"]["flightOps"]>
+
+  export type $FlightOpsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FlightOps"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      FlightOpsID: number
+      Keyid: number | null
+      Image: string | null
+    }, ExtArgs["result"]["flightOps"]>
+    composites: {}
+  }
+
+  type FlightOpsGetPayload<S extends boolean | null | undefined | FlightOpsDefaultArgs> = $Result.GetResult<Prisma.$FlightOpsPayload, S>
+
+  type FlightOpsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FlightOpsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FlightOpsCountAggregateInputType | true
+    }
+
+  export interface FlightOpsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FlightOps'], meta: { name: 'FlightOps' } }
+    /**
+     * Find zero or one FlightOps that matches the filter.
+     * @param {FlightOpsFindUniqueArgs} args - Arguments to find a FlightOps
+     * @example
+     * // Get one FlightOps
+     * const flightOps = await prisma.flightOps.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FlightOpsFindUniqueArgs>(args: SelectSubset<T, FlightOpsFindUniqueArgs<ExtArgs>>): Prisma__FlightOpsClient<$Result.GetResult<Prisma.$FlightOpsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FlightOps that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FlightOpsFindUniqueOrThrowArgs} args - Arguments to find a FlightOps
+     * @example
+     * // Get one FlightOps
+     * const flightOps = await prisma.flightOps.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FlightOpsFindUniqueOrThrowArgs>(args: SelectSubset<T, FlightOpsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FlightOpsClient<$Result.GetResult<Prisma.$FlightOpsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FlightOps that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlightOpsFindFirstArgs} args - Arguments to find a FlightOps
+     * @example
+     * // Get one FlightOps
+     * const flightOps = await prisma.flightOps.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FlightOpsFindFirstArgs>(args?: SelectSubset<T, FlightOpsFindFirstArgs<ExtArgs>>): Prisma__FlightOpsClient<$Result.GetResult<Prisma.$FlightOpsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FlightOps that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlightOpsFindFirstOrThrowArgs} args - Arguments to find a FlightOps
+     * @example
+     * // Get one FlightOps
+     * const flightOps = await prisma.flightOps.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FlightOpsFindFirstOrThrowArgs>(args?: SelectSubset<T, FlightOpsFindFirstOrThrowArgs<ExtArgs>>): Prisma__FlightOpsClient<$Result.GetResult<Prisma.$FlightOpsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FlightOps that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlightOpsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FlightOps
+     * const flightOps = await prisma.flightOps.findMany()
+     * 
+     * // Get first 10 FlightOps
+     * const flightOps = await prisma.flightOps.findMany({ take: 10 })
+     * 
+     * // Only select the `FlightOpsID`
+     * const flightOpsWithFlightOpsIDOnly = await prisma.flightOps.findMany({ select: { FlightOpsID: true } })
+     * 
+     */
+    findMany<T extends FlightOpsFindManyArgs>(args?: SelectSubset<T, FlightOpsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlightOpsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FlightOps.
+     * @param {FlightOpsCreateArgs} args - Arguments to create a FlightOps.
+     * @example
+     * // Create one FlightOps
+     * const FlightOps = await prisma.flightOps.create({
+     *   data: {
+     *     // ... data to create a FlightOps
+     *   }
+     * })
+     * 
+     */
+    create<T extends FlightOpsCreateArgs>(args: SelectSubset<T, FlightOpsCreateArgs<ExtArgs>>): Prisma__FlightOpsClient<$Result.GetResult<Prisma.$FlightOpsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FlightOps.
+     * @param {FlightOpsCreateManyArgs} args - Arguments to create many FlightOps.
+     * @example
+     * // Create many FlightOps
+     * const flightOps = await prisma.flightOps.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FlightOpsCreateManyArgs>(args?: SelectSubset<T, FlightOpsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a FlightOps.
+     * @param {FlightOpsDeleteArgs} args - Arguments to delete one FlightOps.
+     * @example
+     * // Delete one FlightOps
+     * const FlightOps = await prisma.flightOps.delete({
+     *   where: {
+     *     // ... filter to delete one FlightOps
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FlightOpsDeleteArgs>(args: SelectSubset<T, FlightOpsDeleteArgs<ExtArgs>>): Prisma__FlightOpsClient<$Result.GetResult<Prisma.$FlightOpsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FlightOps.
+     * @param {FlightOpsUpdateArgs} args - Arguments to update one FlightOps.
+     * @example
+     * // Update one FlightOps
+     * const flightOps = await prisma.flightOps.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FlightOpsUpdateArgs>(args: SelectSubset<T, FlightOpsUpdateArgs<ExtArgs>>): Prisma__FlightOpsClient<$Result.GetResult<Prisma.$FlightOpsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FlightOps.
+     * @param {FlightOpsDeleteManyArgs} args - Arguments to filter FlightOps to delete.
+     * @example
+     * // Delete a few FlightOps
+     * const { count } = await prisma.flightOps.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FlightOpsDeleteManyArgs>(args?: SelectSubset<T, FlightOpsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FlightOps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlightOpsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FlightOps
+     * const flightOps = await prisma.flightOps.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FlightOpsUpdateManyArgs>(args: SelectSubset<T, FlightOpsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one FlightOps.
+     * @param {FlightOpsUpsertArgs} args - Arguments to update or create a FlightOps.
+     * @example
+     * // Update or create a FlightOps
+     * const flightOps = await prisma.flightOps.upsert({
+     *   create: {
+     *     // ... data to create a FlightOps
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FlightOps we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FlightOpsUpsertArgs>(args: SelectSubset<T, FlightOpsUpsertArgs<ExtArgs>>): Prisma__FlightOpsClient<$Result.GetResult<Prisma.$FlightOpsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FlightOps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlightOpsCountArgs} args - Arguments to filter FlightOps to count.
+     * @example
+     * // Count the number of FlightOps
+     * const count = await prisma.flightOps.count({
+     *   where: {
+     *     // ... the filter for the FlightOps we want to count
+     *   }
+     * })
+    **/
+    count<T extends FlightOpsCountArgs>(
+      args?: Subset<T, FlightOpsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FlightOpsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FlightOps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlightOpsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FlightOpsAggregateArgs>(args: Subset<T, FlightOpsAggregateArgs>): Prisma.PrismaPromise<GetFlightOpsAggregateType<T>>
+
+    /**
+     * Group by FlightOps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlightOpsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FlightOpsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FlightOpsGroupByArgs['orderBy'] }
+        : { orderBy?: FlightOpsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FlightOpsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFlightOpsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FlightOps model
+   */
+  readonly fields: FlightOpsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FlightOps.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FlightOpsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FlightOps model
+   */
+  interface FlightOpsFieldRefs {
+    readonly FlightOpsID: FieldRef<"FlightOps", 'Int'>
+    readonly Keyid: FieldRef<"FlightOps", 'Int'>
+    readonly Image: FieldRef<"FlightOps", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FlightOps findUnique
+   */
+  export type FlightOpsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlightOps
+     */
+    select?: FlightOpsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlightOps
+     */
+    omit?: FlightOpsOmit<ExtArgs> | null
+    /**
+     * Filter, which FlightOps to fetch.
+     */
+    where: FlightOpsWhereUniqueInput
+  }
+
+  /**
+   * FlightOps findUniqueOrThrow
+   */
+  export type FlightOpsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlightOps
+     */
+    select?: FlightOpsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlightOps
+     */
+    omit?: FlightOpsOmit<ExtArgs> | null
+    /**
+     * Filter, which FlightOps to fetch.
+     */
+    where: FlightOpsWhereUniqueInput
+  }
+
+  /**
+   * FlightOps findFirst
+   */
+  export type FlightOpsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlightOps
+     */
+    select?: FlightOpsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlightOps
+     */
+    omit?: FlightOpsOmit<ExtArgs> | null
+    /**
+     * Filter, which FlightOps to fetch.
+     */
+    where?: FlightOpsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlightOps to fetch.
+     */
+    orderBy?: FlightOpsOrderByWithRelationInput | FlightOpsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FlightOps.
+     */
+    cursor?: FlightOpsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlightOps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlightOps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlightOps.
+     */
+    distinct?: FlightOpsScalarFieldEnum | FlightOpsScalarFieldEnum[]
+  }
+
+  /**
+   * FlightOps findFirstOrThrow
+   */
+  export type FlightOpsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlightOps
+     */
+    select?: FlightOpsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlightOps
+     */
+    omit?: FlightOpsOmit<ExtArgs> | null
+    /**
+     * Filter, which FlightOps to fetch.
+     */
+    where?: FlightOpsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlightOps to fetch.
+     */
+    orderBy?: FlightOpsOrderByWithRelationInput | FlightOpsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FlightOps.
+     */
+    cursor?: FlightOpsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlightOps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlightOps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlightOps.
+     */
+    distinct?: FlightOpsScalarFieldEnum | FlightOpsScalarFieldEnum[]
+  }
+
+  /**
+   * FlightOps findMany
+   */
+  export type FlightOpsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlightOps
+     */
+    select?: FlightOpsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlightOps
+     */
+    omit?: FlightOpsOmit<ExtArgs> | null
+    /**
+     * Filter, which FlightOps to fetch.
+     */
+    where?: FlightOpsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlightOps to fetch.
+     */
+    orderBy?: FlightOpsOrderByWithRelationInput | FlightOpsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FlightOps.
+     */
+    cursor?: FlightOpsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlightOps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlightOps.
+     */
+    skip?: number
+    distinct?: FlightOpsScalarFieldEnum | FlightOpsScalarFieldEnum[]
+  }
+
+  /**
+   * FlightOps create
+   */
+  export type FlightOpsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlightOps
+     */
+    select?: FlightOpsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlightOps
+     */
+    omit?: FlightOpsOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FlightOps.
+     */
+    data?: XOR<FlightOpsCreateInput, FlightOpsUncheckedCreateInput>
+  }
+
+  /**
+   * FlightOps createMany
+   */
+  export type FlightOpsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FlightOps.
+     */
+    data: FlightOpsCreateManyInput | FlightOpsCreateManyInput[]
+  }
+
+  /**
+   * FlightOps update
+   */
+  export type FlightOpsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlightOps
+     */
+    select?: FlightOpsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlightOps
+     */
+    omit?: FlightOpsOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FlightOps.
+     */
+    data: XOR<FlightOpsUpdateInput, FlightOpsUncheckedUpdateInput>
+    /**
+     * Choose, which FlightOps to update.
+     */
+    where: FlightOpsWhereUniqueInput
+  }
+
+  /**
+   * FlightOps updateMany
+   */
+  export type FlightOpsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FlightOps.
+     */
+    data: XOR<FlightOpsUpdateManyMutationInput, FlightOpsUncheckedUpdateManyInput>
+    /**
+     * Filter which FlightOps to update
+     */
+    where?: FlightOpsWhereInput
+    /**
+     * Limit how many FlightOps to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FlightOps upsert
+   */
+  export type FlightOpsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlightOps
+     */
+    select?: FlightOpsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlightOps
+     */
+    omit?: FlightOpsOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FlightOps to update in case it exists.
+     */
+    where: FlightOpsWhereUniqueInput
+    /**
+     * In case the FlightOps found by the `where` argument doesn't exist, create a new FlightOps with this data.
+     */
+    create: XOR<FlightOpsCreateInput, FlightOpsUncheckedCreateInput>
+    /**
+     * In case the FlightOps was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FlightOpsUpdateInput, FlightOpsUncheckedUpdateInput>
+  }
+
+  /**
+   * FlightOps delete
+   */
+  export type FlightOpsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlightOps
+     */
+    select?: FlightOpsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlightOps
+     */
+    omit?: FlightOpsOmit<ExtArgs> | null
+    /**
+     * Filter which FlightOps to delete.
+     */
+    where: FlightOpsWhereUniqueInput
+  }
+
+  /**
+   * FlightOps deleteMany
+   */
+  export type FlightOpsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FlightOps to delete
+     */
+    where?: FlightOpsWhereInput
+    /**
+     * Limit how many FlightOps to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FlightOps without action
+   */
+  export type FlightOpsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlightOps
+     */
+    select?: FlightOpsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlightOps
+     */
+    omit?: FlightOpsOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TallyUsers
+   */
+
+  export type AggregateTallyUsers = {
+    _count: TallyUsersCountAggregateOutputType | null
+    _avg: TallyUsersAvgAggregateOutputType | null
+    _sum: TallyUsersSumAggregateOutputType | null
+    _min: TallyUsersMinAggregateOutputType | null
+    _max: TallyUsersMaxAggregateOutputType | null
+  }
+
+  export type TallyUsersAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type TallyUsersSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type TallyUsersMinAggregateOutputType = {
+    id: number | null
+    username: string | null
+    password: string | null
+    region: string | null
+    created_at: Date | null
+  }
+
+  export type TallyUsersMaxAggregateOutputType = {
+    id: number | null
+    username: string | null
+    password: string | null
+    region: string | null
+    created_at: Date | null
+  }
+
+  export type TallyUsersCountAggregateOutputType = {
+    id: number
+    username: number
+    password: number
+    region: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type TallyUsersAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type TallyUsersSumAggregateInputType = {
+    id?: true
+  }
+
+  export type TallyUsersMinAggregateInputType = {
+    id?: true
+    username?: true
+    password?: true
+    region?: true
+    created_at?: true
+  }
+
+  export type TallyUsersMaxAggregateInputType = {
+    id?: true
+    username?: true
+    password?: true
+    region?: true
+    created_at?: true
+  }
+
+  export type TallyUsersCountAggregateInputType = {
+    id?: true
+    username?: true
+    password?: true
+    region?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type TallyUsersAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TallyUsers to aggregate.
+     */
+    where?: TallyUsersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TallyUsers to fetch.
+     */
+    orderBy?: TallyUsersOrderByWithRelationInput | TallyUsersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TallyUsersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TallyUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TallyUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TallyUsers
+    **/
+    _count?: true | TallyUsersCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TallyUsersAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TallyUsersSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TallyUsersMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TallyUsersMaxAggregateInputType
+  }
+
+  export type GetTallyUsersAggregateType<T extends TallyUsersAggregateArgs> = {
+        [P in keyof T & keyof AggregateTallyUsers]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTallyUsers[P]>
+      : GetScalarType<T[P], AggregateTallyUsers[P]>
+  }
+
+
+
+
+  export type TallyUsersGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TallyUsersWhereInput
+    orderBy?: TallyUsersOrderByWithAggregationInput | TallyUsersOrderByWithAggregationInput[]
+    by: TallyUsersScalarFieldEnum[] | TallyUsersScalarFieldEnum
+    having?: TallyUsersScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TallyUsersCountAggregateInputType | true
+    _avg?: TallyUsersAvgAggregateInputType
+    _sum?: TallyUsersSumAggregateInputType
+    _min?: TallyUsersMinAggregateInputType
+    _max?: TallyUsersMaxAggregateInputType
+  }
+
+  export type TallyUsersGroupByOutputType = {
+    id: number
+    username: string
+    password: string
+    region: string
+    created_at: Date | null
+    _count: TallyUsersCountAggregateOutputType | null
+    _avg: TallyUsersAvgAggregateOutputType | null
+    _sum: TallyUsersSumAggregateOutputType | null
+    _min: TallyUsersMinAggregateOutputType | null
+    _max: TallyUsersMaxAggregateOutputType | null
+  }
+
+  type GetTallyUsersGroupByPayload<T extends TallyUsersGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TallyUsersGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TallyUsersGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TallyUsersGroupByOutputType[P]>
+            : GetScalarType<T[P], TallyUsersGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TallyUsersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    username?: boolean
+    password?: boolean
+    region?: boolean
+    created_at?: boolean
+    TallyVoucherSyncLog?: boolean | TallyUsers$TallyVoucherSyncLogArgs<ExtArgs>
+    _count?: boolean | TallyUsersCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tallyUsers"]>
+
+
+
+  export type TallyUsersSelectScalar = {
+    id?: boolean
+    username?: boolean
+    password?: boolean
+    region?: boolean
+    created_at?: boolean
+  }
+
+  export type TallyUsersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "password" | "region" | "created_at", ExtArgs["result"]["tallyUsers"]>
+  export type TallyUsersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    TallyVoucherSyncLog?: boolean | TallyUsers$TallyVoucherSyncLogArgs<ExtArgs>
+    _count?: boolean | TallyUsersCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $TallyUsersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TallyUsers"
+    objects: {
+      TallyVoucherSyncLog: Prisma.$TallyVoucherSyncLogPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      username: string
+      password: string
+      region: string
+      created_at: Date | null
+    }, ExtArgs["result"]["tallyUsers"]>
+    composites: {}
+  }
+
+  type TallyUsersGetPayload<S extends boolean | null | undefined | TallyUsersDefaultArgs> = $Result.GetResult<Prisma.$TallyUsersPayload, S>
+
+  type TallyUsersCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TallyUsersFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TallyUsersCountAggregateInputType | true
+    }
+
+  export interface TallyUsersDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TallyUsers'], meta: { name: 'TallyUsers' } }
+    /**
+     * Find zero or one TallyUsers that matches the filter.
+     * @param {TallyUsersFindUniqueArgs} args - Arguments to find a TallyUsers
+     * @example
+     * // Get one TallyUsers
+     * const tallyUsers = await prisma.tallyUsers.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TallyUsersFindUniqueArgs>(args: SelectSubset<T, TallyUsersFindUniqueArgs<ExtArgs>>): Prisma__TallyUsersClient<$Result.GetResult<Prisma.$TallyUsersPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TallyUsers that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TallyUsersFindUniqueOrThrowArgs} args - Arguments to find a TallyUsers
+     * @example
+     * // Get one TallyUsers
+     * const tallyUsers = await prisma.tallyUsers.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TallyUsersFindUniqueOrThrowArgs>(args: SelectSubset<T, TallyUsersFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TallyUsersClient<$Result.GetResult<Prisma.$TallyUsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TallyUsers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyUsersFindFirstArgs} args - Arguments to find a TallyUsers
+     * @example
+     * // Get one TallyUsers
+     * const tallyUsers = await prisma.tallyUsers.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TallyUsersFindFirstArgs>(args?: SelectSubset<T, TallyUsersFindFirstArgs<ExtArgs>>): Prisma__TallyUsersClient<$Result.GetResult<Prisma.$TallyUsersPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TallyUsers that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyUsersFindFirstOrThrowArgs} args - Arguments to find a TallyUsers
+     * @example
+     * // Get one TallyUsers
+     * const tallyUsers = await prisma.tallyUsers.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TallyUsersFindFirstOrThrowArgs>(args?: SelectSubset<T, TallyUsersFindFirstOrThrowArgs<ExtArgs>>): Prisma__TallyUsersClient<$Result.GetResult<Prisma.$TallyUsersPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TallyUsers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyUsersFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TallyUsers
+     * const tallyUsers = await prisma.tallyUsers.findMany()
+     * 
+     * // Get first 10 TallyUsers
+     * const tallyUsers = await prisma.tallyUsers.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tallyUsersWithIdOnly = await prisma.tallyUsers.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TallyUsersFindManyArgs>(args?: SelectSubset<T, TallyUsersFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TallyUsersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TallyUsers.
+     * @param {TallyUsersCreateArgs} args - Arguments to create a TallyUsers.
+     * @example
+     * // Create one TallyUsers
+     * const TallyUsers = await prisma.tallyUsers.create({
+     *   data: {
+     *     // ... data to create a TallyUsers
+     *   }
+     * })
+     * 
+     */
+    create<T extends TallyUsersCreateArgs>(args: SelectSubset<T, TallyUsersCreateArgs<ExtArgs>>): Prisma__TallyUsersClient<$Result.GetResult<Prisma.$TallyUsersPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TallyUsers.
+     * @param {TallyUsersCreateManyArgs} args - Arguments to create many TallyUsers.
+     * @example
+     * // Create many TallyUsers
+     * const tallyUsers = await prisma.tallyUsers.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TallyUsersCreateManyArgs>(args?: SelectSubset<T, TallyUsersCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a TallyUsers.
+     * @param {TallyUsersDeleteArgs} args - Arguments to delete one TallyUsers.
+     * @example
+     * // Delete one TallyUsers
+     * const TallyUsers = await prisma.tallyUsers.delete({
+     *   where: {
+     *     // ... filter to delete one TallyUsers
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TallyUsersDeleteArgs>(args: SelectSubset<T, TallyUsersDeleteArgs<ExtArgs>>): Prisma__TallyUsersClient<$Result.GetResult<Prisma.$TallyUsersPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TallyUsers.
+     * @param {TallyUsersUpdateArgs} args - Arguments to update one TallyUsers.
+     * @example
+     * // Update one TallyUsers
+     * const tallyUsers = await prisma.tallyUsers.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TallyUsersUpdateArgs>(args: SelectSubset<T, TallyUsersUpdateArgs<ExtArgs>>): Prisma__TallyUsersClient<$Result.GetResult<Prisma.$TallyUsersPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TallyUsers.
+     * @param {TallyUsersDeleteManyArgs} args - Arguments to filter TallyUsers to delete.
+     * @example
+     * // Delete a few TallyUsers
+     * const { count } = await prisma.tallyUsers.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TallyUsersDeleteManyArgs>(args?: SelectSubset<T, TallyUsersDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TallyUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyUsersUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TallyUsers
+     * const tallyUsers = await prisma.tallyUsers.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TallyUsersUpdateManyArgs>(args: SelectSubset<T, TallyUsersUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one TallyUsers.
+     * @param {TallyUsersUpsertArgs} args - Arguments to update or create a TallyUsers.
+     * @example
+     * // Update or create a TallyUsers
+     * const tallyUsers = await prisma.tallyUsers.upsert({
+     *   create: {
+     *     // ... data to create a TallyUsers
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TallyUsers we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TallyUsersUpsertArgs>(args: SelectSubset<T, TallyUsersUpsertArgs<ExtArgs>>): Prisma__TallyUsersClient<$Result.GetResult<Prisma.$TallyUsersPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TallyUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyUsersCountArgs} args - Arguments to filter TallyUsers to count.
+     * @example
+     * // Count the number of TallyUsers
+     * const count = await prisma.tallyUsers.count({
+     *   where: {
+     *     // ... the filter for the TallyUsers we want to count
+     *   }
+     * })
+    **/
+    count<T extends TallyUsersCountArgs>(
+      args?: Subset<T, TallyUsersCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TallyUsersCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TallyUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyUsersAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TallyUsersAggregateArgs>(args: Subset<T, TallyUsersAggregateArgs>): Prisma.PrismaPromise<GetTallyUsersAggregateType<T>>
+
+    /**
+     * Group by TallyUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyUsersGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TallyUsersGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TallyUsersGroupByArgs['orderBy'] }
+        : { orderBy?: TallyUsersGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TallyUsersGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTallyUsersGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TallyUsers model
+   */
+  readonly fields: TallyUsersFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TallyUsers.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TallyUsersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    TallyVoucherSyncLog<T extends TallyUsers$TallyVoucherSyncLogArgs<ExtArgs> = {}>(args?: Subset<T, TallyUsers$TallyVoucherSyncLogArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TallyVoucherSyncLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TallyUsers model
+   */
+  interface TallyUsersFieldRefs {
+    readonly id: FieldRef<"TallyUsers", 'Int'>
+    readonly username: FieldRef<"TallyUsers", 'String'>
+    readonly password: FieldRef<"TallyUsers", 'String'>
+    readonly region: FieldRef<"TallyUsers", 'String'>
+    readonly created_at: FieldRef<"TallyUsers", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TallyUsers findUnique
+   */
+  export type TallyUsersFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyUsers
+     */
+    select?: TallyUsersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyUsers
+     */
+    omit?: TallyUsersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyUsersInclude<ExtArgs> | null
+    /**
+     * Filter, which TallyUsers to fetch.
+     */
+    where: TallyUsersWhereUniqueInput
+  }
+
+  /**
+   * TallyUsers findUniqueOrThrow
+   */
+  export type TallyUsersFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyUsers
+     */
+    select?: TallyUsersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyUsers
+     */
+    omit?: TallyUsersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyUsersInclude<ExtArgs> | null
+    /**
+     * Filter, which TallyUsers to fetch.
+     */
+    where: TallyUsersWhereUniqueInput
+  }
+
+  /**
+   * TallyUsers findFirst
+   */
+  export type TallyUsersFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyUsers
+     */
+    select?: TallyUsersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyUsers
+     */
+    omit?: TallyUsersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyUsersInclude<ExtArgs> | null
+    /**
+     * Filter, which TallyUsers to fetch.
+     */
+    where?: TallyUsersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TallyUsers to fetch.
+     */
+    orderBy?: TallyUsersOrderByWithRelationInput | TallyUsersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TallyUsers.
+     */
+    cursor?: TallyUsersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TallyUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TallyUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TallyUsers.
+     */
+    distinct?: TallyUsersScalarFieldEnum | TallyUsersScalarFieldEnum[]
+  }
+
+  /**
+   * TallyUsers findFirstOrThrow
+   */
+  export type TallyUsersFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyUsers
+     */
+    select?: TallyUsersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyUsers
+     */
+    omit?: TallyUsersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyUsersInclude<ExtArgs> | null
+    /**
+     * Filter, which TallyUsers to fetch.
+     */
+    where?: TallyUsersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TallyUsers to fetch.
+     */
+    orderBy?: TallyUsersOrderByWithRelationInput | TallyUsersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TallyUsers.
+     */
+    cursor?: TallyUsersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TallyUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TallyUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TallyUsers.
+     */
+    distinct?: TallyUsersScalarFieldEnum | TallyUsersScalarFieldEnum[]
+  }
+
+  /**
+   * TallyUsers findMany
+   */
+  export type TallyUsersFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyUsers
+     */
+    select?: TallyUsersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyUsers
+     */
+    omit?: TallyUsersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyUsersInclude<ExtArgs> | null
+    /**
+     * Filter, which TallyUsers to fetch.
+     */
+    where?: TallyUsersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TallyUsers to fetch.
+     */
+    orderBy?: TallyUsersOrderByWithRelationInput | TallyUsersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TallyUsers.
+     */
+    cursor?: TallyUsersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TallyUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TallyUsers.
+     */
+    skip?: number
+    distinct?: TallyUsersScalarFieldEnum | TallyUsersScalarFieldEnum[]
+  }
+
+  /**
+   * TallyUsers create
+   */
+  export type TallyUsersCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyUsers
+     */
+    select?: TallyUsersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyUsers
+     */
+    omit?: TallyUsersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyUsersInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TallyUsers.
+     */
+    data: XOR<TallyUsersCreateInput, TallyUsersUncheckedCreateInput>
+  }
+
+  /**
+   * TallyUsers createMany
+   */
+  export type TallyUsersCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TallyUsers.
+     */
+    data: TallyUsersCreateManyInput | TallyUsersCreateManyInput[]
+  }
+
+  /**
+   * TallyUsers update
+   */
+  export type TallyUsersUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyUsers
+     */
+    select?: TallyUsersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyUsers
+     */
+    omit?: TallyUsersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyUsersInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TallyUsers.
+     */
+    data: XOR<TallyUsersUpdateInput, TallyUsersUncheckedUpdateInput>
+    /**
+     * Choose, which TallyUsers to update.
+     */
+    where: TallyUsersWhereUniqueInput
+  }
+
+  /**
+   * TallyUsers updateMany
+   */
+  export type TallyUsersUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TallyUsers.
+     */
+    data: XOR<TallyUsersUpdateManyMutationInput, TallyUsersUncheckedUpdateManyInput>
+    /**
+     * Filter which TallyUsers to update
+     */
+    where?: TallyUsersWhereInput
+    /**
+     * Limit how many TallyUsers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TallyUsers upsert
+   */
+  export type TallyUsersUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyUsers
+     */
+    select?: TallyUsersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyUsers
+     */
+    omit?: TallyUsersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyUsersInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TallyUsers to update in case it exists.
+     */
+    where: TallyUsersWhereUniqueInput
+    /**
+     * In case the TallyUsers found by the `where` argument doesn't exist, create a new TallyUsers with this data.
+     */
+    create: XOR<TallyUsersCreateInput, TallyUsersUncheckedCreateInput>
+    /**
+     * In case the TallyUsers was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TallyUsersUpdateInput, TallyUsersUncheckedUpdateInput>
+  }
+
+  /**
+   * TallyUsers delete
+   */
+  export type TallyUsersDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyUsers
+     */
+    select?: TallyUsersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyUsers
+     */
+    omit?: TallyUsersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyUsersInclude<ExtArgs> | null
+    /**
+     * Filter which TallyUsers to delete.
+     */
+    where: TallyUsersWhereUniqueInput
+  }
+
+  /**
+   * TallyUsers deleteMany
+   */
+  export type TallyUsersDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TallyUsers to delete
+     */
+    where?: TallyUsersWhereInput
+    /**
+     * Limit how many TallyUsers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TallyUsers.TallyVoucherSyncLog
+   */
+  export type TallyUsers$TallyVoucherSyncLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyVoucherSyncLog
+     */
+    select?: TallyVoucherSyncLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyVoucherSyncLog
+     */
+    omit?: TallyVoucherSyncLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyVoucherSyncLogInclude<ExtArgs> | null
+    where?: TallyVoucherSyncLogWhereInput
+    orderBy?: TallyVoucherSyncLogOrderByWithRelationInput | TallyVoucherSyncLogOrderByWithRelationInput[]
+    cursor?: TallyVoucherSyncLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TallyVoucherSyncLogScalarFieldEnum | TallyVoucherSyncLogScalarFieldEnum[]
+  }
+
+  /**
+   * TallyUsers without action
+   */
+  export type TallyUsersDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyUsers
+     */
+    select?: TallyUsersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyUsers
+     */
+    omit?: TallyUsersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyUsersInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TallyVoucherSyncLog
+   */
+
+  export type AggregateTallyVoucherSyncLog = {
+    _count: TallyVoucherSyncLogCountAggregateOutputType | null
+    _avg: TallyVoucherSyncLogAvgAggregateOutputType | null
+    _sum: TallyVoucherSyncLogSumAggregateOutputType | null
+    _min: TallyVoucherSyncLogMinAggregateOutputType | null
+    _max: TallyVoucherSyncLogMaxAggregateOutputType | null
+  }
+
+  export type TallyVoucherSyncLogAvgAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    start_voucher: number | null
+    end_voucher: number | null
+    last_updated_voucher_number: number | null
+  }
+
+  export type TallyVoucherSyncLogSumAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    start_voucher: number | null
+    end_voucher: number | null
+    last_updated_voucher_number: number | null
+  }
+
+  export type TallyVoucherSyncLogMinAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    region: string | null
+    voucher_type: string | null
+    submission_date: Date | null
+    last_updated_date: Date | null
+    start_date: Date | null
+    end_date: Date | null
+    start_voucher: number | null
+    end_voucher: number | null
+    created_at: Date | null
+    last_updated_voucher_number: number | null
+  }
+
+  export type TallyVoucherSyncLogMaxAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    region: string | null
+    voucher_type: string | null
+    submission_date: Date | null
+    last_updated_date: Date | null
+    start_date: Date | null
+    end_date: Date | null
+    start_voucher: number | null
+    end_voucher: number | null
+    created_at: Date | null
+    last_updated_voucher_number: number | null
+  }
+
+  export type TallyVoucherSyncLogCountAggregateOutputType = {
+    id: number
+    user_id: number
+    region: number
+    voucher_type: number
+    submission_date: number
+    last_updated_date: number
+    start_date: number
+    end_date: number
+    start_voucher: number
+    end_voucher: number
+    created_at: number
+    last_updated_voucher_number: number
+    _all: number
+  }
+
+
+  export type TallyVoucherSyncLogAvgAggregateInputType = {
+    id?: true
+    user_id?: true
+    start_voucher?: true
+    end_voucher?: true
+    last_updated_voucher_number?: true
+  }
+
+  export type TallyVoucherSyncLogSumAggregateInputType = {
+    id?: true
+    user_id?: true
+    start_voucher?: true
+    end_voucher?: true
+    last_updated_voucher_number?: true
+  }
+
+  export type TallyVoucherSyncLogMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    region?: true
+    voucher_type?: true
+    submission_date?: true
+    last_updated_date?: true
+    start_date?: true
+    end_date?: true
+    start_voucher?: true
+    end_voucher?: true
+    created_at?: true
+    last_updated_voucher_number?: true
+  }
+
+  export type TallyVoucherSyncLogMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    region?: true
+    voucher_type?: true
+    submission_date?: true
+    last_updated_date?: true
+    start_date?: true
+    end_date?: true
+    start_voucher?: true
+    end_voucher?: true
+    created_at?: true
+    last_updated_voucher_number?: true
+  }
+
+  export type TallyVoucherSyncLogCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    region?: true
+    voucher_type?: true
+    submission_date?: true
+    last_updated_date?: true
+    start_date?: true
+    end_date?: true
+    start_voucher?: true
+    end_voucher?: true
+    created_at?: true
+    last_updated_voucher_number?: true
+    _all?: true
+  }
+
+  export type TallyVoucherSyncLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TallyVoucherSyncLog to aggregate.
+     */
+    where?: TallyVoucherSyncLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TallyVoucherSyncLogs to fetch.
+     */
+    orderBy?: TallyVoucherSyncLogOrderByWithRelationInput | TallyVoucherSyncLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TallyVoucherSyncLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TallyVoucherSyncLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TallyVoucherSyncLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TallyVoucherSyncLogs
+    **/
+    _count?: true | TallyVoucherSyncLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TallyVoucherSyncLogAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TallyVoucherSyncLogSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TallyVoucherSyncLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TallyVoucherSyncLogMaxAggregateInputType
+  }
+
+  export type GetTallyVoucherSyncLogAggregateType<T extends TallyVoucherSyncLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateTallyVoucherSyncLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTallyVoucherSyncLog[P]>
+      : GetScalarType<T[P], AggregateTallyVoucherSyncLog[P]>
+  }
+
+
+
+
+  export type TallyVoucherSyncLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TallyVoucherSyncLogWhereInput
+    orderBy?: TallyVoucherSyncLogOrderByWithAggregationInput | TallyVoucherSyncLogOrderByWithAggregationInput[]
+    by: TallyVoucherSyncLogScalarFieldEnum[] | TallyVoucherSyncLogScalarFieldEnum
+    having?: TallyVoucherSyncLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TallyVoucherSyncLogCountAggregateInputType | true
+    _avg?: TallyVoucherSyncLogAvgAggregateInputType
+    _sum?: TallyVoucherSyncLogSumAggregateInputType
+    _min?: TallyVoucherSyncLogMinAggregateInputType
+    _max?: TallyVoucherSyncLogMaxAggregateInputType
+  }
+
+  export type TallyVoucherSyncLogGroupByOutputType = {
+    id: number
+    user_id: number | null
+    region: string
+    voucher_type: string
+    submission_date: Date
+    last_updated_date: Date | null
+    start_date: Date | null
+    end_date: Date | null
+    start_voucher: number | null
+    end_voucher: number | null
+    created_at: Date | null
+    last_updated_voucher_number: number | null
+    _count: TallyVoucherSyncLogCountAggregateOutputType | null
+    _avg: TallyVoucherSyncLogAvgAggregateOutputType | null
+    _sum: TallyVoucherSyncLogSumAggregateOutputType | null
+    _min: TallyVoucherSyncLogMinAggregateOutputType | null
+    _max: TallyVoucherSyncLogMaxAggregateOutputType | null
+  }
+
+  type GetTallyVoucherSyncLogGroupByPayload<T extends TallyVoucherSyncLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TallyVoucherSyncLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TallyVoucherSyncLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TallyVoucherSyncLogGroupByOutputType[P]>
+            : GetScalarType<T[P], TallyVoucherSyncLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TallyVoucherSyncLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    region?: boolean
+    voucher_type?: boolean
+    submission_date?: boolean
+    last_updated_date?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    start_voucher?: boolean
+    end_voucher?: boolean
+    created_at?: boolean
+    last_updated_voucher_number?: boolean
+    TallyUsers?: boolean | TallyVoucherSyncLog$TallyUsersArgs<ExtArgs>
+  }, ExtArgs["result"]["tallyVoucherSyncLog"]>
+
+
+
+  export type TallyVoucherSyncLogSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    region?: boolean
+    voucher_type?: boolean
+    submission_date?: boolean
+    last_updated_date?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    start_voucher?: boolean
+    end_voucher?: boolean
+    created_at?: boolean
+    last_updated_voucher_number?: boolean
+  }
+
+  export type TallyVoucherSyncLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "region" | "voucher_type" | "submission_date" | "last_updated_date" | "start_date" | "end_date" | "start_voucher" | "end_voucher" | "created_at" | "last_updated_voucher_number", ExtArgs["result"]["tallyVoucherSyncLog"]>
+  export type TallyVoucherSyncLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    TallyUsers?: boolean | TallyVoucherSyncLog$TallyUsersArgs<ExtArgs>
+  }
+
+  export type $TallyVoucherSyncLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TallyVoucherSyncLog"
+    objects: {
+      TallyUsers: Prisma.$TallyUsersPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      user_id: number | null
+      region: string
+      voucher_type: string
+      submission_date: Date
+      last_updated_date: Date | null
+      start_date: Date | null
+      end_date: Date | null
+      start_voucher: number | null
+      end_voucher: number | null
+      created_at: Date | null
+      last_updated_voucher_number: number | null
+    }, ExtArgs["result"]["tallyVoucherSyncLog"]>
+    composites: {}
+  }
+
+  type TallyVoucherSyncLogGetPayload<S extends boolean | null | undefined | TallyVoucherSyncLogDefaultArgs> = $Result.GetResult<Prisma.$TallyVoucherSyncLogPayload, S>
+
+  type TallyVoucherSyncLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TallyVoucherSyncLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TallyVoucherSyncLogCountAggregateInputType | true
+    }
+
+  export interface TallyVoucherSyncLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TallyVoucherSyncLog'], meta: { name: 'TallyVoucherSyncLog' } }
+    /**
+     * Find zero or one TallyVoucherSyncLog that matches the filter.
+     * @param {TallyVoucherSyncLogFindUniqueArgs} args - Arguments to find a TallyVoucherSyncLog
+     * @example
+     * // Get one TallyVoucherSyncLog
+     * const tallyVoucherSyncLog = await prisma.tallyVoucherSyncLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TallyVoucherSyncLogFindUniqueArgs>(args: SelectSubset<T, TallyVoucherSyncLogFindUniqueArgs<ExtArgs>>): Prisma__TallyVoucherSyncLogClient<$Result.GetResult<Prisma.$TallyVoucherSyncLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TallyVoucherSyncLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TallyVoucherSyncLogFindUniqueOrThrowArgs} args - Arguments to find a TallyVoucherSyncLog
+     * @example
+     * // Get one TallyVoucherSyncLog
+     * const tallyVoucherSyncLog = await prisma.tallyVoucherSyncLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TallyVoucherSyncLogFindUniqueOrThrowArgs>(args: SelectSubset<T, TallyVoucherSyncLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TallyVoucherSyncLogClient<$Result.GetResult<Prisma.$TallyVoucherSyncLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TallyVoucherSyncLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyVoucherSyncLogFindFirstArgs} args - Arguments to find a TallyVoucherSyncLog
+     * @example
+     * // Get one TallyVoucherSyncLog
+     * const tallyVoucherSyncLog = await prisma.tallyVoucherSyncLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TallyVoucherSyncLogFindFirstArgs>(args?: SelectSubset<T, TallyVoucherSyncLogFindFirstArgs<ExtArgs>>): Prisma__TallyVoucherSyncLogClient<$Result.GetResult<Prisma.$TallyVoucherSyncLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TallyVoucherSyncLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyVoucherSyncLogFindFirstOrThrowArgs} args - Arguments to find a TallyVoucherSyncLog
+     * @example
+     * // Get one TallyVoucherSyncLog
+     * const tallyVoucherSyncLog = await prisma.tallyVoucherSyncLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TallyVoucherSyncLogFindFirstOrThrowArgs>(args?: SelectSubset<T, TallyVoucherSyncLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__TallyVoucherSyncLogClient<$Result.GetResult<Prisma.$TallyVoucherSyncLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TallyVoucherSyncLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyVoucherSyncLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TallyVoucherSyncLogs
+     * const tallyVoucherSyncLogs = await prisma.tallyVoucherSyncLog.findMany()
+     * 
+     * // Get first 10 TallyVoucherSyncLogs
+     * const tallyVoucherSyncLogs = await prisma.tallyVoucherSyncLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tallyVoucherSyncLogWithIdOnly = await prisma.tallyVoucherSyncLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TallyVoucherSyncLogFindManyArgs>(args?: SelectSubset<T, TallyVoucherSyncLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TallyVoucherSyncLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TallyVoucherSyncLog.
+     * @param {TallyVoucherSyncLogCreateArgs} args - Arguments to create a TallyVoucherSyncLog.
+     * @example
+     * // Create one TallyVoucherSyncLog
+     * const TallyVoucherSyncLog = await prisma.tallyVoucherSyncLog.create({
+     *   data: {
+     *     // ... data to create a TallyVoucherSyncLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends TallyVoucherSyncLogCreateArgs>(args: SelectSubset<T, TallyVoucherSyncLogCreateArgs<ExtArgs>>): Prisma__TallyVoucherSyncLogClient<$Result.GetResult<Prisma.$TallyVoucherSyncLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TallyVoucherSyncLogs.
+     * @param {TallyVoucherSyncLogCreateManyArgs} args - Arguments to create many TallyVoucherSyncLogs.
+     * @example
+     * // Create many TallyVoucherSyncLogs
+     * const tallyVoucherSyncLog = await prisma.tallyVoucherSyncLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TallyVoucherSyncLogCreateManyArgs>(args?: SelectSubset<T, TallyVoucherSyncLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a TallyVoucherSyncLog.
+     * @param {TallyVoucherSyncLogDeleteArgs} args - Arguments to delete one TallyVoucherSyncLog.
+     * @example
+     * // Delete one TallyVoucherSyncLog
+     * const TallyVoucherSyncLog = await prisma.tallyVoucherSyncLog.delete({
+     *   where: {
+     *     // ... filter to delete one TallyVoucherSyncLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TallyVoucherSyncLogDeleteArgs>(args: SelectSubset<T, TallyVoucherSyncLogDeleteArgs<ExtArgs>>): Prisma__TallyVoucherSyncLogClient<$Result.GetResult<Prisma.$TallyVoucherSyncLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TallyVoucherSyncLog.
+     * @param {TallyVoucherSyncLogUpdateArgs} args - Arguments to update one TallyVoucherSyncLog.
+     * @example
+     * // Update one TallyVoucherSyncLog
+     * const tallyVoucherSyncLog = await prisma.tallyVoucherSyncLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TallyVoucherSyncLogUpdateArgs>(args: SelectSubset<T, TallyVoucherSyncLogUpdateArgs<ExtArgs>>): Prisma__TallyVoucherSyncLogClient<$Result.GetResult<Prisma.$TallyVoucherSyncLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TallyVoucherSyncLogs.
+     * @param {TallyVoucherSyncLogDeleteManyArgs} args - Arguments to filter TallyVoucherSyncLogs to delete.
+     * @example
+     * // Delete a few TallyVoucherSyncLogs
+     * const { count } = await prisma.tallyVoucherSyncLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TallyVoucherSyncLogDeleteManyArgs>(args?: SelectSubset<T, TallyVoucherSyncLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TallyVoucherSyncLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyVoucherSyncLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TallyVoucherSyncLogs
+     * const tallyVoucherSyncLog = await prisma.tallyVoucherSyncLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TallyVoucherSyncLogUpdateManyArgs>(args: SelectSubset<T, TallyVoucherSyncLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one TallyVoucherSyncLog.
+     * @param {TallyVoucherSyncLogUpsertArgs} args - Arguments to update or create a TallyVoucherSyncLog.
+     * @example
+     * // Update or create a TallyVoucherSyncLog
+     * const tallyVoucherSyncLog = await prisma.tallyVoucherSyncLog.upsert({
+     *   create: {
+     *     // ... data to create a TallyVoucherSyncLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TallyVoucherSyncLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TallyVoucherSyncLogUpsertArgs>(args: SelectSubset<T, TallyVoucherSyncLogUpsertArgs<ExtArgs>>): Prisma__TallyVoucherSyncLogClient<$Result.GetResult<Prisma.$TallyVoucherSyncLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TallyVoucherSyncLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyVoucherSyncLogCountArgs} args - Arguments to filter TallyVoucherSyncLogs to count.
+     * @example
+     * // Count the number of TallyVoucherSyncLogs
+     * const count = await prisma.tallyVoucherSyncLog.count({
+     *   where: {
+     *     // ... the filter for the TallyVoucherSyncLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends TallyVoucherSyncLogCountArgs>(
+      args?: Subset<T, TallyVoucherSyncLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TallyVoucherSyncLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TallyVoucherSyncLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyVoucherSyncLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TallyVoucherSyncLogAggregateArgs>(args: Subset<T, TallyVoucherSyncLogAggregateArgs>): Prisma.PrismaPromise<GetTallyVoucherSyncLogAggregateType<T>>
+
+    /**
+     * Group by TallyVoucherSyncLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TallyVoucherSyncLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TallyVoucherSyncLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TallyVoucherSyncLogGroupByArgs['orderBy'] }
+        : { orderBy?: TallyVoucherSyncLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TallyVoucherSyncLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTallyVoucherSyncLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TallyVoucherSyncLog model
+   */
+  readonly fields: TallyVoucherSyncLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TallyVoucherSyncLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TallyVoucherSyncLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    TallyUsers<T extends TallyVoucherSyncLog$TallyUsersArgs<ExtArgs> = {}>(args?: Subset<T, TallyVoucherSyncLog$TallyUsersArgs<ExtArgs>>): Prisma__TallyUsersClient<$Result.GetResult<Prisma.$TallyUsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TallyVoucherSyncLog model
+   */
+  interface TallyVoucherSyncLogFieldRefs {
+    readonly id: FieldRef<"TallyVoucherSyncLog", 'Int'>
+    readonly user_id: FieldRef<"TallyVoucherSyncLog", 'Int'>
+    readonly region: FieldRef<"TallyVoucherSyncLog", 'String'>
+    readonly voucher_type: FieldRef<"TallyVoucherSyncLog", 'String'>
+    readonly submission_date: FieldRef<"TallyVoucherSyncLog", 'DateTime'>
+    readonly last_updated_date: FieldRef<"TallyVoucherSyncLog", 'DateTime'>
+    readonly start_date: FieldRef<"TallyVoucherSyncLog", 'DateTime'>
+    readonly end_date: FieldRef<"TallyVoucherSyncLog", 'DateTime'>
+    readonly start_voucher: FieldRef<"TallyVoucherSyncLog", 'Int'>
+    readonly end_voucher: FieldRef<"TallyVoucherSyncLog", 'Int'>
+    readonly created_at: FieldRef<"TallyVoucherSyncLog", 'DateTime'>
+    readonly last_updated_voucher_number: FieldRef<"TallyVoucherSyncLog", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TallyVoucherSyncLog findUnique
+   */
+  export type TallyVoucherSyncLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyVoucherSyncLog
+     */
+    select?: TallyVoucherSyncLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyVoucherSyncLog
+     */
+    omit?: TallyVoucherSyncLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyVoucherSyncLogInclude<ExtArgs> | null
+    /**
+     * Filter, which TallyVoucherSyncLog to fetch.
+     */
+    where: TallyVoucherSyncLogWhereUniqueInput
+  }
+
+  /**
+   * TallyVoucherSyncLog findUniqueOrThrow
+   */
+  export type TallyVoucherSyncLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyVoucherSyncLog
+     */
+    select?: TallyVoucherSyncLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyVoucherSyncLog
+     */
+    omit?: TallyVoucherSyncLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyVoucherSyncLogInclude<ExtArgs> | null
+    /**
+     * Filter, which TallyVoucherSyncLog to fetch.
+     */
+    where: TallyVoucherSyncLogWhereUniqueInput
+  }
+
+  /**
+   * TallyVoucherSyncLog findFirst
+   */
+  export type TallyVoucherSyncLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyVoucherSyncLog
+     */
+    select?: TallyVoucherSyncLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyVoucherSyncLog
+     */
+    omit?: TallyVoucherSyncLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyVoucherSyncLogInclude<ExtArgs> | null
+    /**
+     * Filter, which TallyVoucherSyncLog to fetch.
+     */
+    where?: TallyVoucherSyncLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TallyVoucherSyncLogs to fetch.
+     */
+    orderBy?: TallyVoucherSyncLogOrderByWithRelationInput | TallyVoucherSyncLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TallyVoucherSyncLogs.
+     */
+    cursor?: TallyVoucherSyncLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TallyVoucherSyncLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TallyVoucherSyncLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TallyVoucherSyncLogs.
+     */
+    distinct?: TallyVoucherSyncLogScalarFieldEnum | TallyVoucherSyncLogScalarFieldEnum[]
+  }
+
+  /**
+   * TallyVoucherSyncLog findFirstOrThrow
+   */
+  export type TallyVoucherSyncLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyVoucherSyncLog
+     */
+    select?: TallyVoucherSyncLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyVoucherSyncLog
+     */
+    omit?: TallyVoucherSyncLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyVoucherSyncLogInclude<ExtArgs> | null
+    /**
+     * Filter, which TallyVoucherSyncLog to fetch.
+     */
+    where?: TallyVoucherSyncLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TallyVoucherSyncLogs to fetch.
+     */
+    orderBy?: TallyVoucherSyncLogOrderByWithRelationInput | TallyVoucherSyncLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TallyVoucherSyncLogs.
+     */
+    cursor?: TallyVoucherSyncLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TallyVoucherSyncLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TallyVoucherSyncLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TallyVoucherSyncLogs.
+     */
+    distinct?: TallyVoucherSyncLogScalarFieldEnum | TallyVoucherSyncLogScalarFieldEnum[]
+  }
+
+  /**
+   * TallyVoucherSyncLog findMany
+   */
+  export type TallyVoucherSyncLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyVoucherSyncLog
+     */
+    select?: TallyVoucherSyncLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyVoucherSyncLog
+     */
+    omit?: TallyVoucherSyncLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyVoucherSyncLogInclude<ExtArgs> | null
+    /**
+     * Filter, which TallyVoucherSyncLogs to fetch.
+     */
+    where?: TallyVoucherSyncLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TallyVoucherSyncLogs to fetch.
+     */
+    orderBy?: TallyVoucherSyncLogOrderByWithRelationInput | TallyVoucherSyncLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TallyVoucherSyncLogs.
+     */
+    cursor?: TallyVoucherSyncLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TallyVoucherSyncLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TallyVoucherSyncLogs.
+     */
+    skip?: number
+    distinct?: TallyVoucherSyncLogScalarFieldEnum | TallyVoucherSyncLogScalarFieldEnum[]
+  }
+
+  /**
+   * TallyVoucherSyncLog create
+   */
+  export type TallyVoucherSyncLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyVoucherSyncLog
+     */
+    select?: TallyVoucherSyncLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyVoucherSyncLog
+     */
+    omit?: TallyVoucherSyncLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyVoucherSyncLogInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TallyVoucherSyncLog.
+     */
+    data: XOR<TallyVoucherSyncLogCreateInput, TallyVoucherSyncLogUncheckedCreateInput>
+  }
+
+  /**
+   * TallyVoucherSyncLog createMany
+   */
+  export type TallyVoucherSyncLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TallyVoucherSyncLogs.
+     */
+    data: TallyVoucherSyncLogCreateManyInput | TallyVoucherSyncLogCreateManyInput[]
+  }
+
+  /**
+   * TallyVoucherSyncLog update
+   */
+  export type TallyVoucherSyncLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyVoucherSyncLog
+     */
+    select?: TallyVoucherSyncLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyVoucherSyncLog
+     */
+    omit?: TallyVoucherSyncLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyVoucherSyncLogInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TallyVoucherSyncLog.
+     */
+    data: XOR<TallyVoucherSyncLogUpdateInput, TallyVoucherSyncLogUncheckedUpdateInput>
+    /**
+     * Choose, which TallyVoucherSyncLog to update.
+     */
+    where: TallyVoucherSyncLogWhereUniqueInput
+  }
+
+  /**
+   * TallyVoucherSyncLog updateMany
+   */
+  export type TallyVoucherSyncLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TallyVoucherSyncLogs.
+     */
+    data: XOR<TallyVoucherSyncLogUpdateManyMutationInput, TallyVoucherSyncLogUncheckedUpdateManyInput>
+    /**
+     * Filter which TallyVoucherSyncLogs to update
+     */
+    where?: TallyVoucherSyncLogWhereInput
+    /**
+     * Limit how many TallyVoucherSyncLogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TallyVoucherSyncLog upsert
+   */
+  export type TallyVoucherSyncLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyVoucherSyncLog
+     */
+    select?: TallyVoucherSyncLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyVoucherSyncLog
+     */
+    omit?: TallyVoucherSyncLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyVoucherSyncLogInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TallyVoucherSyncLog to update in case it exists.
+     */
+    where: TallyVoucherSyncLogWhereUniqueInput
+    /**
+     * In case the TallyVoucherSyncLog found by the `where` argument doesn't exist, create a new TallyVoucherSyncLog with this data.
+     */
+    create: XOR<TallyVoucherSyncLogCreateInput, TallyVoucherSyncLogUncheckedCreateInput>
+    /**
+     * In case the TallyVoucherSyncLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TallyVoucherSyncLogUpdateInput, TallyVoucherSyncLogUncheckedUpdateInput>
+  }
+
+  /**
+   * TallyVoucherSyncLog delete
+   */
+  export type TallyVoucherSyncLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyVoucherSyncLog
+     */
+    select?: TallyVoucherSyncLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyVoucherSyncLog
+     */
+    omit?: TallyVoucherSyncLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyVoucherSyncLogInclude<ExtArgs> | null
+    /**
+     * Filter which TallyVoucherSyncLog to delete.
+     */
+    where: TallyVoucherSyncLogWhereUniqueInput
+  }
+
+  /**
+   * TallyVoucherSyncLog deleteMany
+   */
+  export type TallyVoucherSyncLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TallyVoucherSyncLogs to delete
+     */
+    where?: TallyVoucherSyncLogWhereInput
+    /**
+     * Limit how many TallyVoucherSyncLogs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TallyVoucherSyncLog.TallyUsers
+   */
+  export type TallyVoucherSyncLog$TallyUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyUsers
+     */
+    select?: TallyUsersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyUsers
+     */
+    omit?: TallyUsersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyUsersInclude<ExtArgs> | null
+    where?: TallyUsersWhereInput
+  }
+
+  /**
+   * TallyVoucherSyncLog without action
+   */
+  export type TallyVoucherSyncLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TallyVoucherSyncLog
+     */
+    select?: TallyVoucherSyncLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TallyVoucherSyncLog
+     */
+    omit?: TallyVoucherSyncLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TallyVoucherSyncLogInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6463,18 +8874,18 @@ export namespace Prisma {
     aoSameFlightStock: 'aoSameFlightStock',
     aoLowestFareFlightDepartureTime: 'aoLowestFareFlightDepartureTime',
     fareAuditRemarks: 'fareAuditRemarks',
-    aoAvailableStock: 'aoAvailableStock'
+    aoAvailableStock: 'aoAvailableStock',
+    actualManagedFare: 'actualManagedFare',
+    bookedPaxQty: 'bookedPaxQty',
+    fsWindowedLowestFare: 'fsWindowedLowestFare',
+    fsWindowedLowestFareFlightNumber: 'fsWindowedLowestFareFlightNumber',
+    fsWindowedLowestFareDepartureTime: 'fsWindowedLowestFareDepartureTime',
+    aoWindowedLowestFare: 'aoWindowedLowestFare',
+    aoWindowedLowestFareFlightNumber: 'aoWindowedLowestFareFlightNumber',
+    aoWindowedLowestFareDepartureTime: 'aoWindowedLowestFareDepartureTime'
   };
 
   export type FareAuditScalarFieldEnum = (typeof FareAuditScalarFieldEnum)[keyof typeof FareAuditScalarFieldEnum]
-
-
-  export const EFMigrationsHistoryScalarFieldEnum: {
-    MigrationId: 'MigrationId',
-    ProductVersion: 'ProductVersion'
-  };
-
-  export type EFMigrationsHistoryScalarFieldEnum = (typeof EFMigrationsHistoryScalarFieldEnum)[keyof typeof EFMigrationsHistoryScalarFieldEnum]
 
 
   export const FlightsScalarFieldEnum: {
@@ -6526,6 +8937,44 @@ export namespace Prisma {
   };
 
   export type LogSheetScalarFieldEnum = (typeof LogSheetScalarFieldEnum)[keyof typeof LogSheetScalarFieldEnum]
+
+
+  export const FlightOpsScalarFieldEnum: {
+    FlightOpsID: 'FlightOpsID',
+    Keyid: 'Keyid',
+    Image: 'Image'
+  };
+
+  export type FlightOpsScalarFieldEnum = (typeof FlightOpsScalarFieldEnum)[keyof typeof FlightOpsScalarFieldEnum]
+
+
+  export const TallyUsersScalarFieldEnum: {
+    id: 'id',
+    username: 'username',
+    password: 'password',
+    region: 'region',
+    created_at: 'created_at'
+  };
+
+  export type TallyUsersScalarFieldEnum = (typeof TallyUsersScalarFieldEnum)[keyof typeof TallyUsersScalarFieldEnum]
+
+
+  export const TallyVoucherSyncLogScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    region: 'region',
+    voucher_type: 'voucher_type',
+    submission_date: 'submission_date',
+    last_updated_date: 'last_updated_date',
+    start_date: 'start_date',
+    end_date: 'end_date',
+    start_voucher: 'start_voucher',
+    end_voucher: 'end_voucher',
+    created_at: 'created_at',
+    last_updated_voucher_number: 'last_updated_voucher_number'
+  };
+
+  export type TallyVoucherSyncLogScalarFieldEnum = (typeof TallyVoucherSyncLogScalarFieldEnum)[keyof typeof TallyVoucherSyncLogScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6638,6 +9087,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
     fareAuditRemarks?: StringNullableFilter<"FareAudit"> | string | null
     aoAvailableStock?: IntNullableFilter<"FareAudit"> | number | null
+    actualManagedFare?: DecimalNullableFilter<"FareAudit"> | Decimal | DecimalJsLike | number | string | null
+    bookedPaxQty?: IntNullableFilter<"FareAudit"> | number | null
+    fsWindowedLowestFare?: DecimalNullableFilter<"FareAudit"> | Decimal | DecimalJsLike | number | string | null
+    fsWindowedLowestFareFlightNumber?: StringNullableFilter<"FareAudit"> | string | null
+    fsWindowedLowestFareDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
+    aoWindowedLowestFare?: DecimalNullableFilter<"FareAudit"> | Decimal | DecimalJsLike | number | string | null
+    aoWindowedLowestFareFlightNumber?: StringNullableFilter<"FareAudit"> | string | null
+    aoWindowedLowestFareDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
   }
 
   export type FareAuditOrderByWithRelationInput = {
@@ -6681,6 +9138,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: SortOrderInput | SortOrder
     fareAuditRemarks?: SortOrderInput | SortOrder
     aoAvailableStock?: SortOrderInput | SortOrder
+    actualManagedFare?: SortOrderInput | SortOrder
+    bookedPaxQty?: SortOrderInput | SortOrder
+    fsWindowedLowestFare?: SortOrderInput | SortOrder
+    fsWindowedLowestFareFlightNumber?: SortOrderInput | SortOrder
+    fsWindowedLowestFareDepartureTime?: SortOrderInput | SortOrder
+    aoWindowedLowestFare?: SortOrderInput | SortOrder
+    aoWindowedLowestFareFlightNumber?: SortOrderInput | SortOrder
+    aoWindowedLowestFareDepartureTime?: SortOrderInput | SortOrder
   }
 
   export type FareAuditWhereUniqueInput = Prisma.AtLeast<{
@@ -6727,6 +9192,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
     fareAuditRemarks?: StringNullableFilter<"FareAudit"> | string | null
     aoAvailableStock?: IntNullableFilter<"FareAudit"> | number | null
+    actualManagedFare?: DecimalNullableFilter<"FareAudit"> | Decimal | DecimalJsLike | number | string | null
+    bookedPaxQty?: IntNullableFilter<"FareAudit"> | number | null
+    fsWindowedLowestFare?: DecimalNullableFilter<"FareAudit"> | Decimal | DecimalJsLike | number | string | null
+    fsWindowedLowestFareFlightNumber?: StringNullableFilter<"FareAudit"> | string | null
+    fsWindowedLowestFareDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
+    aoWindowedLowestFare?: DecimalNullableFilter<"FareAudit"> | Decimal | DecimalJsLike | number | string | null
+    aoWindowedLowestFareFlightNumber?: StringNullableFilter<"FareAudit"> | string | null
+    aoWindowedLowestFareDepartureTime?: DateTimeNullableFilter<"FareAudit"> | Date | string | null
   }, "id">
 
   export type FareAuditOrderByWithAggregationInput = {
@@ -6770,6 +9243,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: SortOrderInput | SortOrder
     fareAuditRemarks?: SortOrderInput | SortOrder
     aoAvailableStock?: SortOrderInput | SortOrder
+    actualManagedFare?: SortOrderInput | SortOrder
+    bookedPaxQty?: SortOrderInput | SortOrder
+    fsWindowedLowestFare?: SortOrderInput | SortOrder
+    fsWindowedLowestFareFlightNumber?: SortOrderInput | SortOrder
+    fsWindowedLowestFareDepartureTime?: SortOrderInput | SortOrder
+    aoWindowedLowestFare?: SortOrderInput | SortOrder
+    aoWindowedLowestFareFlightNumber?: SortOrderInput | SortOrder
+    aoWindowedLowestFareDepartureTime?: SortOrderInput | SortOrder
     _count?: FareAuditCountOrderByAggregateInput
     _avg?: FareAuditAvgOrderByAggregateInput
     _max?: FareAuditMaxOrderByAggregateInput
@@ -6821,43 +9302,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: DateTimeNullableWithAggregatesFilter<"FareAudit"> | Date | string | null
     fareAuditRemarks?: StringNullableWithAggregatesFilter<"FareAudit"> | string | null
     aoAvailableStock?: IntNullableWithAggregatesFilter<"FareAudit"> | number | null
-  }
-
-  export type EFMigrationsHistoryWhereInput = {
-    AND?: EFMigrationsHistoryWhereInput | EFMigrationsHistoryWhereInput[]
-    OR?: EFMigrationsHistoryWhereInput[]
-    NOT?: EFMigrationsHistoryWhereInput | EFMigrationsHistoryWhereInput[]
-    MigrationId?: StringFilter<"EFMigrationsHistory"> | string
-    ProductVersion?: StringFilter<"EFMigrationsHistory"> | string
-  }
-
-  export type EFMigrationsHistoryOrderByWithRelationInput = {
-    MigrationId?: SortOrder
-    ProductVersion?: SortOrder
-  }
-
-  export type EFMigrationsHistoryWhereUniqueInput = Prisma.AtLeast<{
-    MigrationId?: string
-    AND?: EFMigrationsHistoryWhereInput | EFMigrationsHistoryWhereInput[]
-    OR?: EFMigrationsHistoryWhereInput[]
-    NOT?: EFMigrationsHistoryWhereInput | EFMigrationsHistoryWhereInput[]
-    ProductVersion?: StringFilter<"EFMigrationsHistory"> | string
-  }, "MigrationId">
-
-  export type EFMigrationsHistoryOrderByWithAggregationInput = {
-    MigrationId?: SortOrder
-    ProductVersion?: SortOrder
-    _count?: EFMigrationsHistoryCountOrderByAggregateInput
-    _max?: EFMigrationsHistoryMaxOrderByAggregateInput
-    _min?: EFMigrationsHistoryMinOrderByAggregateInput
-  }
-
-  export type EFMigrationsHistoryScalarWhereWithAggregatesInput = {
-    AND?: EFMigrationsHistoryScalarWhereWithAggregatesInput | EFMigrationsHistoryScalarWhereWithAggregatesInput[]
-    OR?: EFMigrationsHistoryScalarWhereWithAggregatesInput[]
-    NOT?: EFMigrationsHistoryScalarWhereWithAggregatesInput | EFMigrationsHistoryScalarWhereWithAggregatesInput[]
-    MigrationId?: StringWithAggregatesFilter<"EFMigrationsHistory"> | string
-    ProductVersion?: StringWithAggregatesFilter<"EFMigrationsHistory"> | string
+    actualManagedFare?: DecimalNullableWithAggregatesFilter<"FareAudit"> | Decimal | DecimalJsLike | number | string | null
+    bookedPaxQty?: IntNullableWithAggregatesFilter<"FareAudit"> | number | null
+    fsWindowedLowestFare?: DecimalNullableWithAggregatesFilter<"FareAudit"> | Decimal | DecimalJsLike | number | string | null
+    fsWindowedLowestFareFlightNumber?: StringNullableWithAggregatesFilter<"FareAudit"> | string | null
+    fsWindowedLowestFareDepartureTime?: DateTimeNullableWithAggregatesFilter<"FareAudit"> | Date | string | null
+    aoWindowedLowestFare?: DecimalNullableWithAggregatesFilter<"FareAudit"> | Decimal | DecimalJsLike | number | string | null
+    aoWindowedLowestFareFlightNumber?: StringNullableWithAggregatesFilter<"FareAudit"> | string | null
+    aoWindowedLowestFareDepartureTime?: DateTimeNullableWithAggregatesFilter<"FareAudit"> | Date | string | null
   }
 
   export type FlightsWhereInput = {
@@ -7113,6 +9565,199 @@ export namespace Prisma {
     Remarks?: StringNullableWithAggregatesFilter<"LogSheet"> | string | null
   }
 
+  export type FlightOpsWhereInput = {
+    AND?: FlightOpsWhereInput | FlightOpsWhereInput[]
+    OR?: FlightOpsWhereInput[]
+    NOT?: FlightOpsWhereInput | FlightOpsWhereInput[]
+    FlightOpsID?: IntFilter<"FlightOps"> | number
+    Keyid?: IntNullableFilter<"FlightOps"> | number | null
+    Image?: StringNullableFilter<"FlightOps"> | string | null
+  }
+
+  export type FlightOpsOrderByWithRelationInput = {
+    FlightOpsID?: SortOrder
+    Keyid?: SortOrderInput | SortOrder
+    Image?: SortOrderInput | SortOrder
+  }
+
+  export type FlightOpsWhereUniqueInput = Prisma.AtLeast<{
+    FlightOpsID?: number
+    AND?: FlightOpsWhereInput | FlightOpsWhereInput[]
+    OR?: FlightOpsWhereInput[]
+    NOT?: FlightOpsWhereInput | FlightOpsWhereInput[]
+    Keyid?: IntNullableFilter<"FlightOps"> | number | null
+    Image?: StringNullableFilter<"FlightOps"> | string | null
+  }, "FlightOpsID">
+
+  export type FlightOpsOrderByWithAggregationInput = {
+    FlightOpsID?: SortOrder
+    Keyid?: SortOrderInput | SortOrder
+    Image?: SortOrderInput | SortOrder
+    _count?: FlightOpsCountOrderByAggregateInput
+    _avg?: FlightOpsAvgOrderByAggregateInput
+    _max?: FlightOpsMaxOrderByAggregateInput
+    _min?: FlightOpsMinOrderByAggregateInput
+    _sum?: FlightOpsSumOrderByAggregateInput
+  }
+
+  export type FlightOpsScalarWhereWithAggregatesInput = {
+    AND?: FlightOpsScalarWhereWithAggregatesInput | FlightOpsScalarWhereWithAggregatesInput[]
+    OR?: FlightOpsScalarWhereWithAggregatesInput[]
+    NOT?: FlightOpsScalarWhereWithAggregatesInput | FlightOpsScalarWhereWithAggregatesInput[]
+    FlightOpsID?: IntWithAggregatesFilter<"FlightOps"> | number
+    Keyid?: IntNullableWithAggregatesFilter<"FlightOps"> | number | null
+    Image?: StringNullableWithAggregatesFilter<"FlightOps"> | string | null
+  }
+
+  export type TallyUsersWhereInput = {
+    AND?: TallyUsersWhereInput | TallyUsersWhereInput[]
+    OR?: TallyUsersWhereInput[]
+    NOT?: TallyUsersWhereInput | TallyUsersWhereInput[]
+    id?: IntFilter<"TallyUsers"> | number
+    username?: StringFilter<"TallyUsers"> | string
+    password?: StringFilter<"TallyUsers"> | string
+    region?: StringFilter<"TallyUsers"> | string
+    created_at?: DateTimeNullableFilter<"TallyUsers"> | Date | string | null
+    TallyVoucherSyncLog?: TallyVoucherSyncLogListRelationFilter
+  }
+
+  export type TallyUsersOrderByWithRelationInput = {
+    id?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    region?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    TallyVoucherSyncLog?: TallyVoucherSyncLogOrderByRelationAggregateInput
+  }
+
+  export type TallyUsersWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    username?: string
+    AND?: TallyUsersWhereInput | TallyUsersWhereInput[]
+    OR?: TallyUsersWhereInput[]
+    NOT?: TallyUsersWhereInput | TallyUsersWhereInput[]
+    password?: StringFilter<"TallyUsers"> | string
+    region?: StringFilter<"TallyUsers"> | string
+    created_at?: DateTimeNullableFilter<"TallyUsers"> | Date | string | null
+    TallyVoucherSyncLog?: TallyVoucherSyncLogListRelationFilter
+  }, "id" | "username">
+
+  export type TallyUsersOrderByWithAggregationInput = {
+    id?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    region?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    _count?: TallyUsersCountOrderByAggregateInput
+    _avg?: TallyUsersAvgOrderByAggregateInput
+    _max?: TallyUsersMaxOrderByAggregateInput
+    _min?: TallyUsersMinOrderByAggregateInput
+    _sum?: TallyUsersSumOrderByAggregateInput
+  }
+
+  export type TallyUsersScalarWhereWithAggregatesInput = {
+    AND?: TallyUsersScalarWhereWithAggregatesInput | TallyUsersScalarWhereWithAggregatesInput[]
+    OR?: TallyUsersScalarWhereWithAggregatesInput[]
+    NOT?: TallyUsersScalarWhereWithAggregatesInput | TallyUsersScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"TallyUsers"> | number
+    username?: StringWithAggregatesFilter<"TallyUsers"> | string
+    password?: StringWithAggregatesFilter<"TallyUsers"> | string
+    region?: StringWithAggregatesFilter<"TallyUsers"> | string
+    created_at?: DateTimeNullableWithAggregatesFilter<"TallyUsers"> | Date | string | null
+  }
+
+  export type TallyVoucherSyncLogWhereInput = {
+    AND?: TallyVoucherSyncLogWhereInput | TallyVoucherSyncLogWhereInput[]
+    OR?: TallyVoucherSyncLogWhereInput[]
+    NOT?: TallyVoucherSyncLogWhereInput | TallyVoucherSyncLogWhereInput[]
+    id?: IntFilter<"TallyVoucherSyncLog"> | number
+    user_id?: IntNullableFilter<"TallyVoucherSyncLog"> | number | null
+    region?: StringFilter<"TallyVoucherSyncLog"> | string
+    voucher_type?: StringFilter<"TallyVoucherSyncLog"> | string
+    submission_date?: DateTimeFilter<"TallyVoucherSyncLog"> | Date | string
+    last_updated_date?: DateTimeNullableFilter<"TallyVoucherSyncLog"> | Date | string | null
+    start_date?: DateTimeNullableFilter<"TallyVoucherSyncLog"> | Date | string | null
+    end_date?: DateTimeNullableFilter<"TallyVoucherSyncLog"> | Date | string | null
+    start_voucher?: IntNullableFilter<"TallyVoucherSyncLog"> | number | null
+    end_voucher?: IntNullableFilter<"TallyVoucherSyncLog"> | number | null
+    created_at?: DateTimeNullableFilter<"TallyVoucherSyncLog"> | Date | string | null
+    last_updated_voucher_number?: IntNullableFilter<"TallyVoucherSyncLog"> | number | null
+    TallyUsers?: XOR<TallyUsersNullableScalarRelationFilter, TallyUsersWhereInput> | null
+  }
+
+  export type TallyVoucherSyncLogOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrderInput | SortOrder
+    region?: SortOrder
+    voucher_type?: SortOrder
+    submission_date?: SortOrder
+    last_updated_date?: SortOrderInput | SortOrder
+    start_date?: SortOrderInput | SortOrder
+    end_date?: SortOrderInput | SortOrder
+    start_voucher?: SortOrderInput | SortOrder
+    end_voucher?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    last_updated_voucher_number?: SortOrderInput | SortOrder
+    TallyUsers?: TallyUsersOrderByWithRelationInput
+  }
+
+  export type TallyVoucherSyncLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: TallyVoucherSyncLogWhereInput | TallyVoucherSyncLogWhereInput[]
+    OR?: TallyVoucherSyncLogWhereInput[]
+    NOT?: TallyVoucherSyncLogWhereInput | TallyVoucherSyncLogWhereInput[]
+    user_id?: IntNullableFilter<"TallyVoucherSyncLog"> | number | null
+    region?: StringFilter<"TallyVoucherSyncLog"> | string
+    voucher_type?: StringFilter<"TallyVoucherSyncLog"> | string
+    submission_date?: DateTimeFilter<"TallyVoucherSyncLog"> | Date | string
+    last_updated_date?: DateTimeNullableFilter<"TallyVoucherSyncLog"> | Date | string | null
+    start_date?: DateTimeNullableFilter<"TallyVoucherSyncLog"> | Date | string | null
+    end_date?: DateTimeNullableFilter<"TallyVoucherSyncLog"> | Date | string | null
+    start_voucher?: IntNullableFilter<"TallyVoucherSyncLog"> | number | null
+    end_voucher?: IntNullableFilter<"TallyVoucherSyncLog"> | number | null
+    created_at?: DateTimeNullableFilter<"TallyVoucherSyncLog"> | Date | string | null
+    last_updated_voucher_number?: IntNullableFilter<"TallyVoucherSyncLog"> | number | null
+    TallyUsers?: XOR<TallyUsersNullableScalarRelationFilter, TallyUsersWhereInput> | null
+  }, "id">
+
+  export type TallyVoucherSyncLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrderInput | SortOrder
+    region?: SortOrder
+    voucher_type?: SortOrder
+    submission_date?: SortOrder
+    last_updated_date?: SortOrderInput | SortOrder
+    start_date?: SortOrderInput | SortOrder
+    end_date?: SortOrderInput | SortOrder
+    start_voucher?: SortOrderInput | SortOrder
+    end_voucher?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    last_updated_voucher_number?: SortOrderInput | SortOrder
+    _count?: TallyVoucherSyncLogCountOrderByAggregateInput
+    _avg?: TallyVoucherSyncLogAvgOrderByAggregateInput
+    _max?: TallyVoucherSyncLogMaxOrderByAggregateInput
+    _min?: TallyVoucherSyncLogMinOrderByAggregateInput
+    _sum?: TallyVoucherSyncLogSumOrderByAggregateInput
+  }
+
+  export type TallyVoucherSyncLogScalarWhereWithAggregatesInput = {
+    AND?: TallyVoucherSyncLogScalarWhereWithAggregatesInput | TallyVoucherSyncLogScalarWhereWithAggregatesInput[]
+    OR?: TallyVoucherSyncLogScalarWhereWithAggregatesInput[]
+    NOT?: TallyVoucherSyncLogScalarWhereWithAggregatesInput | TallyVoucherSyncLogScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"TallyVoucherSyncLog"> | number
+    user_id?: IntNullableWithAggregatesFilter<"TallyVoucherSyncLog"> | number | null
+    region?: StringWithAggregatesFilter<"TallyVoucherSyncLog"> | string
+    voucher_type?: StringWithAggregatesFilter<"TallyVoucherSyncLog"> | string
+    submission_date?: DateTimeWithAggregatesFilter<"TallyVoucherSyncLog"> | Date | string
+    last_updated_date?: DateTimeNullableWithAggregatesFilter<"TallyVoucherSyncLog"> | Date | string | null
+    start_date?: DateTimeNullableWithAggregatesFilter<"TallyVoucherSyncLog"> | Date | string | null
+    end_date?: DateTimeNullableWithAggregatesFilter<"TallyVoucherSyncLog"> | Date | string | null
+    start_voucher?: IntNullableWithAggregatesFilter<"TallyVoucherSyncLog"> | number | null
+    end_voucher?: IntNullableWithAggregatesFilter<"TallyVoucherSyncLog"> | number | null
+    created_at?: DateTimeNullableWithAggregatesFilter<"TallyVoucherSyncLog"> | Date | string | null
+    last_updated_voucher_number?: IntNullableWithAggregatesFilter<"TallyVoucherSyncLog"> | number | null
+  }
+
   export type FareAuditCreateInput = {
     bookingId?: number | null
     ticketId: number
@@ -7153,6 +9798,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: Date | string | null
     fareAuditRemarks?: string | null
     aoAvailableStock?: number | null
+    actualManagedFare?: Decimal | DecimalJsLike | number | string | null
+    bookedPaxQty?: number | null
+    fsWindowedLowestFare?: Decimal | DecimalJsLike | number | string | null
+    fsWindowedLowestFareFlightNumber?: string | null
+    fsWindowedLowestFareDepartureTime?: Date | string | null
+    aoWindowedLowestFare?: Decimal | DecimalJsLike | number | string | null
+    aoWindowedLowestFareFlightNumber?: string | null
+    aoWindowedLowestFareDepartureTime?: Date | string | null
   }
 
   export type FareAuditUncheckedCreateInput = {
@@ -7196,6 +9849,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: Date | string | null
     fareAuditRemarks?: string | null
     aoAvailableStock?: number | null
+    actualManagedFare?: Decimal | DecimalJsLike | number | string | null
+    bookedPaxQty?: number | null
+    fsWindowedLowestFare?: Decimal | DecimalJsLike | number | string | null
+    fsWindowedLowestFareFlightNumber?: string | null
+    fsWindowedLowestFareDepartureTime?: Date | string | null
+    aoWindowedLowestFare?: Decimal | DecimalJsLike | number | string | null
+    aoWindowedLowestFareFlightNumber?: string | null
+    aoWindowedLowestFareDepartureTime?: Date | string | null
   }
 
   export type FareAuditUpdateInput = {
@@ -7238,6 +9899,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fareAuditRemarks?: NullableStringFieldUpdateOperationsInput | string | null
     aoAvailableStock?: NullableIntFieldUpdateOperationsInput | number | null
+    actualManagedFare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bookedPaxQty?: NullableIntFieldUpdateOperationsInput | number | null
+    fsWindowedLowestFare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    fsWindowedLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    fsWindowedLowestFareDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aoWindowedLowestFare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    aoWindowedLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aoWindowedLowestFareDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FareAuditUncheckedUpdateInput = {
@@ -7281,6 +9950,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fareAuditRemarks?: NullableStringFieldUpdateOperationsInput | string | null
     aoAvailableStock?: NullableIntFieldUpdateOperationsInput | number | null
+    actualManagedFare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bookedPaxQty?: NullableIntFieldUpdateOperationsInput | number | null
+    fsWindowedLowestFare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    fsWindowedLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    fsWindowedLowestFareDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aoWindowedLowestFare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    aoWindowedLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aoWindowedLowestFareDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FareAuditCreateManyInput = {
@@ -7323,6 +10000,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: Date | string | null
     fareAuditRemarks?: string | null
     aoAvailableStock?: number | null
+    actualManagedFare?: Decimal | DecimalJsLike | number | string | null
+    bookedPaxQty?: number | null
+    fsWindowedLowestFare?: Decimal | DecimalJsLike | number | string | null
+    fsWindowedLowestFareFlightNumber?: string | null
+    fsWindowedLowestFareDepartureTime?: Date | string | null
+    aoWindowedLowestFare?: Decimal | DecimalJsLike | number | string | null
+    aoWindowedLowestFareFlightNumber?: string | null
+    aoWindowedLowestFareDepartureTime?: Date | string | null
   }
 
   export type FareAuditUpdateManyMutationInput = {
@@ -7365,6 +10050,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fareAuditRemarks?: NullableStringFieldUpdateOperationsInput | string | null
     aoAvailableStock?: NullableIntFieldUpdateOperationsInput | number | null
+    actualManagedFare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bookedPaxQty?: NullableIntFieldUpdateOperationsInput | number | null
+    fsWindowedLowestFare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    fsWindowedLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    fsWindowedLowestFareDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aoWindowedLowestFare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    aoWindowedLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aoWindowedLowestFareDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FareAuditUncheckedUpdateManyInput = {
@@ -7408,41 +10101,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     fareAuditRemarks?: NullableStringFieldUpdateOperationsInput | string | null
     aoAvailableStock?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type EFMigrationsHistoryCreateInput = {
-    MigrationId: string
-    ProductVersion: string
-  }
-
-  export type EFMigrationsHistoryUncheckedCreateInput = {
-    MigrationId: string
-    ProductVersion: string
-  }
-
-  export type EFMigrationsHistoryUpdateInput = {
-    MigrationId?: StringFieldUpdateOperationsInput | string
-    ProductVersion?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type EFMigrationsHistoryUncheckedUpdateInput = {
-    MigrationId?: StringFieldUpdateOperationsInput | string
-    ProductVersion?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type EFMigrationsHistoryCreateManyInput = {
-    MigrationId: string
-    ProductVersion: string
-  }
-
-  export type EFMigrationsHistoryUpdateManyMutationInput = {
-    MigrationId?: StringFieldUpdateOperationsInput | string
-    ProductVersion?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type EFMigrationsHistoryUncheckedUpdateManyInput = {
-    MigrationId?: StringFieldUpdateOperationsInput | string
-    ProductVersion?: StringFieldUpdateOperationsInput | string
+    actualManagedFare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bookedPaxQty?: NullableIntFieldUpdateOperationsInput | number | null
+    fsWindowedLowestFare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    fsWindowedLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    fsWindowedLowestFareDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aoWindowedLowestFare?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    aoWindowedLowestFareFlightNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    aoWindowedLowestFareDepartureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FlightsCreateInput = {
@@ -7727,6 +10393,200 @@ export namespace Prisma {
     Remarks?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type FlightOpsCreateInput = {
+    Keyid?: number | null
+    Image?: string | null
+  }
+
+  export type FlightOpsUncheckedCreateInput = {
+    FlightOpsID?: number
+    Keyid?: number | null
+    Image?: string | null
+  }
+
+  export type FlightOpsUpdateInput = {
+    Keyid?: NullableIntFieldUpdateOperationsInput | number | null
+    Image?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FlightOpsUncheckedUpdateInput = {
+    FlightOpsID?: IntFieldUpdateOperationsInput | number
+    Keyid?: NullableIntFieldUpdateOperationsInput | number | null
+    Image?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FlightOpsCreateManyInput = {
+    Keyid?: number | null
+    Image?: string | null
+  }
+
+  export type FlightOpsUpdateManyMutationInput = {
+    Keyid?: NullableIntFieldUpdateOperationsInput | number | null
+    Image?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FlightOpsUncheckedUpdateManyInput = {
+    FlightOpsID?: IntFieldUpdateOperationsInput | number
+    Keyid?: NullableIntFieldUpdateOperationsInput | number | null
+    Image?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TallyUsersCreateInput = {
+    username: string
+    password: string
+    region: string
+    created_at?: Date | string | null
+    TallyVoucherSyncLog?: TallyVoucherSyncLogCreateNestedManyWithoutTallyUsersInput
+  }
+
+  export type TallyUsersUncheckedCreateInput = {
+    id?: number
+    username: string
+    password: string
+    region: string
+    created_at?: Date | string | null
+    TallyVoucherSyncLog?: TallyVoucherSyncLogUncheckedCreateNestedManyWithoutTallyUsersInput
+  }
+
+  export type TallyUsersUpdateInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    region?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    TallyVoucherSyncLog?: TallyVoucherSyncLogUpdateManyWithoutTallyUsersNestedInput
+  }
+
+  export type TallyUsersUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    region?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    TallyVoucherSyncLog?: TallyVoucherSyncLogUncheckedUpdateManyWithoutTallyUsersNestedInput
+  }
+
+  export type TallyUsersCreateManyInput = {
+    username: string
+    password: string
+    region: string
+    created_at?: Date | string | null
+  }
+
+  export type TallyUsersUpdateManyMutationInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    region?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TallyUsersUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    region?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TallyVoucherSyncLogCreateInput = {
+    region: string
+    voucher_type: string
+    submission_date: Date | string
+    last_updated_date?: Date | string | null
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    start_voucher?: number | null
+    end_voucher?: number | null
+    created_at?: Date | string | null
+    last_updated_voucher_number?: number | null
+    TallyUsers?: TallyUsersCreateNestedOneWithoutTallyVoucherSyncLogInput
+  }
+
+  export type TallyVoucherSyncLogUncheckedCreateInput = {
+    id?: number
+    user_id?: number | null
+    region: string
+    voucher_type: string
+    submission_date: Date | string
+    last_updated_date?: Date | string | null
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    start_voucher?: number | null
+    end_voucher?: number | null
+    created_at?: Date | string | null
+    last_updated_voucher_number?: number | null
+  }
+
+  export type TallyVoucherSyncLogUpdateInput = {
+    region?: StringFieldUpdateOperationsInput | string
+    voucher_type?: StringFieldUpdateOperationsInput | string
+    submission_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_updated_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    end_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_updated_voucher_number?: NullableIntFieldUpdateOperationsInput | number | null
+    TallyUsers?: TallyUsersUpdateOneWithoutTallyVoucherSyncLogNestedInput
+  }
+
+  export type TallyVoucherSyncLogUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    region?: StringFieldUpdateOperationsInput | string
+    voucher_type?: StringFieldUpdateOperationsInput | string
+    submission_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_updated_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    end_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_updated_voucher_number?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type TallyVoucherSyncLogCreateManyInput = {
+    user_id?: number | null
+    region: string
+    voucher_type: string
+    submission_date: Date | string
+    last_updated_date?: Date | string | null
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    start_voucher?: number | null
+    end_voucher?: number | null
+    created_at?: Date | string | null
+    last_updated_voucher_number?: number | null
+  }
+
+  export type TallyVoucherSyncLogUpdateManyMutationInput = {
+    region?: StringFieldUpdateOperationsInput | string
+    voucher_type?: StringFieldUpdateOperationsInput | string
+    submission_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_updated_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    end_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_updated_voucher_number?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type TallyVoucherSyncLogUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user_id?: NullableIntFieldUpdateOperationsInput | number | null
+    region?: StringFieldUpdateOperationsInput | string
+    voucher_type?: StringFieldUpdateOperationsInput | string
+    submission_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_updated_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    end_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_updated_voucher_number?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -7856,6 +10716,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: SortOrder
     fareAuditRemarks?: SortOrder
     aoAvailableStock?: SortOrder
+    actualManagedFare?: SortOrder
+    bookedPaxQty?: SortOrder
+    fsWindowedLowestFare?: SortOrder
+    fsWindowedLowestFareFlightNumber?: SortOrder
+    fsWindowedLowestFareDepartureTime?: SortOrder
+    aoWindowedLowestFare?: SortOrder
+    aoWindowedLowestFareFlightNumber?: SortOrder
+    aoWindowedLowestFareDepartureTime?: SortOrder
   }
 
   export type FareAuditAvgOrderByAggregateInput = {
@@ -7882,6 +10750,10 @@ export namespace Prisma {
     fsSameFlightStock?: SortOrder
     aoSameFlightStock?: SortOrder
     aoAvailableStock?: SortOrder
+    actualManagedFare?: SortOrder
+    bookedPaxQty?: SortOrder
+    fsWindowedLowestFare?: SortOrder
+    aoWindowedLowestFare?: SortOrder
   }
 
   export type FareAuditMaxOrderByAggregateInput = {
@@ -7925,6 +10797,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: SortOrder
     fareAuditRemarks?: SortOrder
     aoAvailableStock?: SortOrder
+    actualManagedFare?: SortOrder
+    bookedPaxQty?: SortOrder
+    fsWindowedLowestFare?: SortOrder
+    fsWindowedLowestFareFlightNumber?: SortOrder
+    fsWindowedLowestFareDepartureTime?: SortOrder
+    aoWindowedLowestFare?: SortOrder
+    aoWindowedLowestFareFlightNumber?: SortOrder
+    aoWindowedLowestFareDepartureTime?: SortOrder
   }
 
   export type FareAuditMinOrderByAggregateInput = {
@@ -7968,6 +10848,14 @@ export namespace Prisma {
     aoLowestFareFlightDepartureTime?: SortOrder
     fareAuditRemarks?: SortOrder
     aoAvailableStock?: SortOrder
+    actualManagedFare?: SortOrder
+    bookedPaxQty?: SortOrder
+    fsWindowedLowestFare?: SortOrder
+    fsWindowedLowestFareFlightNumber?: SortOrder
+    fsWindowedLowestFareDepartureTime?: SortOrder
+    aoWindowedLowestFare?: SortOrder
+    aoWindowedLowestFareFlightNumber?: SortOrder
+    aoWindowedLowestFareDepartureTime?: SortOrder
   }
 
   export type FareAuditSumOrderByAggregateInput = {
@@ -7994,6 +10882,10 @@ export namespace Prisma {
     fsSameFlightStock?: SortOrder
     aoSameFlightStock?: SortOrder
     aoAvailableStock?: SortOrder
+    actualManagedFare?: SortOrder
+    bookedPaxQty?: SortOrder
+    fsWindowedLowestFare?: SortOrder
+    aoWindowedLowestFare?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -8104,21 +10996,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type EFMigrationsHistoryCountOrderByAggregateInput = {
-    MigrationId?: SortOrder
-    ProductVersion?: SortOrder
-  }
-
-  export type EFMigrationsHistoryMaxOrderByAggregateInput = {
-    MigrationId?: SortOrder
-    ProductVersion?: SortOrder
-  }
-
-  export type EFMigrationsHistoryMinOrderByAggregateInput = {
-    MigrationId?: SortOrder
-    ProductVersion?: SortOrder
   }
 
   export type DecimalFilter<$PrismaModel = never> = {
@@ -8338,6 +11215,142 @@ export namespace Prisma {
     UserID?: SortOrder
   }
 
+  export type FlightOpsCountOrderByAggregateInput = {
+    FlightOpsID?: SortOrder
+    Keyid?: SortOrder
+    Image?: SortOrder
+  }
+
+  export type FlightOpsAvgOrderByAggregateInput = {
+    FlightOpsID?: SortOrder
+    Keyid?: SortOrder
+  }
+
+  export type FlightOpsMaxOrderByAggregateInput = {
+    FlightOpsID?: SortOrder
+    Keyid?: SortOrder
+    Image?: SortOrder
+  }
+
+  export type FlightOpsMinOrderByAggregateInput = {
+    FlightOpsID?: SortOrder
+    Keyid?: SortOrder
+    Image?: SortOrder
+  }
+
+  export type FlightOpsSumOrderByAggregateInput = {
+    FlightOpsID?: SortOrder
+    Keyid?: SortOrder
+  }
+
+  export type TallyVoucherSyncLogListRelationFilter = {
+    every?: TallyVoucherSyncLogWhereInput
+    some?: TallyVoucherSyncLogWhereInput
+    none?: TallyVoucherSyncLogWhereInput
+  }
+
+  export type TallyVoucherSyncLogOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TallyUsersCountOrderByAggregateInput = {
+    id?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    region?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type TallyUsersAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type TallyUsersMaxOrderByAggregateInput = {
+    id?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    region?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type TallyUsersMinOrderByAggregateInput = {
+    id?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    region?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type TallyUsersSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type TallyUsersNullableScalarRelationFilter = {
+    is?: TallyUsersWhereInput | null
+    isNot?: TallyUsersWhereInput | null
+  }
+
+  export type TallyVoucherSyncLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    region?: SortOrder
+    voucher_type?: SortOrder
+    submission_date?: SortOrder
+    last_updated_date?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    start_voucher?: SortOrder
+    end_voucher?: SortOrder
+    created_at?: SortOrder
+    last_updated_voucher_number?: SortOrder
+  }
+
+  export type TallyVoucherSyncLogAvgOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    start_voucher?: SortOrder
+    end_voucher?: SortOrder
+    last_updated_voucher_number?: SortOrder
+  }
+
+  export type TallyVoucherSyncLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    region?: SortOrder
+    voucher_type?: SortOrder
+    submission_date?: SortOrder
+    last_updated_date?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    start_voucher?: SortOrder
+    end_voucher?: SortOrder
+    created_at?: SortOrder
+    last_updated_voucher_number?: SortOrder
+  }
+
+  export type TallyVoucherSyncLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    region?: SortOrder
+    voucher_type?: SortOrder
+    submission_date?: SortOrder
+    last_updated_date?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    start_voucher?: SortOrder
+    end_voucher?: SortOrder
+    created_at?: SortOrder
+    last_updated_voucher_number?: SortOrder
+  }
+
+  export type TallyVoucherSyncLogSumOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    start_voucher?: SortOrder
+    end_voucher?: SortOrder
+    last_updated_voucher_number?: SortOrder
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
@@ -8388,6 +11401,64 @@ export namespace Prisma {
 
   export type NullableBytesFieldUpdateOperationsInput = {
     set?: Uint8Array | null
+  }
+
+  export type TallyVoucherSyncLogCreateNestedManyWithoutTallyUsersInput = {
+    create?: XOR<TallyVoucherSyncLogCreateWithoutTallyUsersInput, TallyVoucherSyncLogUncheckedCreateWithoutTallyUsersInput> | TallyVoucherSyncLogCreateWithoutTallyUsersInput[] | TallyVoucherSyncLogUncheckedCreateWithoutTallyUsersInput[]
+    connectOrCreate?: TallyVoucherSyncLogCreateOrConnectWithoutTallyUsersInput | TallyVoucherSyncLogCreateOrConnectWithoutTallyUsersInput[]
+    createMany?: TallyVoucherSyncLogCreateManyTallyUsersInputEnvelope
+    connect?: TallyVoucherSyncLogWhereUniqueInput | TallyVoucherSyncLogWhereUniqueInput[]
+  }
+
+  export type TallyVoucherSyncLogUncheckedCreateNestedManyWithoutTallyUsersInput = {
+    create?: XOR<TallyVoucherSyncLogCreateWithoutTallyUsersInput, TallyVoucherSyncLogUncheckedCreateWithoutTallyUsersInput> | TallyVoucherSyncLogCreateWithoutTallyUsersInput[] | TallyVoucherSyncLogUncheckedCreateWithoutTallyUsersInput[]
+    connectOrCreate?: TallyVoucherSyncLogCreateOrConnectWithoutTallyUsersInput | TallyVoucherSyncLogCreateOrConnectWithoutTallyUsersInput[]
+    createMany?: TallyVoucherSyncLogCreateManyTallyUsersInputEnvelope
+    connect?: TallyVoucherSyncLogWhereUniqueInput | TallyVoucherSyncLogWhereUniqueInput[]
+  }
+
+  export type TallyVoucherSyncLogUpdateManyWithoutTallyUsersNestedInput = {
+    create?: XOR<TallyVoucherSyncLogCreateWithoutTallyUsersInput, TallyVoucherSyncLogUncheckedCreateWithoutTallyUsersInput> | TallyVoucherSyncLogCreateWithoutTallyUsersInput[] | TallyVoucherSyncLogUncheckedCreateWithoutTallyUsersInput[]
+    connectOrCreate?: TallyVoucherSyncLogCreateOrConnectWithoutTallyUsersInput | TallyVoucherSyncLogCreateOrConnectWithoutTallyUsersInput[]
+    upsert?: TallyVoucherSyncLogUpsertWithWhereUniqueWithoutTallyUsersInput | TallyVoucherSyncLogUpsertWithWhereUniqueWithoutTallyUsersInput[]
+    createMany?: TallyVoucherSyncLogCreateManyTallyUsersInputEnvelope
+    set?: TallyVoucherSyncLogWhereUniqueInput | TallyVoucherSyncLogWhereUniqueInput[]
+    disconnect?: TallyVoucherSyncLogWhereUniqueInput | TallyVoucherSyncLogWhereUniqueInput[]
+    delete?: TallyVoucherSyncLogWhereUniqueInput | TallyVoucherSyncLogWhereUniqueInput[]
+    connect?: TallyVoucherSyncLogWhereUniqueInput | TallyVoucherSyncLogWhereUniqueInput[]
+    update?: TallyVoucherSyncLogUpdateWithWhereUniqueWithoutTallyUsersInput | TallyVoucherSyncLogUpdateWithWhereUniqueWithoutTallyUsersInput[]
+    updateMany?: TallyVoucherSyncLogUpdateManyWithWhereWithoutTallyUsersInput | TallyVoucherSyncLogUpdateManyWithWhereWithoutTallyUsersInput[]
+    deleteMany?: TallyVoucherSyncLogScalarWhereInput | TallyVoucherSyncLogScalarWhereInput[]
+  }
+
+  export type TallyVoucherSyncLogUncheckedUpdateManyWithoutTallyUsersNestedInput = {
+    create?: XOR<TallyVoucherSyncLogCreateWithoutTallyUsersInput, TallyVoucherSyncLogUncheckedCreateWithoutTallyUsersInput> | TallyVoucherSyncLogCreateWithoutTallyUsersInput[] | TallyVoucherSyncLogUncheckedCreateWithoutTallyUsersInput[]
+    connectOrCreate?: TallyVoucherSyncLogCreateOrConnectWithoutTallyUsersInput | TallyVoucherSyncLogCreateOrConnectWithoutTallyUsersInput[]
+    upsert?: TallyVoucherSyncLogUpsertWithWhereUniqueWithoutTallyUsersInput | TallyVoucherSyncLogUpsertWithWhereUniqueWithoutTallyUsersInput[]
+    createMany?: TallyVoucherSyncLogCreateManyTallyUsersInputEnvelope
+    set?: TallyVoucherSyncLogWhereUniqueInput | TallyVoucherSyncLogWhereUniqueInput[]
+    disconnect?: TallyVoucherSyncLogWhereUniqueInput | TallyVoucherSyncLogWhereUniqueInput[]
+    delete?: TallyVoucherSyncLogWhereUniqueInput | TallyVoucherSyncLogWhereUniqueInput[]
+    connect?: TallyVoucherSyncLogWhereUniqueInput | TallyVoucherSyncLogWhereUniqueInput[]
+    update?: TallyVoucherSyncLogUpdateWithWhereUniqueWithoutTallyUsersInput | TallyVoucherSyncLogUpdateWithWhereUniqueWithoutTallyUsersInput[]
+    updateMany?: TallyVoucherSyncLogUpdateManyWithWhereWithoutTallyUsersInput | TallyVoucherSyncLogUpdateManyWithWhereWithoutTallyUsersInput[]
+    deleteMany?: TallyVoucherSyncLogScalarWhereInput | TallyVoucherSyncLogScalarWhereInput[]
+  }
+
+  export type TallyUsersCreateNestedOneWithoutTallyVoucherSyncLogInput = {
+    create?: XOR<TallyUsersCreateWithoutTallyVoucherSyncLogInput, TallyUsersUncheckedCreateWithoutTallyVoucherSyncLogInput>
+    connectOrCreate?: TallyUsersCreateOrConnectWithoutTallyVoucherSyncLogInput
+    connect?: TallyUsersWhereUniqueInput
+  }
+
+  export type TallyUsersUpdateOneWithoutTallyVoucherSyncLogNestedInput = {
+    create?: XOR<TallyUsersCreateWithoutTallyVoucherSyncLogInput, TallyUsersUncheckedCreateWithoutTallyVoucherSyncLogInput>
+    connectOrCreate?: TallyUsersCreateOrConnectWithoutTallyVoucherSyncLogInput
+    upsert?: TallyUsersUpsertWithoutTallyVoucherSyncLogInput
+    disconnect?: TallyUsersWhereInput | boolean
+    delete?: TallyUsersWhereInput | boolean
+    connect?: TallyUsersWhereUniqueInput
+    update?: XOR<XOR<TallyUsersUpdateToOneWithWhereWithoutTallyVoucherSyncLogInput, TallyUsersUpdateWithoutTallyVoucherSyncLogInput>, TallyUsersUncheckedUpdateWithoutTallyVoucherSyncLogInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -8647,6 +11718,176 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBytesNullableFilter<$PrismaModel>
     _max?: NestedBytesNullableFilter<$PrismaModel>
+  }
+
+  export type TallyVoucherSyncLogCreateWithoutTallyUsersInput = {
+    region: string
+    voucher_type: string
+    submission_date: Date | string
+    last_updated_date?: Date | string | null
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    start_voucher?: number | null
+    end_voucher?: number | null
+    created_at?: Date | string | null
+    last_updated_voucher_number?: number | null
+  }
+
+  export type TallyVoucherSyncLogUncheckedCreateWithoutTallyUsersInput = {
+    id?: number
+    region: string
+    voucher_type: string
+    submission_date: Date | string
+    last_updated_date?: Date | string | null
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    start_voucher?: number | null
+    end_voucher?: number | null
+    created_at?: Date | string | null
+    last_updated_voucher_number?: number | null
+  }
+
+  export type TallyVoucherSyncLogCreateOrConnectWithoutTallyUsersInput = {
+    where: TallyVoucherSyncLogWhereUniqueInput
+    create: XOR<TallyVoucherSyncLogCreateWithoutTallyUsersInput, TallyVoucherSyncLogUncheckedCreateWithoutTallyUsersInput>
+  }
+
+  export type TallyVoucherSyncLogCreateManyTallyUsersInputEnvelope = {
+    data: TallyVoucherSyncLogCreateManyTallyUsersInput | TallyVoucherSyncLogCreateManyTallyUsersInput[]
+  }
+
+  export type TallyVoucherSyncLogUpsertWithWhereUniqueWithoutTallyUsersInput = {
+    where: TallyVoucherSyncLogWhereUniqueInput
+    update: XOR<TallyVoucherSyncLogUpdateWithoutTallyUsersInput, TallyVoucherSyncLogUncheckedUpdateWithoutTallyUsersInput>
+    create: XOR<TallyVoucherSyncLogCreateWithoutTallyUsersInput, TallyVoucherSyncLogUncheckedCreateWithoutTallyUsersInput>
+  }
+
+  export type TallyVoucherSyncLogUpdateWithWhereUniqueWithoutTallyUsersInput = {
+    where: TallyVoucherSyncLogWhereUniqueInput
+    data: XOR<TallyVoucherSyncLogUpdateWithoutTallyUsersInput, TallyVoucherSyncLogUncheckedUpdateWithoutTallyUsersInput>
+  }
+
+  export type TallyVoucherSyncLogUpdateManyWithWhereWithoutTallyUsersInput = {
+    where: TallyVoucherSyncLogScalarWhereInput
+    data: XOR<TallyVoucherSyncLogUpdateManyMutationInput, TallyVoucherSyncLogUncheckedUpdateManyWithoutTallyUsersInput>
+  }
+
+  export type TallyVoucherSyncLogScalarWhereInput = {
+    AND?: TallyVoucherSyncLogScalarWhereInput | TallyVoucherSyncLogScalarWhereInput[]
+    OR?: TallyVoucherSyncLogScalarWhereInput[]
+    NOT?: TallyVoucherSyncLogScalarWhereInput | TallyVoucherSyncLogScalarWhereInput[]
+    id?: IntFilter<"TallyVoucherSyncLog"> | number
+    user_id?: IntNullableFilter<"TallyVoucherSyncLog"> | number | null
+    region?: StringFilter<"TallyVoucherSyncLog"> | string
+    voucher_type?: StringFilter<"TallyVoucherSyncLog"> | string
+    submission_date?: DateTimeFilter<"TallyVoucherSyncLog"> | Date | string
+    last_updated_date?: DateTimeNullableFilter<"TallyVoucherSyncLog"> | Date | string | null
+    start_date?: DateTimeNullableFilter<"TallyVoucherSyncLog"> | Date | string | null
+    end_date?: DateTimeNullableFilter<"TallyVoucherSyncLog"> | Date | string | null
+    start_voucher?: IntNullableFilter<"TallyVoucherSyncLog"> | number | null
+    end_voucher?: IntNullableFilter<"TallyVoucherSyncLog"> | number | null
+    created_at?: DateTimeNullableFilter<"TallyVoucherSyncLog"> | Date | string | null
+    last_updated_voucher_number?: IntNullableFilter<"TallyVoucherSyncLog"> | number | null
+  }
+
+  export type TallyUsersCreateWithoutTallyVoucherSyncLogInput = {
+    username: string
+    password: string
+    region: string
+    created_at?: Date | string | null
+  }
+
+  export type TallyUsersUncheckedCreateWithoutTallyVoucherSyncLogInput = {
+    id?: number
+    username: string
+    password: string
+    region: string
+    created_at?: Date | string | null
+  }
+
+  export type TallyUsersCreateOrConnectWithoutTallyVoucherSyncLogInput = {
+    where: TallyUsersWhereUniqueInput
+    create: XOR<TallyUsersCreateWithoutTallyVoucherSyncLogInput, TallyUsersUncheckedCreateWithoutTallyVoucherSyncLogInput>
+  }
+
+  export type TallyUsersUpsertWithoutTallyVoucherSyncLogInput = {
+    update: XOR<TallyUsersUpdateWithoutTallyVoucherSyncLogInput, TallyUsersUncheckedUpdateWithoutTallyVoucherSyncLogInput>
+    create: XOR<TallyUsersCreateWithoutTallyVoucherSyncLogInput, TallyUsersUncheckedCreateWithoutTallyVoucherSyncLogInput>
+    where?: TallyUsersWhereInput
+  }
+
+  export type TallyUsersUpdateToOneWithWhereWithoutTallyVoucherSyncLogInput = {
+    where?: TallyUsersWhereInput
+    data: XOR<TallyUsersUpdateWithoutTallyVoucherSyncLogInput, TallyUsersUncheckedUpdateWithoutTallyVoucherSyncLogInput>
+  }
+
+  export type TallyUsersUpdateWithoutTallyVoucherSyncLogInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    region?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TallyUsersUncheckedUpdateWithoutTallyVoucherSyncLogInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    region?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TallyVoucherSyncLogCreateManyTallyUsersInput = {
+    region: string
+    voucher_type: string
+    submission_date: Date | string
+    last_updated_date?: Date | string | null
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    start_voucher?: number | null
+    end_voucher?: number | null
+    created_at?: Date | string | null
+    last_updated_voucher_number?: number | null
+  }
+
+  export type TallyVoucherSyncLogUpdateWithoutTallyUsersInput = {
+    region?: StringFieldUpdateOperationsInput | string
+    voucher_type?: StringFieldUpdateOperationsInput | string
+    submission_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_updated_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    end_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_updated_voucher_number?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type TallyVoucherSyncLogUncheckedUpdateWithoutTallyUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    region?: StringFieldUpdateOperationsInput | string
+    voucher_type?: StringFieldUpdateOperationsInput | string
+    submission_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_updated_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    end_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_updated_voucher_number?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type TallyVoucherSyncLogUncheckedUpdateManyWithoutTallyUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    region?: StringFieldUpdateOperationsInput | string
+    voucher_type?: StringFieldUpdateOperationsInput | string
+    submission_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    last_updated_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    start_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    end_voucher?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_updated_voucher_number?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 

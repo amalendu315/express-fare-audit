@@ -158,12 +158,15 @@ exports.Prisma.FareAuditScalarFieldEnum = {
   aoSameFlightStock: 'aoSameFlightStock',
   aoLowestFareFlightDepartureTime: 'aoLowestFareFlightDepartureTime',
   fareAuditRemarks: 'fareAuditRemarks',
-  aoAvailableStock: 'aoAvailableStock'
-};
-
-exports.Prisma.EFMigrationsHistoryScalarFieldEnum = {
-  MigrationId: 'MigrationId',
-  ProductVersion: 'ProductVersion'
+  aoAvailableStock: 'aoAvailableStock',
+  actualManagedFare: 'actualManagedFare',
+  bookedPaxQty: 'bookedPaxQty',
+  fsWindowedLowestFare: 'fsWindowedLowestFare',
+  fsWindowedLowestFareFlightNumber: 'fsWindowedLowestFareFlightNumber',
+  fsWindowedLowestFareDepartureTime: 'fsWindowedLowestFareDepartureTime',
+  aoWindowedLowestFare: 'aoWindowedLowestFare',
+  aoWindowedLowestFareFlightNumber: 'aoWindowedLowestFareFlightNumber',
+  aoWindowedLowestFareDepartureTime: 'aoWindowedLowestFareDepartureTime'
 };
 
 exports.Prisma.FlightsScalarFieldEnum = {
@@ -208,6 +211,35 @@ exports.Prisma.LogSheetScalarFieldEnum = {
   Remarks: 'Remarks'
 };
 
+exports.Prisma.FlightOpsScalarFieldEnum = {
+  FlightOpsID: 'FlightOpsID',
+  Keyid: 'Keyid',
+  Image: 'Image'
+};
+
+exports.Prisma.TallyUsersScalarFieldEnum = {
+  id: 'id',
+  username: 'username',
+  password: 'password',
+  region: 'region',
+  created_at: 'created_at'
+};
+
+exports.Prisma.TallyVoucherSyncLogScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  region: 'region',
+  voucher_type: 'voucher_type',
+  submission_date: 'submission_date',
+  last_updated_date: 'last_updated_date',
+  start_date: 'start_date',
+  end_date: 'end_date',
+  start_voucher: 'start_voucher',
+  end_voucher: 'end_voucher',
+  created_at: 'created_at',
+  last_updated_voucher_number: 'last_updated_voucher_number'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -221,10 +253,12 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   FareAudit: 'FareAudit',
-  EFMigrationsHistory: 'EFMigrationsHistory',
   Flights: 'Flights',
   sysdiagrams: 'sysdiagrams',
-  LogSheet: 'LogSheet'
+  LogSheet: 'LogSheet',
+  FlightOps: 'FlightOps',
+  TallyUsers: 'TallyUsers',
+  TallyVoucherSyncLog: 'TallyVoucherSyncLog'
 };
 
 /**

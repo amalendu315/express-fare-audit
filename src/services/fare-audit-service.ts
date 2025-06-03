@@ -6,11 +6,11 @@ import { enrichmentQueue } from "./enrichment/queue";
 const prisma = new PrismaClient();
 // type FareAudit = Prisma.FareAuditScalarFieldEnum;
 
-   function getISTDate(): Date {
-     const now = new Date();
-     const offsetInMilliseconds = 5.5 * 60 * 60 * 1000;
-     return new Date(now.getTime() + offsetInMilliseconds);
-   }
+function getISTDate(): Date {
+  const now = new Date();
+  const offsetInMilliseconds = 5.5 * 60 * 60 * 1000;
+  return new Date(now.getTime() + offsetInMilliseconds);
+}
 
 export class FareAuditService {
   private orchestrator = new EnrichmentOrchestrator();
@@ -19,7 +19,7 @@ export class FareAuditService {
     const exists = await prisma.fareAudit.findFirst({
       where: {
         fareLogId: log.fareLogId,
-        logType:"fare",
+        logType: "fare",
       },
     });
 
@@ -35,7 +35,7 @@ export class FareAuditService {
     const exists = await prisma.fareAudit.findFirst({
       where: {
         bookingId: log.bookingId,
-        logType:"booking",
+        logType: "booking",
       },
     });
 
@@ -70,6 +70,9 @@ export class FareAuditService {
         fsSameFlightStock: fs?.sameFlightStock,
         fsLowestFareFlightNumber: fs?.lowestFareFlightNumber,
         fsLowestFareFlightDepartureTime: fs?.lowestFareFlightDepartureTime,
+        fsWindowedLowestFare: fs?.windowedLowestFare,
+        fsWindowedLowestFareFlightNumber: fs?.windowedLowestFareFlightNumber,
+        fsWindowedLowestFareDepartureTime: fs?.windowedLowestFareDepartureTime,
         fsAverageFare: fs?.averageFare,
         fsErrorMessage: fs?.errorMessage,
 
@@ -77,6 +80,9 @@ export class FareAuditService {
         aoLowestFare: ao?.lowestFlightFare,
         aoAverageFare: ao?.averageFare,
         aoLowestFareFlightNumber: ao?.lowestFareFlightNumber,
+        aoWindowedLowestFare: ao?.windowedLowestFare,
+        aoWindowedLowestFareFlightNumber: ao?.windowedLowestFareFlightNumber,
+        aoWindowedLowestFareDepartureTime: ao?.windowedLowestFareDepartureTime,
         aoAvailableStock: ao?.availableStock,
         aoLowestFareFlightDepartureTime: ao?.lowestFareFlightDepartureTime,
         aoSameFlightStock: ao?.sameFlightStock,
@@ -88,14 +94,14 @@ export class FareAuditService {
             ? "Partially Completed"
             : "Completed",
         remark: "Auto enriched",
-        fareAuditRemarks:"",
+        fareAuditRemarks: "",
       },
     });
     console.log(`[ENRICH DONE] TicketID: ${log.ticketId}`);
   }
 
   async enrichBookingTicketAsync(log: FareAudit): Promise<void> {
-    if(!log.bookingId) {
+    if (!log.bookingId) {
       console.log(`[ENRICH DONE] TicketID: ${log.ticketId} - Not Enriched`);
       return;
     }
@@ -110,43 +116,54 @@ export class FareAuditService {
       flightDate
     );
 
-   try {
-     const updated = await prisma.fareAudit.update({
-       where: { id: log.id },
-       data: {
-         flightSector: sector,
-         travelDateTime: flightDate,
+    try {
+      const updated = await prisma.fareAudit.update({
+        where: { id: log.id },
+        data: {
+          flightSector: sector,
+          travelDateTime: flightDate,
 
-         fsSameFlightFare: fs?.sameFlightFare,
-         fsLowestFlightFare: fs?.lowestFlightFare,
-         fsAvailableStock: fs?.availableStock,
-         fsSameFlightStock: fs?.sameFlightStock,
-         fsLowestFareFlightNumber: fs?.lowestFareFlightNumber,
-         fsLowestFareFlightDepartureTime: fs?.lowestFareFlightDepartureTime,
-         fsAverageFare: fs?.averageFare,
-         fsErrorMessage: fs?.errorMessage,
+          fsSameFlightFare: fs?.sameFlightFare,
+          fsLowestFlightFare: fs?.lowestFlightFare,
+          fsAvailableStock: fs?.availableStock,
+          fsSameFlightStock: fs?.sameFlightStock,
+          fsLowestFareFlightNumber: fs?.lowestFareFlightNumber,
+          fsLowestFareFlightDepartureTime: fs?.lowestFareFlightDepartureTime,
+          fsWindowedLowestFare: fs?.windowedLowestFare,
+          fsWindowedLowestFareFlightNumber: fs?.windowedLowestFareFlightNumber,
+          fsWindowedLowestFareDepartureTime:
+            fs?.windowedLowestFareDepartureTime,
+          fsAverageFare: fs?.averageFare,
+          fsErrorMessage: fs?.errorMessage,
 
-         aoSameFlightFare: ao?.sameFlightFare,
-         aoLowestFare: ao?.lowestFlightFare,
-         aoAverageFare: ao?.averageFare,
-         aoLowestFareFlightNumber: ao?.lowestFareFlightNumber,
-         aoAvailableStock: ao?.availableStock,
-         aoLowestFareFlightDepartureTime: ao?.lowestFareFlightDepartureTime,
-         aoSameFlightStock: ao?.sameFlightStock,
-         aoErrorMessage: ao?.errorMessage,
+          aoSameFlightFare: ao?.sameFlightFare,
+          aoLowestFare: ao?.lowestFlightFare,
+          aoAverageFare: ao?.averageFare,
+          aoLowestFareFlightNumber: ao?.lowestFareFlightNumber,
+          aoWindowedLowestFare: ao?.windowedLowestFare,
+          aoWindowedLowestFareFlightNumber: ao?.windowedLowestFareFlightNumber,
+          aoWindowedLowestFareDepartureTime:
+            ao?.windowedLowestFareDepartureTime,
+          aoAvailableStock: ao?.availableStock,
+          aoLowestFareFlightDepartureTime: ao?.lowestFareFlightDepartureTime,
+          aoSameFlightStock: ao?.sameFlightStock,
+          aoErrorMessage: ao?.errorMessage,
 
-         taskCompletedDateTime: getISTDate(),
-         status:
-           fs?.errorMessage || ao?.errorMessage
-             ? "Partially Completed"
-             : "Completed",
-         remark: "Auto enriched",
-         fareAuditRemarks: "",
-       },
-     });
-   } catch (error) {
-      console.error("🔥 Error during fareAudit.update:", (error as Error).message);
-   }
+          taskCompletedDateTime: getISTDate(),
+          status:
+            fs?.errorMessage || ao?.errorMessage
+              ? "Partially Completed"
+              : "Completed",
+          remark: "Auto enriched",
+          fareAuditRemarks: "",
+        },
+      });
+    } catch (error) {
+      console.error(
+        "🔥 Error during fareAudit.update:",
+        (error as Error).message
+      );
+    }
 
     console.log(`[ENRICH DONE] BookingID: ${log.bookingId}`);
   }

@@ -9,53 +9,54 @@ datasource db {
 }
 
 model FareAudit {
-  id                              Int       @id(map: "PK__FareAudi__3213E83FE4946D4A") @default(autoincrement())
-  bookingId                       Int?
-  ticketId                        Int
-  fareLogId                       Int
-  logType                         String    @db.NVarChar(100)
-  source                          String    @db.NVarChar(100)
-  requestDateTime                 DateTime  @db.DateTime
-  pnr                             String?   @db.NVarChar(50)
-  flightSector                    String    @db.NVarChar(50)
-  flightNumber                    String    @db.NVarChar(20)
-  travelDateTime                  DateTime  @db.DateTime
-  fsSameFlightFare                Decimal?  @db.Decimal(10, 2)
-  fsLowestFlightFare              Decimal?  @db.Decimal(10, 2)
-  fsAvailableStock                Int?
-  fsErrorMessage                  String?   @db.NVarChar(255)
-  fsAverageFare                   Decimal?  @db.Decimal(10, 2)
-  aoSameFlightFare                Decimal?  @db.Decimal(10, 2)
-  aoLowestFare                    Decimal?  @db.Decimal(10, 2)
-  aoAverageFare                   Decimal?  @db.Decimal(10, 2)
-  aoErrorMessage                  String?   @db.NVarChar(255)
-  flightWiseTotalSeatsPurchased   Int?
-  flightWiseTotalSeatsSold        Int?
-  flightWiseTotalSeatsLeft        Int?
-  flightWiseAverageCost           Decimal?  @db.Decimal(10, 2)
-  routeWiseSeatsPurchased         Int?
-  routeWiseSeatsSold              Int?
-  routeWiseSeatsLeft              Int?
-  routeWiseAverageCost            Decimal?  @db.Decimal(10, 2)
-  averageSellFare                 Decimal?  @db.Decimal(10, 2)
-  status                          String?   @db.NVarChar(50)
-  remark                          String?   @db.NVarChar(255)
-  taskCompletedDateTime           DateTime  @db.DateTime
-  fsSameFlightStock               Int?
-  fsLowestFareFlightNumber        String?   @db.NVarChar(20)
-  fsLowestFareFlightDepartureTime DateTime? @db.DateTime
-  aoLowestFareFlightNumber        String?   @db.NVarChar(20)
-  aoSameFlightStock               Int?
-  aoLowestFareFlightDepartureTime DateTime? @db.DateTime
-  fareAuditRemarks                String?   @db.NVarChar(Max)
-  aoAvailableStock                Int?
-}
-
-model EFMigrationsHistory {
-  MigrationId    String @id(map: "PK___EFMigrationsHistory") @db.NVarChar(150)
-  ProductVersion String @db.NVarChar(32)
-
-  @@map("__EFMigrationsHistory")
+  id                                Int       @id(map: "PK__FareAudi__3213E83FE4946D4A") @default(autoincrement())
+  bookingId                         Int?
+  ticketId                          Int
+  fareLogId                         Int
+  logType                           String    @db.NVarChar(100)
+  source                            String    @db.NVarChar(100)
+  requestDateTime                   DateTime  @db.DateTime
+  pnr                               String?   @db.NVarChar(50)
+  flightSector                      String    @db.NVarChar(50)
+  flightNumber                      String    @db.NVarChar(20)
+  travelDateTime                    DateTime  @db.DateTime
+  fsSameFlightFare                  Decimal?  @db.Decimal(10, 2)
+  fsLowestFlightFare                Decimal?  @db.Decimal(10, 2)
+  fsAvailableStock                  Int?
+  fsErrorMessage                    String?   @db.NVarChar(255)
+  fsAverageFare                     Decimal?  @db.Decimal(10, 2)
+  aoSameFlightFare                  Decimal?  @db.Decimal(10, 2)
+  aoLowestFare                      Decimal?  @db.Decimal(10, 2)
+  aoAverageFare                     Decimal?  @db.Decimal(10, 2)
+  aoErrorMessage                    String?   @db.NVarChar(255)
+  flightWiseTotalSeatsPurchased     Int?
+  flightWiseTotalSeatsSold          Int?
+  flightWiseTotalSeatsLeft          Int?
+  flightWiseAverageCost             Decimal?  @db.Decimal(10, 2)
+  routeWiseSeatsPurchased           Int?
+  routeWiseSeatsSold                Int?
+  routeWiseSeatsLeft                Int?
+  routeWiseAverageCost              Decimal?  @db.Decimal(10, 2)
+  averageSellFare                   Decimal?  @db.Decimal(10, 2)
+  status                            String?   @db.NVarChar(50)
+  remark                            String?   @db.NVarChar(255)
+  taskCompletedDateTime             DateTime  @db.DateTime
+  fsSameFlightStock                 Int?
+  fsLowestFareFlightNumber          String?   @db.NVarChar(20)
+  fsLowestFareFlightDepartureTime   DateTime? @db.DateTime
+  aoLowestFareFlightNumber          String?   @db.NVarChar(20)
+  aoSameFlightStock                 Int?
+  aoLowestFareFlightDepartureTime   DateTime? @db.DateTime
+  fareAuditRemarks                  String?   @db.NVarChar(Max)
+  aoAvailableStock                  Int?
+  actualManagedFare                 Decimal?  @db.Decimal(18, 0)
+  bookedPaxQty                      Int?
+  fsWindowedLowestFare              Decimal?  @db.Decimal(10, 2)
+  fsWindowedLowestFareFlightNumber  String?   @db.NVarChar(20)
+  fsWindowedLowestFareDepartureTime DateTime? @db.DateTime
+  aoWindowedLowestFare              Decimal?  @db.Decimal(10, 2)
+  aoWindowedLowestFareFlightNumber  String?   @db.NVarChar(20)
+  aoWindowedLowestFareDepartureTime DateTime? @db.DateTime
 }
 
 model Flights {
@@ -100,4 +101,35 @@ model LogSheet {
   UserName   String?   @db.NVarChar(100)
   DateTime   DateTime? @db.DateTime
   Remarks    String?   @db.NVarChar(Max)
+}
+
+model FlightOps {
+  FlightOpsID Int     @id(map: "PK__FlightOp__C2C62EDD034C484E") @default(autoincrement())
+  Keyid       Int?
+  Image       String? @db.NVarChar(Max)
+}
+
+model TallyUsers {
+  id                  Int                   @id(map: "PK__TallyUse__3213E83F18927C7F") @default(autoincrement())
+  username            String                @unique(map: "UQ__TallyUse__F3DBC572E4A3AD8A") @db.NVarChar(100)
+  password            String                @db.NVarChar(100)
+  region              String                @db.NVarChar(50)
+  created_at          DateTime?             @default(now(), map: "DF__TallyUser__creat__7B264821") @db.DateTime
+  TallyVoucherSyncLog TallyVoucherSyncLog[]
+}
+
+model TallyVoucherSyncLog {
+  id                          Int         @id(map: "PK__TallyVou__3213E83FB65C57E2") @default(autoincrement())
+  user_id                     Int?
+  region                      String      @db.VarChar(50)
+  voucher_type                String      @db.VarChar(50)
+  submission_date             DateTime    @db.Date
+  last_updated_date           DateTime?   @db.Date
+  start_date                  DateTime?   @db.Date
+  end_date                    DateTime?   @db.Date
+  start_voucher               Int?
+  end_voucher                 Int?
+  created_at                  DateTime?   @default(now(), map: "DF__TallyVouc__creat__05A3D694") @db.DateTime
+  last_updated_voucher_number Int?
+  TallyUsers                  TallyUsers? @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK__TallyVouc__user___04AFB25B")
 }

@@ -19,6 +19,9 @@ export class FsEnrichmentService implements IEnrichmentService {
         availableStock: 0,
         lowestFareFlightNumber: null,
         lowestFareFlightDepartureTime: null,
+        windowedLowestFare: null,
+        windowedLowestFareFlightNumber: null,
+        windowedLowestFareDepartureTime: null,
         errorMessage: "Missing FlightSector or FlightDate",
         remarks: "Cannot enrich without flight info",
       };
@@ -34,6 +37,9 @@ export class FsEnrichmentService implements IEnrichmentService {
         availableStock: 0,
         lowestFareFlightNumber: null,
         lowestFareFlightDepartureTime: null,
+        windowedLowestFare: null,
+        windowedLowestFareFlightNumber: null,
+        windowedLowestFareDepartureTime: null,
         errorMessage: "Invalid sector format",
         remarks: "Expected format: ORIGIN-DEST",
       };
@@ -75,7 +81,7 @@ export class FsEnrichmentService implements IEnrichmentService {
         requestPayload
       );
       const flights = res.data?.TripDetails?.[0]?.Flights;
-      if(flights?.length === 0) {
+      if (flights?.length === 0) {
         return {
           sameFlightFare: 0,
           lowestFlightFare: 0,
@@ -84,6 +90,9 @@ export class FsEnrichmentService implements IEnrichmentService {
           availableStock: 0,
           lowestFareFlightNumber: null,
           lowestFareFlightDepartureTime: null,
+          windowedLowestFare: null,
+          windowedLowestFareFlightNumber: null,
+          windowedLowestFareDepartureTime: null,
           errorMessage: "No flights found",
           remarks: "No flights found for the given sector",
         };
@@ -98,6 +107,9 @@ export class FsEnrichmentService implements IEnrichmentService {
           availableStock: 0,
           lowestFareFlightNumber: null,
           lowestFareFlightDepartureTime: null,
+          windowedLowestFare: null,
+          windowedLowestFareFlightNumber: null,
+          windowedLowestFareDepartureTime: null,
           errorMessage: "No flights found",
           remarks: "No flights found for the given sector",
         };
@@ -111,6 +123,7 @@ export class FsEnrichmentService implements IEnrichmentService {
       let sameFlightSeats: number | undefined;
       let lowestFareFlightNumber: string | null = null;
       let lowestFareFlightDepartureTime: Date | null = null;
+      let targetDepartureTime: Date | null = null;
 
       for (const flight of flights) {
         const segmentFlightNumber = flight.Segments?.[0]?.Flight_Number;
@@ -125,6 +138,7 @@ export class FsEnrichmentService implements IEnrichmentService {
             new Date()
           );
           segmentDepartureDate = isValid(parsed) ? parsed : null;
+          targetDepartureTime = segmentDepartureDate;
         }
         const fares = flight.Fares;
 
@@ -147,6 +161,47 @@ export class FsEnrichmentService implements IEnrichmentService {
           fareCount++;
         }
       }
+      // Step 2: Windowed lowest fare
+      let windowedLowestFare: number | null = null;
+      let windowedLowestFareFlightNumber: string | null = null;
+      let windowedLowestFareDepartureTime: Date | null = null;
+
+      if (targetDepartureTime) {
+        for (const flight of flights) {
+          const segmentFlightNumber = flight.Segments?.[0]?.Flight_Number;
+          const airlineCode = flight.Segments?.[0]?.Airline_Code;
+          const fullFlightNumber = `${airlineCode} ${segmentFlightNumber}`;
+          const segmentDepartureTime = flight.Segments?.[0]?.Departure_DateTime;
+          let segmentDepartureDate: Date | null = null;
+          if (segmentDepartureTime) {
+            const parsed = parse(
+              segmentDepartureTime,
+              "MM/dd/yyyy HH:mm",
+              new Date()
+            );
+            segmentDepartureDate = isValid(parsed) ? parsed : null;
+          }
+          if (
+            segmentDepartureDate &&
+            segmentDepartureDate.getTime() >=
+              targetDepartureTime.getTime() - 4 * 60 * 60 * 1000 &&
+            segmentDepartureDate.getTime() <=
+              targetDepartureTime.getTime() + 4 * 60 * 60 * 1000
+          ) {
+            for (const fare of flight.Fares) {
+              const totalAmount = fare.FareDetails?.[0]?.Total_Amount;
+              if (
+                windowedLowestFare === null ||
+                totalAmount < windowedLowestFare
+              ) {
+                windowedLowestFare = totalAmount;
+                windowedLowestFareFlightNumber = fullFlightNumber;
+                windowedLowestFareDepartureTime = segmentDepartureDate;
+              }
+            }
+          }
+        }
+      }
 
       return {
         sameFlightFare: sameFlightFare ?? 0,
@@ -154,8 +209,11 @@ export class FsEnrichmentService implements IEnrichmentService {
         sameFlightStock: sameFlightSeats ?? 0,
         averageFare: fareCount > 0 ? totalFare / fareCount : 0,
         availableStock: totalSeats,
-        lowestFareFlightNumber:lowestFareFlightNumber ?? null,
+        lowestFareFlightNumber: lowestFareFlightNumber ?? null,
         lowestFareFlightDepartureTime: lowestFareFlightDepartureTime ?? null,
+        windowedLowestFare: windowedLowestFare ?? null,
+        windowedLowestFareFlightNumber: windowedLowestFareFlightNumber ?? null,
+        windowedLowestFareDepartureTime: windowedLowestFareDepartureTime ?? null,
         errorMessage: sameFlightFare ? "" : "Same Flight Fare Not Found",
         remarks: "FS API Enriched",
       };
@@ -168,6 +226,9 @@ export class FsEnrichmentService implements IEnrichmentService {
         availableStock: 0,
         lowestFareFlightNumber: null,
         lowestFareFlightDepartureTime: null,
+        windowedLowestFare: null,
+        windowedLowestFareFlightNumber: null,
+        windowedLowestFareDepartureTime: null,
         errorMessage: `FS API Error: ${e.message}`,
         remarks: "Enrichment Error",
       };
