@@ -53,6 +53,8 @@ export class AoEnrichmentService implements IEnrichmentService {
        FlightNumber: "", 
      };
 
+     console.log("Enrichment Payload:", JSON.stringify(payload, null, 2));
+
     try {
       const res = await axios.post(
         "http://13.203.38.118:8080/B2BFareTest/Availability",
@@ -98,6 +100,8 @@ export class AoEnrichmentService implements IEnrichmentService {
 
         if (!flightData) continue;
 
+        
+
         const flightNoRaw = flightData.AirlineNo || "";
         const flightNo = flightNoRaw.split(" ").pop()?.trim();
         const availSeats = parseInt(flightData.AvailSeat || "0");
@@ -139,12 +143,16 @@ export class AoEnrichmentService implements IEnrichmentService {
       let windowedLowestFare: number | null = null;
       let windowedLowestFareFlightNumber: string | null = null;
       let windowedLowestFareDepartureTime: Date | null = null;
+      let foundDirectFlight = false;
+
 
       if (targetDepartureTime) {
+        foundDirectFlight = true;
         for (const item of items) {
           const flightData = item.AirlinetList?.[0];
           if (!flightData) continue;
           const flightNoRaw = flightData.AirlineNo || "";
+          const isDirect = flightData?.Stops === 0 || flightData?.Stops === '0';
           const flightNo = flightNoRaw.split(" ").pop()?.trim();
           const departureDateTime = flightData.DepartureDateTime || "";
           let segmentDepartureDate: Date | null = null;
@@ -157,6 +165,7 @@ export class AoEnrichmentService implements IEnrichmentService {
             segmentDepartureDate = isValid(parsed) ? parsed : null;
           }
           if (
+            isDirect &&
             segmentDepartureDate &&
             segmentDepartureDate.getTime() >=
               targetDepartureTime.getTime() - 4 * 60 * 60 * 1000 &&
@@ -183,20 +192,43 @@ export class AoEnrichmentService implements IEnrichmentService {
       }
       const averageFare =
         totalFareCount > 0 ? totalFareSum / totalFareCount : 0;
-      return {
-        sameFlightFare: sameFlightFare || 0,
-        lowestFlightFare: lowestFlightFare || 0,
-        sameFlightStock: sameFlightSeats || 0,
-        averageFare: averageFare,
-        lowestFareFlightNumber: lowestFareFlightNumber ?? null,
-        lowestFareFlightDepartureTime: lowestFareFlightDepartureTime || null,
-        windowedLowestFare: windowedLowestFare || null,
-        windowedLowestFareFlightNumber: windowedLowestFareFlightNumber || null,
-        windowedLowestFareDepartureTime: windowedLowestFareDepartureTime || null,
-        errorMessage: sameFlightFare ? "" : "Same Flight Fare Not Found",
-        availableStock: totalSeats,
-        remarks: "AO API Enriched",
-      };
+
+        if (!foundDirectFlight) {
+          return {
+            sameFlightFare: sameFlightFare ?? 0,
+            lowestFlightFare: lowestFlightFare ?? 0,
+            sameFlightStock: sameFlightSeats ?? 0,
+            averageFare: averageFare,
+            availableStock: totalSeats,
+            lowestFareFlightNumber: lowestFareFlightNumber ?? null,
+            lowestFareFlightDepartureTime:
+              lowestFareFlightDepartureTime ?? null,
+            windowedLowestFare: null,
+            windowedLowestFareFlightNumber: null,
+            windowedLowestFareDepartureTime: null,
+            errorMessage: "No direct flights found in ±4 hour window",
+            remarks: "No direct flights found for windowed search",
+          };
+        } else {
+          return {
+            sameFlightFare: sameFlightFare || 0,
+            lowestFlightFare: lowestFlightFare || 0,
+            sameFlightStock: sameFlightSeats || 0,
+            averageFare: averageFare,
+            lowestFareFlightNumber: lowestFareFlightNumber ?? null,
+            lowestFareFlightDepartureTime:
+              lowestFareFlightDepartureTime || null,
+            windowedLowestFare: windowedLowestFare || null,
+            windowedLowestFareFlightNumber:
+              windowedLowestFareFlightNumber || null,
+            windowedLowestFareDepartureTime:
+              windowedLowestFareDepartureTime || null,
+            errorMessage: sameFlightFare ? "" : "Same Flight Fare Not Found",
+            availableStock: totalSeats,
+            remarks: "AO API Enriched",
+          };
+        }
+      
     } catch (e: any) {
       return {
         sameFlightFare: 0,
