@@ -98,8 +98,6 @@ export class AoEnrichmentService implements IEnrichmentService {
 
         if (!flightData) continue;
 
-        
-
         const flightNoRaw = flightData.AirlineNo || "";
         const flightNo = flightNoRaw.split(" ").pop()?.trim();
         const availSeats = parseInt(flightData.AvailSeat || "0");
@@ -112,7 +110,12 @@ export class AoEnrichmentService implements IEnrichmentService {
             new Date()
           );
           segmentDepartureDate = isValid(parsed) ? parsed : null;
+        }
+
+        // Only set if flightNo matches the input flightNumber
+        if (parseInt(flightNo) === flightNumber) {
           targetDepartureTime = segmentDepartureDate;
+          break; // found our flight, stop looking
         }
 
         for (const fare of priceList) {
@@ -150,7 +153,7 @@ export class AoEnrichmentService implements IEnrichmentService {
           const flightData = item.AirlinetList?.[0];
           if (!flightData) continue;
           const flightNoRaw = flightData.AirlineNo || "";
-          const isDirect = flightData?.Stops === 0 || flightData?.Stops === '0';
+          const isDirect = flightData?.Stops === 0 || flightData?.Stops === "0";
           const flightNo = flightNoRaw.split(" ").pop()?.trim();
           const departureDateTime = flightData.DepartureDateTime || "";
           let segmentDepartureDate: Date | null = null;

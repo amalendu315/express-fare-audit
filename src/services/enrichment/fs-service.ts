@@ -59,11 +59,15 @@ export class FsEnrichmentService implements IEnrichmentService {
         {
           Origin: origin,
           Destination: destination,
-          TravelDate: travelDateTime.toLocaleDateString("en-US",{
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-          }).split('-').reverse().join('/'),
+          TravelDate: travelDateTime
+            .toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            })
+            .split("-")
+            .reverse()
+            .join("/"),
           Trip_Id: 0,
         },
       ],
@@ -81,24 +85,7 @@ export class FsEnrichmentService implements IEnrichmentService {
         requestPayload
       );
       const flights = res.data?.TripDetails?.[0]?.Flights;
-      if (flights?.length === 0) {
-        return {
-          sameFlightFare: 0,
-          lowestFlightFare: 0,
-          averageFare: 0,
-          sameFlightStock: 0,
-          availableStock: 0,
-          lowestFareFlightNumber: null,
-          lowestFareFlightDepartureTime: null,
-          windowedLowestFare: null,
-          windowedLowestFareFlightNumber: null,
-          windowedLowestFareDepartureTime: null,
-          errorMessage: "No flights found",
-          remarks: "No flights found for the given sector",
-        };
-      }
-
-      if (flights === null || flights === undefined) {
+      if (!flights || flights.length === 0) {
         return {
           sameFlightFare: 0,
           lowestFlightFare: 0,
@@ -123,8 +110,29 @@ export class FsEnrichmentService implements IEnrichmentService {
       let sameFlightSeats: number | undefined;
       let lowestFareFlightNumber: string | null = null;
       let lowestFareFlightDepartureTime: Date | null = null;
-      let targetDepartureTime: Date | null = null;
 
+      // 1. Find the target departure time of the requested flight
+      let targetDepartureTime: Date | null = null;
+      for (const flight of flights) {
+        const segmentFlightNumber = flight.Segments?.[0]?.Flight_Number;
+        const airlineCode = flight.Segments?.[0]?.Airline_Code;
+        const segmentDepartureTime = flight.Segments?.[0]?.Departure_DateTime;
+        let segmentDepartureDate: Date | null = null;
+        if (segmentDepartureTime) {
+          const parsed = parse(
+            segmentDepartureTime,
+            "MM/dd/yyyy HH:mm",
+            new Date()
+          );
+          segmentDepartureDate = isValid(parsed) ? parsed : null;
+        }
+        if (parseInt(segmentFlightNumber) === flightNumber) {
+          targetDepartureTime = segmentDepartureDate;
+          break;
+        }
+      }
+
+      // 2. Find sameFlightFare, lowestFare, etc.
       for (const flight of flights) {
         const segmentFlightNumber = flight.Segments?.[0]?.Flight_Number;
         const airlineCode = flight.Segments?.[0]?.Airline_Code;
@@ -138,10 +146,8 @@ export class FsEnrichmentService implements IEnrichmentService {
             new Date()
           );
           segmentDepartureDate = isValid(parsed) ? parsed : null;
-          targetDepartureTime = segmentDepartureDate;
         }
         const fares = flight.Fares;
-
         for (const fare of fares) {
           const totalAmount = fare.FareDetails?.[0]?.Total_Amount;
           const seats = fare?.Seats_Available;
@@ -150,21 +156,21 @@ export class FsEnrichmentService implements IEnrichmentService {
             sameFlightFare ??= totalAmount;
             sameFlightSeats ??= parseInt(seats);
           }
-
           if (!lowestFare || totalAmount < lowestFare) {
             lowestFare = totalAmount;
             lowestFareFlightNumber = fullFlightNumber;
             lowestFareFlightDepartureTime = segmentDepartureDate;
           }
-
           totalFare += totalAmount;
           fareCount++;
         }
       }
-      // Step 2: Windowed lowest fare
+
+      // 3. Windowed lowest fare (±4h, direct flights only)
       let windowedLowestFare: number | null = null;
       let windowedLowestFareFlightNumber: string | null = null;
       let windowedLowestFareDepartureTime: Date | null = null;
+      let foundDirectFlight = false;
 
       if (targetDepartureTime) {
         for (const flight of flights) {
@@ -181,13 +187,16 @@ export class FsEnrichmentService implements IEnrichmentService {
             );
             segmentDepartureDate = isValid(parsed) ? parsed : null;
           }
+          const isDirect = flight.Segments?.length === 1;
           if (
+            isDirect &&
             segmentDepartureDate &&
             segmentDepartureDate.getTime() >=
               targetDepartureTime.getTime() - 4 * 60 * 60 * 1000 &&
             segmentDepartureDate.getTime() <=
               targetDepartureTime.getTime() + 4 * 60 * 60 * 1000
           ) {
+            foundDirectFlight = true;
             for (const fare of flight.Fares) {
               const totalAmount = fare.FareDetails?.[0]?.Total_Amount;
               if (
@@ -203,17 +212,37 @@ export class FsEnrichmentService implements IEnrichmentService {
         }
       }
 
+      const averageFare = fareCount > 0 ? totalFare / fareCount : 0;
+
+      if (!foundDirectFlight) {
+        return {
+          sameFlightFare: sameFlightFare ?? 0,
+          lowestFlightFare: lowestFare ?? 0,
+          sameFlightStock: sameFlightSeats ?? 0,
+          averageFare: averageFare,
+          availableStock: totalSeats,
+          lowestFareFlightNumber: lowestFareFlightNumber ?? null,
+          lowestFareFlightDepartureTime: lowestFareFlightDepartureTime ?? null,
+          windowedLowestFare: null,
+          windowedLowestFareFlightNumber: null,
+          windowedLowestFareDepartureTime: null,
+          errorMessage: "No direct flights found in ±4 hour window",
+          remarks: "No direct flights found for windowed search",
+        };
+      }
+
       return {
         sameFlightFare: sameFlightFare ?? 0,
         lowestFlightFare: lowestFare ?? 0,
         sameFlightStock: sameFlightSeats ?? 0,
-        averageFare: fareCount > 0 ? totalFare / fareCount : 0,
+        averageFare: averageFare,
         availableStock: totalSeats,
         lowestFareFlightNumber: lowestFareFlightNumber ?? null,
         lowestFareFlightDepartureTime: lowestFareFlightDepartureTime ?? null,
-        windowedLowestFare: windowedLowestFare ?? lowestFare ?? null,
-        windowedLowestFareFlightNumber: windowedLowestFareFlightNumber ?? lowestFareFlightNumber ?? null,
-        windowedLowestFareDepartureTime: windowedLowestFareDepartureTime ?? lowestFareFlightDepartureTime ?? null,
+        windowedLowestFare: windowedLowestFare ?? null,
+        windowedLowestFareFlightNumber: windowedLowestFareFlightNumber ?? null,
+        windowedLowestFareDepartureTime:
+          windowedLowestFareDepartureTime ?? null,
         errorMessage: sameFlightFare ? "" : "Same Flight Fare Not Found",
         remarks: "FS API Enriched",
       };
