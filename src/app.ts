@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import fareAuditRoutes from "./routes/fare-audit-routes"; // your audit endpoints
+import flightBookingRoutes from "./routes/flight-booking"; // your booking endpoints
 import { startEnrichmentWorker } from "./services/enrichment/worker";
 import axios from "axios";
 
@@ -13,6 +14,7 @@ app.use(express.json()); // Body parser
 
 // API Routes
 app.use("/api", fareAuditRoutes);
+app.use("/api/flight-book",flightBookingRoutes);
 
 process.on("unhandledRejection", (reason) => {
   console.error("Unhandled Rejection:", reason);

@@ -1,4 +1,4 @@
-import { Request, Response, RequestHandler, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import { FareAuditRequestBody } from "../models/fare-audit-request-body";
 import { BookingRequestBody } from "../models/booking-request-body";
 import { FareAudit } from "../models/fare-audit-model";
