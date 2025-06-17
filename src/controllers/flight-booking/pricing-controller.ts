@@ -20,7 +20,11 @@ export const pricing = async (req: Request, res: Response) => {
         body: JSON.stringify(payload),
       }
     );
+    if (!pricingRes.ok) {
+      throw new Error(`Pricing request failed with status ${pricingRes.status}`);
+    }
     const data = await pricingRes.json();
+    console.log("Pricing response:", data);
     res.json(data);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
