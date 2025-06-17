@@ -57,7 +57,7 @@ export async function fetchNewToken(): Promise<string> {
         throw new Error(`Login failed with status ${res.status}`);
     }
   const data = await res.json() as LoginResponse;
-  
+  console.log("Login response:", data);
   if (!data?.Token) throw new Error("Login failed");
   saveToken(data.Token);
   return data.Token;
