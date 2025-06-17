@@ -38,21 +38,18 @@ export function getToken(): string | null {
 }
 
 export async function fetchNewToken(): Promise<string> {
-  const res = await fetch(
-    "http://testairiq.mywebcheck.in/TravelAPI.svc/Login",
-    {
-      method: "POST",
-      headers: {
-        Authorization: "Basic QVFBRzA1MTI2NSo5NzEwMTAxMDEwOjM0ODkzMQ==",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        AgentID: "AQAG051265",
-        Username: "9710101010",
-        Password: "348931",
-      }),
-    }
-  );
+  const res = await fetch("https://airiqapi.tesepr.com/TravelAPI.svc/Login", {
+    method: "POST",
+    headers: {
+      Authorization: "Basic QVFBRzA1MTI2NSo5NzEwMTAxMDEwOjM0ODkzMQ==",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      AgentID: "AQAG051265",
+      Username: "9710101010",
+      Password: "348931",
+    }),
+  });
     if (!res.ok) {
         throw new Error(`Login failed with status ${res.status}`);
     }
