@@ -10,7 +10,7 @@ export const pricing = async (req: Request, res: Response) => {
     const token = await ensureToken();
     const payload = req.body;
     const pricingRes = await fetch(
-      "http://testairiq.mywebcheck.in/TravelAPI.svc/Pricing",
+      "https://airiqapi.tesepr.com/TravelAPI.svc/Pricing",
       {
         method: "POST",
         headers: {
