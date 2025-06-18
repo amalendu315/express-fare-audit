@@ -11,7 +11,7 @@
             const payload = req.body;
             console.log("Booking request payload:", payload);
             const bookingRes = await fetch(
-              "https://airiqapi.tesepr.com/TravelAPI.svc/Booking",
+              "https://airiqapi.tesepr.com/TravelAPI.svc/Book",
               {
                 method: "POST",
                 headers: {
