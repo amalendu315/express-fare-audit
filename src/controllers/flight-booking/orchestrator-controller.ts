@@ -97,7 +97,7 @@ export const oneClickBooking = async (
     const searchData: SearchAvailabilityResponse = await searchRes.json();
 
     const itinerary =
-      searchData.ItineraryFlightList[0]?.Items?.find((item) => {
+      searchData?.ItineraryFlightList[0]?.Items?.find((item) => {
         if (!flightNumber) return true;
         return item.FlightDetails[0]?.FlightNumber === flightNumber;
       }) || searchData.ItineraryFlightList[0]?.Items[0];
@@ -292,8 +292,9 @@ export const oneClickBooking = async (
       status: "SUCCESS",
     });
   } catch (error: any) {
+    console.error(error);
     res.status(500).json({
-      error: error.message || "Something went wrong",
+      error: error,
       status: "FAILED",
     });
   }
