@@ -21,9 +21,6 @@
                 body: JSON.stringify(payload),
               }
             );
-            if (!bookingRes.ok) {
-              throw new Error(`Booking request failed with status ${await bookingRes.json()}`);
-            }
             const data = await bookingRes.json();
             console.log("Booking response:", data);
             res.json(data);
