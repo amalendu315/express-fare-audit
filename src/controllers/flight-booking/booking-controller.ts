@@ -25,7 +25,7 @@
             console.log("Booking response:", data);
             res.json(data);
           } catch (err: any) {
-            res.status(500).json({ error: err.message });
+            res.status(500).json({ error: err });
           }
         };
         
