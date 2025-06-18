@@ -9,6 +9,7 @@
           try {
             const token = await ensureToken();
             const payload = req.body;
+            console.log("Booking request payload:", payload);
             const bookingRes = await fetch(
               "https://airiqapi.tesepr.com/TravelAPI.svc/Booking",
               {
