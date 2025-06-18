@@ -21,7 +21,7 @@
               }
             );
             if (!bookingRes.ok) {
-              throw new Error(`Booking request failed with status ${bookingRes.json()}`);
+              throw new Error(`Booking request failed with status ${await bookingRes.json()}`);
             }
             const data = await bookingRes.json();
             console.log("Booking response:", data);
