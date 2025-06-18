@@ -93,6 +93,8 @@ export const oneClickBooking = async (
         body: JSON.stringify(searchBody),
       }
     );
+    console.log("Search Request Body:", JSON.stringify(searchBody, null, 2));
+    console.log("Search Response Status:", searchRes.status);
     if (!searchRes.ok) throw new Error("Search API failed");
     const searchData: SearchAvailabilityResponse = await searchRes.json();
 
