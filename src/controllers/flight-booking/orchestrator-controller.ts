@@ -258,7 +258,7 @@ export const oneClickBooking = async (
       BaseDestination: destination,
       TrackId: bookingTrackId,
     };
-
+    console.log("Booking Request Body:", JSON.stringify(bookingBody, null, 2));
     const bookingRes = await fetch(
       "https://airiqapi.tesepr.com/TravelAPI.svc/Book",
       {
