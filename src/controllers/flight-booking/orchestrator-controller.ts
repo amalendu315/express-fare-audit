@@ -235,9 +235,9 @@ export const oneClickBooking = async (
 
     const bookingBody = {
       AgentInfo: AGENT_INFO,
-      AdultCount: searchBody.PassengersInfo.AdultCount,
-      ChildCount: searchBody.PassengersInfo.ChildCount,
-      InfantCount: searchBody.PassengersInfo.InfantCount,
+      AdultCount: parseInt(searchBody.PassengersInfo.AdultCount, 10),
+      ChildCount: parseInt(searchBody.PassengersInfo.ChildCount, 10),
+      InfantCount: parseInt(searchBody.PassengersInfo.InfantCount, 10),
       ItineraryFlightsInfo: itineraryFlightsInfo,
       PaxDetailsInfo: paxDetailsInfo,
       AddressDetails: {
