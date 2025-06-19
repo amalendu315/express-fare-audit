@@ -3,9 +3,7 @@
 import { Request, Response } from "express";
 import fetch from "node-fetch";
 import { ensureToken } from "../../utils/token-manager";
-import {
-  OneClickBookingRequest,
-} from "../../types/booking";
+import { OneClickBookingRequest } from "../../types/booking";
 import {
   SearchAvailabilityResponse,
   PricingResponse,
@@ -52,7 +50,14 @@ export const oneClickBooking = async (
       flightNumber,
       passengers,
       contact,
-      });
+    });
+
+    const paxCounts = {
+      ADT: passengers.filter((p) => p.type === "ADT").length,
+      CHD: passengers.filter((p) => p.type === "CHD").length,
+      INF: passengers.filter((p) => p.type === "INF").length,
+    };
+    
 
     // --- 1. Search Step ---
     const searchBody = {
@@ -104,7 +109,7 @@ export const oneClickBooking = async (
         return item.FlightDetails[0]?.FlightNumber === flightNumber;
       }) || searchData.ItineraryFlightList[0]?.Items[0];
 
-      console.log("Found Itinerary:", itinerary);
+    console.log("Found Itinerary:", itinerary);
 
     if (!itinerary) throw new Error("No suitable flight found");
 
@@ -115,15 +120,40 @@ export const oneClickBooking = async (
 
     // --- 2. Pricing Step ---
     // Find the fare for ADT or first fare in Fares
-    const mainFare: AirIqFare =
-      itinerary.Fares.find((f) =>
-        f.Faredescription.some((d) => d.Paxtype === "ADT")
-      ) || itinerary.Fares[0];
-    const fareDesc: AirIqFareDescription =
-      mainFare.Faredescription.find((d) => d.Paxtype === "ADT") ||
-      mainFare.Faredescription[0];
+    function getFareAmounts(itinerary: any, paxType: "ADT" | "CHD" | "INF") {
+      // Find fare that has this pax type
+      const fare = itinerary.Fares.find((f: AirIqFare) =>
+        f.Faredescription.some(
+          (d: AirIqFareDescription) => d.Paxtype === paxType
+        )
+      );
+      if (!fare) return undefined;
+      const fareDesc : AirIqFareDescription = fare.Faredescription.find((d:any) => d.Paxtype === paxType);
+      if (!fareDesc) return undefined;
+      return {
+        BaseAmount: fareDesc.BaseAmount,
+        GrossAmount: fareDesc.GrossAmount,
+      };
+    }
 
-      console.log("Selected Fare:", fareDesc);
+    const adtAmounts = getFareAmounts(itinerary, "ADT");
+    const chdAmounts = getFareAmounts(itinerary, "CHD");
+    const infAmounts = getFareAmounts(itinerary, "INF");
+
+    function amountOr0(x: any) {
+      return x ? parseFloat(x) : 0;
+    }
+
+    const totalBaseAmount =
+      paxCounts.ADT * amountOr0(adtAmounts?.BaseAmount) +
+      paxCounts.CHD * amountOr0(chdAmounts?.BaseAmount) +
+      paxCounts.INF * amountOr0(infAmounts?.BaseAmount);
+
+    const totalGrossAmount =
+      paxCounts.ADT * amountOr0(adtAmounts?.GrossAmount) +
+      paxCounts.CHD * amountOr0(chdAmounts?.GrossAmount) +
+      paxCounts.INF * amountOr0(infAmounts?.GrossAmount);
+
 
     const pricingBody = {
       AgentInfo: AGENT_INFO,
@@ -140,8 +170,8 @@ export const oneClickBooking = async (
       ItineraryInfo: [
         {
           FlightDetails: itinerary.FlightDetails,
-          BaseAmount: fareDesc.BaseAmount,
-          GrossAmount: fareDesc.GrossAmount,
+          BaseAmount: totalBaseAmount.toFixed(2),
+          GrossAmount: totalGrossAmount.toFixed(2),
         },
       ],
     };
@@ -167,6 +197,8 @@ export const oneClickBooking = async (
       priceInfo.AvailabilityResponse?.[0] || priceInfo?.AvailabilityResponse[0];
     const priceToken = pricingFlight.Token;
 
+    console.log("Price Token:", priceToken);
+
     // --- 3. Booking Step ---
     const bookingTrackId = priceInfo.Trackid;
 
@@ -181,7 +213,7 @@ export const oneClickBooking = async (
         OtherSSRInfo: [],
         PaymentInfo: [
           {
-            TotalAmount: fareDesc.GrossAmount,
+            TotalAmount: totalGrossAmount.toFixed(2),
           },
         ],
       },
