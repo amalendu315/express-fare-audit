@@ -272,7 +272,7 @@ export const oneClickBooking = async (
     );
     if (!bookingRes.ok) throw new Error("Booking API failed");
     const bookingData: BookingResponse = await bookingRes.json();
-
+    console.log("Booking Data:", bookingData);
     const bookItem =
       bookingData.Bookingresponse.ItinearyDetails?.[0]?.Item?.[0];
     if (
