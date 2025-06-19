@@ -233,96 +233,94 @@ export const oneClickBooking = async (
       InfantRef: p.infantRef ?? "",
     }));
 
-    // const bookingBody = {
-    //   AgentInfo: AGENT_INFO,
-    //   AdultCount: searchBody.PassengersInfo.AdultCount,
-    //   ChildCount: searchBody.PassengersInfo.ChildCount,
-    //   InfantCount: searchBody.PassengersInfo.InfantCount,
-    //   ItineraryFlightsInfo: itineraryFlightsInfo,
-    //   PaxDetailsInfo: paxDetailsInfo,
-    //   AddressDetails: {
-    //     CountryCode: contact.countryCode,
-    //     ContactNumber: contact.phone,
-    //     EmailID: contact.email,
-    //   },
-    //   GSTInfo: {
-    //     GSTNumber: "",
-    //     GSTCompanyName: "",
-    //     GSTAddress: "",
-    //     GSTEmailID: "",
-    //     GSTMobileNumber: "",
-    //   },
-    //   TripType: "O",
-    //   BlockPNR: true,
-    //   BaseOrigin: origin,
-    //   BaseDestination: destination,
-    //   TrackId: bookingTrackId,
-    // };
+    const bookingBody = {
+      AgentInfo: AGENT_INFO,
+      AdultCount: searchBody.PassengersInfo.AdultCount,
+      ChildCount: searchBody.PassengersInfo.ChildCount,
+      InfantCount: searchBody.PassengersInfo.InfantCount,
+      ItineraryFlightsInfo: itineraryFlightsInfo,
+      PaxDetailsInfo: paxDetailsInfo,
+      AddressDetails: {
+        CountryCode: contact.countryCode,
+        ContactNumber: contact.phone,
+        EmailID: contact.email,
+      },
+      GSTInfo: {
+        GSTNumber: "",
+        GSTCompanyName: "",
+        GSTAddress: "",
+        GSTEmailID: "",
+        GSTMobileNumber: "",
+      },
+      TripType: "O",
+      BlockPNR: true,
+      BaseOrigin: origin,
+      BaseDestination: destination,
+      TrackId: bookingTrackId,
+    };
 
-    // const bookingRes = await fetch(
-    //   "https://airiqapi.tesepr.com/TravelAPI.svc/Book",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       TOKEN: token,
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(bookingBody),
-    //   }
-    // );
-    // if (!bookingRes.ok) throw new Error("Booking API failed");
-    // const bookingData: BookingResponse = await bookingRes.json();
+    const bookingRes = await fetch(
+      "https://airiqapi.tesepr.com/TravelAPI.svc/Book",
+      {
+        method: "POST",
+        headers: {
+          TOKEN: token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingBody),
+      }
+    );
+    if (!bookingRes.ok) throw new Error("Booking API failed");
+    const bookingData: BookingResponse = await bookingRes.json();
 
-    // const bookItem =
-    //   bookingData.Bookingresponse.ItinearyDetails?.[0]?.Item?.[0];
-    // if (
-    //   !bookItem ||
-    //   bookItem.Resultcode !== "1" ||
-    //   !bookItem.BookingTrackId ||
-    //   !bookItem.AirIqPNR
-    // ) {
-    //   throw new Error(
-    //     `Booking failed: ${
-    //       bookItem?.Resultcode
-    //         ? `Code ${bookItem.Resultcode}`
-    //         : "No booking item"
-    //     }`
-    //   );
-    // }
+    const bookItem =
+      bookingData.Bookingresponse.ItinearyDetails?.[0]?.Item?.[0];
+    if (
+      !bookItem ||
+      bookItem.Resultcode !== "1" ||
+      !bookItem.BookingTrackId ||
+      !bookItem.AirIqPNR
+    ) {
+      throw new Error(
+        `Booking failed: ${
+          bookItem?.Resultcode
+            ? `Code ${bookItem.Resultcode}`
+            : "No booking item"
+        }`
+      );
+    }
 
     // --- 4. Issue Ticket Step ---
-    // const ticketBody = {
-    //   AgentInfo: AGENT_INFO,
-    //   BookingTrackId: bookItem.BookingTrackId,
-    //   AirIqPNR: bookItem.AirIqPNR,
-    //   AirlinePNR:
-    //     bookItem.TravellerInfo.Item?.[0]?.SegmentInformation.Item?.[0]
-    //       ?.AirlinePNR,
-    //   BookingAmount:
-    //     bookItem.PaymentDetails.Item?.[0]?.Amount || fareDesc.GrossAmount,
-    //   PaymentMode: "T",
-    // };
+    const ticketBody = {
+      AgentInfo: AGENT_INFO,
+      BookingTrackId: bookItem.BookingTrackId,
+      AirIqPNR: bookItem.AirIqPNR,
+      AirlinePNR:
+        bookItem.TravellerInfo.Item?.[0]?.SegmentInformation.Item?.[0]
+          ?.AirlinePNR,
+      BookingAmount:
+        bookItem.PaymentDetails.Item?.[0]?.Amount || totalGrossAmount.toFixed(2),
+      PaymentMode: "T",
+    };
 
-    // const ticketRes = await fetch(
-    //   "https://airiqapi.tesepr.com/TravelAPI.svc/IssueTicket",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       TOKEN: token,
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(ticketBody),
-    //   }
-    // );
-    // if (!ticketRes.ok) throw new Error("IssueTicket API failed");
-    // const ticketData: TicketingResponse = await ticketRes.json();
+    const ticketRes = await fetch(
+      "https://airiqapi.tesepr.com/TravelAPI.svc/IssueTicket",
+      {
+        method: "POST",
+        headers: {
+          TOKEN: token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(ticketBody),
+      }
+    );
+    if (!ticketRes.ok) throw new Error("IssueTicket API failed");
+    const ticketData: TicketingResponse = await ticketRes.json();
 
     // --- Done! Return the issued ticket response ---
     res.status(200).json({
-      searchData,
-      pricingData,
-      // bookingData,
-      // ticketData,
+      bookingData,
+      ticketData,
       status: "SUCCESS",
     });
   } catch (error: any) {
