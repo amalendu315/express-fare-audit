@@ -233,6 +233,8 @@ export const oneClickBooking = async (
       InfantRef: p.infantRef ?? "",
     }));
 
+    console.log(bookingTrackId)
+
     const bookingBody = {
       AgentInfo: AGENT_INFO,
       AdultCount: parseInt(searchBody.PassengersInfo.AdultCount, 10),
