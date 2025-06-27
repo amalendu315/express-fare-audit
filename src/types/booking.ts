@@ -27,6 +27,8 @@ export interface OneClickBookingRequest {
   destination: string;
   travelDate: string; // "YYYYMMDD" or "DD/MM/YYYY"
   flightNumber?: string; // Optional: pick first available if not given
+  expectedFare?: string; // Optional: for fare validation if provided
+  tripType: "D" | "I"; // "D" for Domestic, "I" for international
   passengers: Passenger[];
   contact: ContactInfo;
 }
