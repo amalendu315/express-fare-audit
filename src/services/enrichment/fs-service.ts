@@ -192,9 +192,9 @@ export class FsEnrichmentService implements IEnrichmentService {
             isDirect &&
             segmentDepartureDate &&
             segmentDepartureDate.getTime() >=
-              targetDepartureTime.getTime() - 4 * 60 * 60 * 1000 &&
+              targetDepartureTime.getTime() - 2 * 60 * 60 * 1000 &&
             segmentDepartureDate.getTime() <=
-              targetDepartureTime.getTime() + 4 * 60 * 60 * 1000
+              targetDepartureTime.getTime() + 2 * 60 * 60 * 1000
           ) {
             foundDirectFlight = true;
             for (const fare of flight.Fares) {
